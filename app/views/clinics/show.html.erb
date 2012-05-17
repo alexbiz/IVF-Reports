@@ -14,6 +14,7 @@
 	<div class="update_button"><%= f.submit :value => 'Submit Review' %></div>
 	<% end %>
 	<% end %>
+
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('span.star_icon').hover(
@@ -520,3 +521,101 @@ $(document).ready(function(){
 	LoadRoseChart();
 });
 </script>
+
+
+<!--
+%h1 #{@clinic.clinic_name}
+.page_subtitle #{@clinic.city}, #{@clinic.state}
+.review_dark_bg.hidden
+ %span.close_button.icon X
+.review_form.round.hidden
+ %h2 Review this Clinic
+ - if signed_in?
+  = form_for @review do |f|
+  = f.hidden_field :user_id, :value => current_user.id
+  = f.hidden_field :clinic_id, :value => @clinic.id
+  = f.hidden_field :rating, :value => 0
+  %ul.star_rating
+    %li
+     %span.star_label Rate This Clinic
+	 %span.stars
+	 %span.icon.star_icon#star1 ★
+	 %span.icon.star_icon#star2 ★
+	 %span.icon.star_icon#star3 ★
+	 %span.icon.star_icon#star4 ★
+	 %span.icon.star_icon#star5 ★
+   %ul.star_rating
+    %li
+	 %span.star_label Write a Title
+	 %span.stars 
+	  = f.text_field :title 
+   %ul.star_rating
+	%li.review_space
+	 %span.star_label Write a Review
+	 %span.stars
+		   = f.text_area :content
+		.update_button
+		 = f.submit :value => "Submit Review"
+		
+:javascript
+    $(document).ready(function(){
+        $('span.star_icon').hover(
+            function(){
+                var cur_id = $(this).attr('id').split('star');
+                var star_num = cur_id[1];
+                for(var i = 0; i < (star_num); i++){
+                    var cur_change_icon = "span#star"+(i+1);
+                    $(cur_change_icon).addClass('yellow');
+                }
+            },
+            function(){
+                $('span.star_icon').removeClass('yellow');
+            }
+        );
+        $('span.star_icon').click(function(){
+            $('span.star_icon').removeClass('permyellow');
+            var cur_id = $(this).attr('id').split('star');
+            var star_num = cur_id[1];
+            for(var i = 0; i < (star_num); i++){
+                var cur_change_icon = "span#star"+(i+1);
+                $(cur_change_icon).addClass('permyellow');
+            }
+            //Need to update the hidden field for the form to finalize the rank.
+            $('input#review_rating').val(star_num);
+        });
+        $('span.close_button').click(function(){
+            $('div.review_dark_bg').hide('slow');
+            $('div.review_form').hide('slow');
+        });
+        $('span.write_a_review').click(function(){          
+            $('div.review_dark_bg').show('slow');
+            $('div.review_form').show('slow');
+        });
+    });
+
+%h2 Ranking Information
+#tabs
+ %ul.ranking_tabs
+  %li
+   %a{ :href => "#rankingtabs_1" } Overall
+  %li
+   %a{ :href => "#rankingtabs_2" } <35
+  %li
+   %a{ :href => "#rankingtabs_3" } 35-37
+  %li
+   %a{ :href => "#rankingtabs_4" } 38-40
+  %li
+   %a{ :href => "#rankingtabs_5" } 41-42
+  %li
+   %a{ :href => "#rankingtabs_6" } >42
+ 
+ #rankingtabs_1.tab_content
+  %table.score_table
+   - if(@scores_all_ages.empty?)
+    %tr
+     %td.score_label.quality_score IVF Reports
+     %td.score_result 
+	  %span No Ranking Data
+      %span.icon.score_icon
+
+-->
