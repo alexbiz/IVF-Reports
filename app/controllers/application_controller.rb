@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   include ApplicationHelper
   helper_method :download_csv
-  Pony.options = { :from => 'info@ivfreports.org', :via => :smtp, :via_options => { :host => 'smtp.sendgrid.net', :port => '587', :user_name => 'ivfreports', :password => 'einstein1', :domain => 'ivfreports.org', :authentication => :plain } }
+  Pony.options = { :from => 'info@ivfreports.org', :sender => 'The IVF Reports Team', :via => :smtp, :via_options => { :host => 'smtp.sendgrid.net', :port => '587', :user_name => 'ivfreports', :password => 'einstein1', :domain => 'ivfreports.org', :authentication => :plain } }
   
   def download_csv(clinic_data)
     require 'csv'
