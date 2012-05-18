@@ -64,7 +64,12 @@ GEM
       rdoc (~> 3.8)
       sax-machine (~> 0.0.20)
     geocoder (1.1.1)
+<<<<<<< HEAD
     gravatar_image_tag (1.1.2)
+=======
+    gravatar_image_tag (1.0.0)
+    haml (3.1.5)
+>>>>>>> 38f4b57e0aa216fc301cc73967da93aea11f1957
     hike (1.2.1)
     i18n (0.6.0)
     journey (1.0.3)
@@ -172,6 +177,7 @@ DEPENDENCIES
   feedzirra
   geocoder
   gravatar_image_tag
+  haml
   jquery-rails
   json
   paperclip

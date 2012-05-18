@@ -1,0 +1,37 @@
+-#
+ .experiment
+  %h1 Test
+  -if true
+   %div#truth 
+   %h1 truth
+   %h1 nested truth 
+   %ul
+    %li
+     = link_to edit_user_path(current_user) do
+      %span.icon ⚙
+      %span Settings
+
+
+
+
+%footer
+ .container_12
+  .grid_12.footer_border
+   %nav.footer_nav
+    %ul
+     %li 
+      = link_to "About Us", about_path
+     %li 
+      = link_to "Terms and Conditions", {:controller => 'pages', :action => 'terms' }
+     %li 
+      = link_to "Privacy Policy", {:controller => 'pages', :action => 'privacy'}
+     %li 
+      = link_to "Clinicians", clinicians_path
+     %li 
+      = link_to "Contact", contact_path
+   .footer_text 
+    %span IVF Reports. An
+    %a{ :href => "#", :target => "_blank" } Althea
+    %span creation.
+ 
+
