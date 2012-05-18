@@ -3,10 +3,13 @@
   %h1 Test
   -if true
    %div#truth 
-    %h1 truth
-    %h1 nested truth 
-
- 
+   %h1 truth
+   %h1 nested truth 
+   %ul
+    %li
+     = link_to edit_user_path(current_user) do
+      %span.icon ⚙
+      %span Settings
 
 
 
