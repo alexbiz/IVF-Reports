@@ -46,7 +46,7 @@
 			<% if current_user?(@user) %><tr><td>About You</td><td class="about_me"><%= @user.about_me %></td></tr><% end %>
 		</table>
 		</div>
-	
+
 		<% if current_user?(@user) %>
 		<div class="personal_info user_info_section">
 			<h2>Personalized Clinic Recommendations</h2>
@@ -69,7 +69,7 @@
 				<% end %>
 			</ul>
 		</div>
-		
+
 		<div class="personal_info user_info_section">
 			<h2>Clinics Contacted (<%= contacts_remaining(@user) %> Requests Remaining)</h2>
 			<div id="contacted_accordion">
@@ -101,7 +101,7 @@
 			</div>
 		</div>
 		<% end %>
-	
+
 
 	<% end %>
 <% end %>
