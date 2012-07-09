@@ -1,0 +1,17 @@
+.grid_8.alpha
+  .twothirds.left
+    %h1 Sign In
+    .sign_in_form
+      =form_for(:session, :url => sessions_path) do |f|
+        .field
+          =f.label :email
+          =f.text_field :email, :class => 'round'
+        .field
+          =f.label :password
+          =f.password_field :password, :class => 'round'
+        .register_button
+          =f.submit "Sign in", :class => "button ivfblue"
+        %h3="Don't Have an Account? #{link_to 'Register', register_path} now!".html_safe
+.grid_4.omega
+  .third.right
+    =render 'layouts/advertisement'

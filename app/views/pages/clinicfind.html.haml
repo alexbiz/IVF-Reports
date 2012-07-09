@@ -1,8 +1,7 @@
 %h1{:style => "text-align:center;"} Find a Clinic in Your Area
 .zip_input
-  %input{:type => "text", :id => "zip_code", :onkeypress => "return findZip(event)", :class => 'zipbox', :placeholder => 'Zipcode.'}
+  %input{:type => "text", :id => "zip_code", :onkeypress => "return findZip(event)", :class => 'zipbox round', :placeholder => 'Enter Your Zipcode.'}
   %input{:id => "zip_submit", :type=> "submit", :value => "Find!", :class => 'button ivfblue'}
-  .zip_explanation Enter Your Zip Code
 #map_canvas.google_map_canvas
 %script{:type => "text/javascript", :src => "http://maps.googleapis.com/maps/api/js?key=AIzaSyBr81CBromVSoshojwDkMb7jEn2EtNkJ3g&sensor=true"}
 :javascript
