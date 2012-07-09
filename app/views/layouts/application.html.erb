@@ -38,18 +38,18 @@
 						    <% end %>
                 <%= yield %>
 				      </div>
+
+
 			      <% else %>
-				      <% if is_controller?("pages") && is_action?('ranking') %>
-					      <%= render 'layouts/region_map' %>
-					        <div id="ranking_content" class="hidden">
-				      <% end %>
-					    <% if is_controller?('pages') && is_action?('home') %>
-					      <% unless signed_in? %>
-						      <div class="grid_12 alpha omega">
-							      <%= render 'layouts/call_to_action' %>
-						      </div>
-					      <% end %>
-					    <% end %>
+
+  				    <% if is_controller?('pages') && is_action?('home') %>
+  				      <% unless signed_in? %>
+  					      <div class="grid_12 alpha omega">
+  						      <%= render 'layouts/call_to_action' %>
+  					      </div>
+  				      <% end %>
+  				    <% end %>
+
 				      <div class="grid_12 alpha omega">
 					      <div class="yield_content">
 						      <% flash.each do |key, value| %>
@@ -58,9 +58,7 @@
 		              <%= yield %>
 					      </div>
 				      </div>
-				      <% if is_controller?("pages") && is_action?('ranking') %>
-					      </div>
-				      <% end %>
+				      
 			      <% end %>
 	        </section>
   		  </div>

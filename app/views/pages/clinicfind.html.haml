@@ -1,0 +1,124 @@
+%h1{:style => "text-align:center;"} Find a Clinic in Your Area
+.zip_input
+  %input{:type => "text", :id => "zip_code", :onkeypress => "return findZip(event)", :class => 'zipbox', :placeholder => 'Zipcode.'}
+  %input{:id => "zip_submit", :type=> "submit", :value => "Find!", :class => 'button ivfblue'}
+  .zip_explanation Enter Your Zip Code
+#map_canvas.google_map_canvas
+%script{:type => "text/javascript", :src => "http://maps.googleapis.com/maps/api/js?key=AIzaSyBr81CBromVSoshojwDkMb7jEn2EtNkJ3g&sensor=true"}
+:javascript
+  var map;
+  var geocoder;
+  function initializeMap() {
+    geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(37.769,-97.211);
+    var myOptions = {
+      zoom: 3,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+  }
+
+  function moveToLatLng(lat, long){
+    var latlong = new google.maps.LatLng(lat, long);
+    map.setCenter(latlong);
+    map.setZoom(7);
+  }
+
+  function plotClinics(clinic_data){
+    $.each(clinic_data, function(k){
+      var contentString = '<div id="content">'+
+      '<h2><a href="/clinics/'+clinic_data[k].permalink+'" >'+ clinic_data[k].clinic_name +'</a></h2>'+
+      '<div class="gmap_score_section">'+
+      '<ul class="gmap">'+
+      '<li>IVF Reports Score: ' + '<span class="score">' + Math.round((clinic_data[k].ivf_reports_score)*100)/100 + '</span></li>'+
+      '<li>Quality Score: ' + '<span class="score">' + Math.round((clinic_data[k].quality_score)*100)/100 + '</span></li>'+
+      '<li>Safety Score: ' + '<span class="score">' + Math.round((clinic_data[k].safety_score)*100)/100 + '</span></li>'+
+      '<li>SART Score: ' + '<span class="score">' + Math.round((clinic_data[k].sart_score)*100)/100 + '</span></li>'+
+      '</ul>' + 
+      '</div>'+
+      '<div id="bodyContent">'+
+      '<p>'+ clinic_data[k].info +'</p>'+
+      '</div>'+
+      '</div>';
+
+      //initialize the infobox for the clinic
+      var infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+
+      //plot the clinic marker
+      if(clinic_data[k].ivf_reports_score >= 90){
+        var icon_image = new google.maps.MarkerImage('http://labs.google.com/ridefinder/images/mm_20_green.png');
+      }
+      else if(clinic_data[k].ivf_reports_score >= 80 && clinic_data[k].ivf_reports_score < 90){
+        var icon_image = new google.maps.MarkerImage('http://labs.google.com/ridefinder/images/mm_20_blue.png');
+      }
+      else if(clinic_data[k].ivf_reports_score >= 70 && clinic_data[k].ivf_reports_score < 80){
+        var icon_image = new google.maps.MarkerImage('http://labs.google.com/ridefinder/images/mm_20_yellow.png');				
+      }
+      else{
+        var icon_image = new google.maps.MarkerImage('http://labs.google.com/ridefinder/images/mm_20_gray.png');
+      }
+      var myLatLng = new google.maps.LatLng(clinic_data[k].latitude, clinic_data[k].longitude);
+      var clinicMarker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: clinic_data[k].clinic_name,
+        icon: icon_image
+      });
+
+      //assign the infobox to the clinic marker upon a click event
+      google.maps.event.addListener(clinicMarker, 'click', function() {
+        infowindow.open(map,clinicMarker);
+      });
+    });
+  }
+
+  function findZip(e){
+    if (e.keyCode == 13) {
+      var zip_code = $('input#zip_code').val();
+      var lat = '';
+      var lng = '';
+      var address = zip_code;
+      geocoder.geocode({'address': address}, function(results, status){
+        if (status == google.maps.GeocoderStatus.OK) {
+          lat = results[0].geometry.location.lat();
+          lng = results[0].geometry.location.lng();
+          moveToLatLng(lat, lng);
+        } 
+        else {
+          alert("Geocode was not successful for the following reason: " + status);
+        }
+      });
+    }
+  }
+
+  $(document).ready(function(){
+    initializeMap();
+    $.ajax({
+      url: "#{url_for(:action => 'clinicfind')}",
+      dataType: 'json',
+      async: true,
+      cache: false,
+      success: 	function(data){
+        plotClinics(data);
+      }
+    });
+    $('input#zip_submit').click(function(){
+      var zip_code = $('input#zip_code').val();
+      var lat = '';
+      var lng = '';
+      var address = zip_code;
+      geocoder.geocode({'address': address}, function(results, status){
+        if (status == google.maps.GeocoderStatus.OK) {
+          lat = results[0].geometry.location.lat();
+          lng = results[0].geometry.location.lng();
+          moveToLatLng(lat, lng);
+        } 
+        else {
+          alert("Geocode was not successful for the following reason: " + status);
+        }
+      });
+    });
+  });

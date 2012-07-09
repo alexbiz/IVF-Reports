@@ -1,6 +1,6 @@
 /* Colors: Mid: #2F7C7C Mid-Dark:#325D5D Dark:#0F5151 Mid-Light:#65BDBD Light:#7DBDBD
 
-/*Call to Action*/
+/*CALL TO ACTION*/
 div.call_to_action_page {border-bottom:1px solid #cccccc;display:inline;}
 div.call_to_action{border:3px solid #cccccc;background:#f5f5f5;display:inline;float:left;overflow:hidden;height:240px;margin-bottom:24px;text-align:center;font-family:'Quicksand', Arial, sans-serif;font-weight:200;}
 div.call_to_action h2{font-size:20px;margin-bottom:12px;margin-top:12px;font-family:'Lato', Arial, sans-serif;font-weight:400;}
@@ -18,25 +18,26 @@ div.call_to_action span.register_now {}
 div.call_to_action span.register_now input.submit {font-weight:bold;margin-top:9px;line-height:18px;}
 div.call_to_action span.register_now a {text-decoration:none;font-weight:bold;color:#ffffff;}
 
-/*page-body-content*/
-.yield_content {}
-.yield_content .third {}
-.yield_content .third.left {margin-left:10px;width:290px;}
-.yield_content .third.right {margin-right:10px;width:290px;}
-.yield_content h2 {color:#6b8b96;font-family:'Lato', Arial, sans-serif;font-weight:400;font-size:16px;margin-bottom:12px;}
-.yield_content h2.welcome {color:#0a3445; font-size:18px;font-weight:400;border-bottom:1px solid #0a3445;padding-bottom:6px;}
-.yield_content p {text-align:justify;margin-bottom:15px;font-size:14px;line-height:20px;font-family:'Quicksand', Arial, sans-serif;font-weight:400;color:#7a7a7a;}
-.yield_content hr {width:95%;margin-top:20px;margin-bottom:20px;border:0px solid #0F5151;background:#0F5151;height:1px;margin-left:auto;margin-right:auto;opacity:0.3;}
+/*FIND A CLINIC*/
+/*Zip Code*/
+div.zip_input{text-align:center;margin-top:12px;margin-bottom:12px;}
+div.zip_input input.zipbox{height:24px;text-align:center;}
+div.zip_explanation {text-align:center;margin-bottom:30px;font-size:12px;margin-top:12px;display:inline-block;float:left;width:100%;color:#7a7a7a;font-family:'Quicksand',Arial,sans-serif;}
+/* Google Map Stuff */
+div.google_map_canvas {border:3px solid #7a7a7a;width:892px;height:350px;margin-left:24px;margin-right:24px;margin-bottom:24px;overflow:hidden;}
+div.gmap_score_section ul.gmap {margin:0px;display:inline-block;float:left;width:100%;padding:0px;margin-bottom:20px;}
+div.gmap_score_section ul.gmap li {list-style-type:none;margin:0px;padding:0px;display:inline-block;float:left;width:80%;height:25px;line-height:25px;border-bottom:1px solid #bbbbff;}
+div.gmap_score_section ul.gmap li span.score{display:inline-block;float:right;}
 
-
-
+/*FAQs*/
+div.faqquestion {color:#ffffff;cursor:pointer;padding:12px;margin-bottom:10px;font-family:'Quicksand',Arial,sans-serif;font-weight:200;}
 
 /*clinicians page*/
 img.clinicians_page {display:inline-block;float:right;}
 
 /*US Region Map*/
 div.region_map {display:inline-block;width:100%;height:480px;position:relative;}
-div.region_map h1 {font-family:'Trebuchet MS', Arial, sans-serif;color:#00345c;text-align:center;font-size:24px;}
+div.region_map h1 {text-align:center;}
 div.region_map div.map_region {position:absolute;display:inline-block;cursor:pointer;opacity:0.5;}
 div.region_map div.map_region:hover {opacity:1.0;}
 div.region_map div#WSC {left:370px;top:290px;background:url('<%= asset_path "regions/wscentral.png" %>') no-repeat;width:190px;height:137px;}
@@ -52,15 +53,6 @@ div.region_map div#MA {left:670px;top:140px;background:url('<%= asset_path "regi
 div.region_map div#NP {left:130px;top:100px;background:url("<%= asset_path 'regions/npacific.png' %>") no-repeat;width:80px;height:94px;}
 span.back_to_region_select {display:inline-block;width:60%;margin-left:20%;margin-right:20%;height:20px;background:#7895a3;cursor:pointer;color:#ffffff;line-height:20px;font-weight:bold;text-align:center;font-size:14px;margin-bottom:12px;}
 span.back_to_region_select:hover {color:#bbbbbb;}
-
-/* Google Map Stuff */
-div.google_map_canvas {border:2px solid #325d64;width:100%;height:350px;}
-div.gmap_score_section ul.gmap {margin:0px;display:inline-block;float:left;width:100%;padding:0px;margin-bottom:20px;}
-div.gmap_score_section ul.gmap li {list-style-type:none;margin:0px;padding:0px;display:inline-block;float:left;width:80%;height:25px;line-height:25px;border-bottom:1px solid #bbbbff;}
-div.gmap_score_section ul.gmap li span.score{display:inline-block;float:right;}
-div#zip_input {display:inline-block;width:46%;margin-left:27%;margin-right:27%;margin-bottom:0px;float:left;}
-div.zip_explanation {text-align:center;margin-bottom:30px;font-size:12px;margin-top:10px;display:inline-block;float:left;width:100%;}
-
 
 /*Ranking Page*/
 div.ranking_tabs {border:0px solid #ffffff;display:inline-block;width:100%;}
