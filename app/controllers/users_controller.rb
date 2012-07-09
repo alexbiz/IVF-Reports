@@ -146,7 +146,7 @@ class UsersController < ApplicationController
 	    email_body += "<p>Your Account Information:</p>"
 	    email_body += "<ul><li><b>Username: </b>#{@user.name}</li>"
 	    email_body += "<li><li><b>Email: </b> #{@user.email}</li></ul>"
-	    email_body += "<p>#{ActionController::Base.helpers.link_to('Log in', signin_path)} to view personal recommendations for clinics best suited to treat you. You may contact up to five clinics through our system. Our relationships with Fertility Clinics will allow your case to receive high-level attention from a physician who can help you get pregnant.</p>"
+	    email_body += "<p><a href='#{root_url}signin'>Log in</a> to view personal recommendations for clinics best suited to treat you. You may contact up to five clinics through our system. Our relationships with Fertility Clinics will allow your case to receive high-level attention from a physician who can help you get pregnant.</p>"
       email_body += "<p>Thank you for being a part of our community. We look forward to helping you embark on your fertility journey.</p>"
       email_body += "<p>Warmest regards,</p>"
       email_body += "<p>The IVF Reports Team</p>"

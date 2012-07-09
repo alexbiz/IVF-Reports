@@ -1,0 +1,29 @@
+.call_to_action_page
+  .grid_4.alpha
+    .call_to_action.left.round
+      %img{:src => "#{asset_path 'mother_baby.png'}", :width => '290'}
+  .grid_4
+    .call_to_action.middle.round
+      %h2 Get Your Personalized Clinic Recommendations
+      %p IVF Reports uses advanced algorithms designed by leading experts in Fertility and Statistics to Help Match <b>You</b> with the Best Clinic to Help You Give birth to a Happy, Healthy, Baby.
+      %span.button.ivfblue.learn_more
+        =link_to "Learn More", '#', :class => 'round'
+  .grid_4.omega
+    .call_to_action.right.round
+      %h2.register Register Now
+      = form_for(@user) do |f|
+        %ul
+          %li
+            %span.field
+              = f.text_field :name, :placeholder => "Username", :class => "round field"
+          %li
+            %span.field
+              = f.text_field :email, :placeholder => "Email", :class => "round field"
+          %li
+            %span.field
+              = f.password_field :password, :placeholder => "Password", :class => "round field"
+          %li
+            %span.field 
+              = f.password_field :password_confirmation, :placeholder => "Password Confirmation", :class => "round field"
+        %span.register_now
+          = f.submit "Register", :class => "submit button ivfblue"

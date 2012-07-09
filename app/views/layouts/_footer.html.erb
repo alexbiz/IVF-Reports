@@ -1,18 +1,40 @@
 <footer>
-<div class="container_12">
-	<div class="grid_12 footer_border">
-		<nav class="footer_nav">
-			<ul>
-				<li><%= link_to "About Us", about_path %></li>
-				<li><%= link_to "Terms and Conditions", {:controller => 'pages', :action => 'terms' } %></li>
-				<li><%= link_to "Privacy Policy", {:controller => 'pages', :action => 'privacy'} %></li>
-				<li><%= link_to "Clinicians", clinicians_path %></li>
-				<li><%= link_to "Contact", contact_path %></li>
-			</ul>
-		</nav>
-		<div class="footer_text">
-			IVF Reports. An <a href="#" target="_blank">Althea</a> creation.
+<div class="footer">
+		<div class="container_12">
+		  <div class="grid_4">
+		    <h3>Links</h3>
+      	<ul>
+      	<li><%= link_to "The CDC", 'http://www.cdc.gov/art/', :target => "_blank" %></li>
+      	<li><%= link_to "SART", 'http://www.sart.org/', :target => "_blank" %></li>
+      	<li><%= link_to "IVF.NET", 'http://www.ivf.net/', :target => "_blank" %></li>
+      	<li><%= link_to "ASRM", 'http://www.asrm.org/', :target => "_blank" %></li>
+      	<li><%= link_to "RBM Online", 'http://www.rbmojournal.com/', :target => "_blank" %></li>
+      	<li><%= link_to "American College of Embryology", 'http://embcol.org/', :target => "_blank" %></li>
+      	</ul>
+      </div>
+      <div class="grid_4">
+        <h3>Our Site</h3>
+      	<ul>
+      		<li><%= link_to "About Us", about_path %></li>
+      		<li><%= link_to "Terms and Conditions", {:controller => 'pages', :action => 'terms' } %></li>
+      		<li><%= link_to "Privacy Policy", {:controller => 'pages', :action => 'privacy'} %></li>
+      		<li><%= link_to "Clinicians", clinicians_path %></li>
+      		<li><%= link_to "Contact", contact_path %></li>
+      	</ul>
+      </div>
+      <div class="grid_4">
+        <h3>Contact</h3>
+      	<ul>
+      		<li><a href="alx.bz">Alexander Bisignano</a></li>
+      		<li>Phone: 646.470.7422</li>
+      		<li>Email: info[at]ivfreports.org</li>
+      	</ul>
+      </div>
+      <div class="grid_12">
+      	<div class="footer_text">
+      		IVF Reports. An <a href="#" target="_blank">Althea</a> creation.
+      	</div>
+      </div>
 		</div>
-	</div>
 </div>
 </footer>
