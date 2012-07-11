@@ -1,0 +1,16 @@
+=form_for(@user) do |f|
+  %ul
+    %li
+      %span.field
+        = f.text_field :name, :placeholder => "Username", :class => "field"
+    %li
+      %span.field
+        = f.text_field :email, :placeholder => "Email", :class => "field"
+    %li
+      %span.field
+        = f.password_field :password, :placeholder => "Password", :class => "field"
+    %li
+      %span.field 
+        = f.password_field :password_confirmation, :placeholder => "Password Confirmation", :class => "field"
+  %span.register_now
+    = f.submit "Register", :class => "submit button ivfblue"

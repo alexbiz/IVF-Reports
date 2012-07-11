@@ -6,13 +6,15 @@ div.call_to_action{border:3px solid #cccccc;background:#f5f5f5;display:inline;fl
 div.call_to_action h2{font-size:20px;margin-bottom:12px;margin-top:12px;font-family:'Lato', Arial, sans-serif;font-weight:400;}
 div.call_to_action h2.register {text-align:left;border-bottom:1px solid #cccccc;margin-left:12px;margin-right:12px;}
 div.call_to_action.left{margin-left:10px;width:290px;}
-div.call_to_action.middle{background:#7795a1;color:#ffffff;}
+div.call_to_action.middle{color:#ffffff;background:#0b3542;}
 div.call_to_action.middle p {margin-bottom:12px;line-height:18px;}
-div.call_to_action.right{margin-right:10px;width:290px;background:#0b3542;color:#ffffff;}
+div.call_to_action.right{margin-right:10px;width:290px;color:#ffffff;background:#7795a1;}
 div.call_to_action ul {text-align:left;list-style-type:none;display:inline-block;width:266px;float:left;margin-left:12px;margin-right:12px;}
-div.call_to_action ul li {list-style-type:none;display:inline-block;width:100%;float:left;height:22px;margin-bottom:12px;}
-div.call_to_action ul li span.field {}
-div.call_to_action ul li span.field input.field{width:100%;height:18px;font-size:16px;padding:2px;}
+div.call_to_action ul li {list-style-type:none;display:inline-block;width:100%;float:left;height:18px;margin-bottom:12px;line-height:18px;}
+div.call_to_action ul li span.field {display:inline-block;float:right;}
+div.call_to_action ul li span.label {font-size:12px;display:inline-block;float:left;}
+div.call_to_action ul li span.field input.field{height:18px;padding:2px;}
+div.call_to_action ul li span.field select {font-size:10px;}
 div.call_to_action span.learn_more a{text-decoration:none;color:#ffffff;font-weight:bold;}
 div.call_to_action span.register_now {}
 div.call_to_action span.register_now input.submit {font-weight:bold;margin-top:9px;line-height:18px;}
@@ -77,7 +79,6 @@ div.ranking_tabs ul.jqueryui-ranking-tabs {width:431px;background:#E6E6E6 url(im
 div.ranking_tabs ul.jqueryui-ranking-tabs li.ranking_tab {height:30px;line-height:30px;text-align:center;width:140px;display:inline-block;}
 div.ranking_tabs ul.jqueryui-ranking-tabs li.ranking_tab a {text-align:center;display:inline-block;width:100%;}
 
-/*Ranking Score-select tooltips*/
 div.score_explanation {position:absolute;width:240px;height:200px;background:#7895a3;color:#ffffff;border:1px solid #325d64;padding:12px;}
 div.score_explanation h3 {font-size:16px;color:#ffffff;font-weight:bold;border-bottom:1px solid #ffffff;margin-bottom:6px;}
 div.score_explanation p {text-align:justify;color:#ffffff;font-size:13px;}
@@ -89,21 +90,18 @@ div.star_explanation ul li {list-style-type:none;padding:0px;margin:0px;float:le
 div.star_explanation ul li span.icon {display:inline-block;float:left;font-size:16px;text-align:left;width:20%;margin-right:5%;}
 div.star_explanation ul li span.explanation {display:inline-block;float:right;text-align:left;width:65%;margin-left:0%;line-height:16px;}
 
-/*Ranking - Age Subselect*/
 .jqueryui-ranking-subselect {padding:0px;margin:0px;display:inline-block;width:431px;font-size:12px;border-left:1px solid #bcbcbc;border-right:1px solid #bcbcbc;}
 .jqueryui-ranking-subselect li {padding:0px;margin:0px;list-style-type:none;display:inline-block;width:83px;text-align:center;height:30px;line-height:30px;cursor:pointer;padding-right:0px;}
 .jqueryui-ranking-subselect .ui-selectee {color:#325d64; }
 .jqueryui-ranking-subselect .ui-selecting { background: #FECA40; }
 .jqueryui-ranking-subselect .ui-selected { background: #7895a3; color: white; height:30px;}
 
-/*Ranking - Diagnosis Subselect*/
 .jqueryui-ranking-subselect-diagnosis {padding:0px;margin:0px;display:inline-block;width:431px;font-size:12px;border-left:1px solid #bcbcbc;border-right:1px solid #bcbcbc;}
 .jqueryui-ranking-subselect-diagnosis li {padding:0px;margin:0px;list-style-type:none;display:inline-block;width:140px;text-align:center;height:30px;line-height:30px;cursor:pointer;padding-right:0px;}
 .jqueryui-ranking-subselect-diagnosis .ui-selectee {color:#325d64; }
 .jqueryui-ranking-subselect-diagnosis .ui-selecting { background: #FECA40; }
 .jqueryui-ranking-subselect-diagnosis .ui-selected { background: #7895a3; color: white; height:30px;}
 
-/*Ranking Display*/
 ul.clinic_rank {border-bottom:1px solid #bcbcbc;margin:0px;padding:0px;display:inline-block;float:left;width:410px;margin:10px;padding-top:10px;padding-bottom:20px;margin-bottom:0px;}
 ul.clinic_rank.bottom {border-bottom:0px solid #ffffff;}
 ul.clinic_rank li {list-style-type:none;display:inline-block;margin:0px;padding:0px;float:left;width:410px;}
@@ -130,13 +128,14 @@ h2.age_ranking_title.hidden {display:none;}
 div.ranking_results {background:#f5f5f5;min-height:500px;display:inline-block;width:431px;border:1px solid #bcbcbc;border-top:0px solid #e5e5e5;}
 div.ranking_results div.clinic_rank_list {display:inline-block;width:100%;min-height:500px;}
 
-/*Ranking Nav*/
 ul.ranking_nav {width:100%;padding:0px;margin:0px;height:30px;float:left;display:inline-block;background:#7895a3;}
 ul.ranking_nav li {list-style-type:none;padding:0px;margin:0px;height:30px;display:inline-block;width:10%;color:#ffffff;font-size:20px;line-height:30px;padding-left:15px;padding-right:15px;cursor:pointer;}
 ul.ranking_nav li span.icon {cursor:pointer;}
 ul.ranking_nav li:hover {color:#cccccc;}
 ul.ranking_nav li.left_button {float:left;text-align:left;}
 ul.ranking_nav li.right_button {float:right;text-align:right;}
+
+
 
 /*contact_info*/
 ul.contact_info {margin:0px;padding:0px;display:inline-block;width:100%;margin-top:20px;}

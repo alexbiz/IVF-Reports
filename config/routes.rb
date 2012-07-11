@@ -29,6 +29,8 @@ IVFReports::Application.routes.draw do
 	match '/signout', :to => 'sessions#destroy'
 
   root :to => "pages#home"
+  match "/complete-contact-form", :to => "pages#lead_contact", :as => :complete_contact_form
+  match "/complete-registration", :to => "pages#lead_registration", :as => :complete_registration
   
   match "/find-a-clinic", :to => "pages#clinicfind", :as => :find_a_clinic
   match "/ranking", :to => "pages#ranking"

@@ -38,6 +38,7 @@ class PagesController < ApplicationController
   end
   
   def system
+    @title = "Our Ranking System"
   end
   
   def ranking
