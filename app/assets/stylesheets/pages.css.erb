@@ -12,9 +12,9 @@ div.call_to_action.right{margin-right:10px;width:290px;color:#ffffff;background:
 div.call_to_action ul {text-align:left;list-style-type:none;display:inline-block;width:266px;float:left;margin-left:12px;margin-right:12px;}
 div.call_to_action ul li {list-style-type:none;display:inline-block;width:100%;float:left;height:18px;margin-bottom:12px;line-height:18px;}
 div.call_to_action ul li span.field {display:inline-block;float:right;}
-div.call_to_action ul li span.label {font-size:12px;display:inline-block;float:left;}
-div.call_to_action ul li span.field input.field{height:18px;padding:2px;}
-div.call_to_action ul li span.field select {font-size:10px;}
+div.call_to_action ul li span.label {font-size:12px;display:inline-block;float:left;margin-right:6px;}
+div.call_to_action ul li span.field input.field{height:14px;width:100px;line-height:14px;text-align:center;}
+div.call_to_action ul li span.field select {font-size:10px;color:#ffffff;}
 div.call_to_action span.learn_more a{text-decoration:none;color:#ffffff;font-weight:bold;}
 div.call_to_action span.register_now {}
 div.call_to_action span.register_now input.submit {font-weight:bold;margin-top:9px;line-height:18px;}
@@ -33,15 +33,50 @@ div.gmap_score_section ul.gmap li span.score{display:inline-block;float:right;}
 div.faqquestion {color:#ffffff;cursor:pointer;padding:12px;margin-bottom:10px;font-family:'Quicksand',Arial,sans-serif;font-weight:200;}
 
 /*SIGN IN*/
-div.sign_in_form {}
+div.sign_in_form {border:1px solid #cccccc;padding:24px;margin-bottom:24px;}
 div.sign_in_form form {margin-bottom:24px;font-family:'Quicksand',Arial,sans-serif;font-weight:400;}
-div.sign_in_form form h3 {color:#325d5d;margin-top:0px;border-top:0px;font-size:16px;margin-bottom:36px;text-align:center;margin-top:48px;}
+div.sign_in_form form h3 {color:#325d5d;margin-top:0px;border-top:0px;font-size:16px;margin-bottom:24px;text-align:center;margin-top:48px;}
 div.sign_in_form form h3 a {color:#0b3542;text-decoration:none;font-weight:bold;}
 div.sign_in_form form h3 a:hover {color:#7a7a7a;}
 div.sign_in_form form .register_button {margin-top:36px;text-align:center;}
 div.sign_in_form div.field {display:inline-block;width:100%;height:40px;line-height:40px;}
 div.sign_in_form div.field label {float:left;display:inline-block;line-height:30px;}
 div.sign_in_form div.field input {float:right;display:inline-block;line-height:18px;font-size:16px;width:40%;height:30px;background:#e5e5e5;}
+
+/*COMPLETE CONTACT FORM*/
+.progress_bar {font-family:'Quicksand', Arial, sans-serif;}
+.progress_bar span.step {display:inline-block;width:29%;border:1px solid #cccccc;height:50px;margin:2%;float:left;}
+.progress_bar span.step.filled {}
+.progress_bar span.step span {height:40px;margin-top:5px;margin-bottom:5px;line-height:40px;display:inline-block;}
+.progress_bar span.step span.number {margin-left:12px;float:left;margin-right:12px;}
+.progress_bar span.step span.task {}
+.progress_bar span.step span.icon {float:right;margin-right:12px;}
+hr.top_divider {margin:12px;display:inline-block;float:left;width:916px;}
+.info_form {background:#0b3542;padding:12px;color:#ffffff;font-family:'Quicksand', Arial, sans-serif;font-weight:400;text-align:center;margin-bottom:24px;margin-top:12px;}
+.info_form h2 {color:#ffffff;font-size:18px;font-family:'Lato', Arial, sans-serif;font-weight:300;padding-bottom:3px;border-bottom:1px solid #ffffff;text-align:left;margin-bottom:24px;}
+.info_form ul {list-style:none;margin:0px;padding:0px;display:inline-block;width:100%;float:left;}
+.info_form ul li {list-style-type:none;margin:0px;padding:0px;display:inline-block;width:100%;float:left;height:24px;line-height:24px;margin-bottom:12px;}
+.info_form ul li.address{font-size:12px;font-weight:bold;float:right;text-align:right;height:14px;line-height:14px;padding-right:6px;}
+.info_form ul li span {display:inline-block;}
+.info_form ul li span.label {float:left;}
+.info_form ul li span.field {float:right;}
+.info_form ul li span.field input.field {width:180px;height:20px;line-height:20px;text-align:center;}
+.info_form form span.contact_now {margin-top:24px;display:inline-block;margin-bottom:12px;}
+.clinic_rec_list {margin-top:12px;border:1px solid #cccccc;padding:12px;display:inline-block;margin-bottom:24px;}
+.clinic_rec_list h2 {color:#7795a1;font-size:18px;font-family:'Lato', Arial, sans-serif;font-weight:300;padding-bottom:3px;border-bottom:1px solid #7795a1;text-align:left;margin-bottom:24px;}
+.clinic_rec_list ul {list-style:none;display:inline-block;margin:0px;padding:0px;float:left;width:100%;}
+.clinic_rec_list ul li {list-style-type:none;display:inline-block;margin:0px;padding:0px;float:left;width:100%;margin-bottom:12px;}
+.clinic_rec_list ul li:hover {color:#cccccc;}
+.clinic_rec_list ul li span {display:inline-block;}
+.clinic_rec_list ul li span.demographics {width:200px;float:left;height:60px;font-size:12px;}
+.clinic_rec_list ul li span.demographics span.clinic_name {height:40px;width:100%;float:left;display:inline-block;line-height:20px;overflow:hidden;font-weight:bold;}
+.clinic_rec_list ul li span.demographics span.citystate {height:20px;display:inline-block;width:100%;float:left;text-align:right;}
+.clinic_rec_list ul li span.score {width:44px;float:right;height:60px;line-height:60px;padding:5px;text-align:center;color:#ffffff;font-weight:bold;}
+.clinic_rec_list ul li.headers span {color:#0b3542;font-weight:bold;height:20px;line-height:20px;font-size:16px;padding:0px;padding-right:6px;margin-bottom:6px;}
+
+.google_map_listing {border:3px solid #0b3542;margin-top:12px;}
+.google_map_listing #google_map {width:100%;height:320px;}
+
 
 
 

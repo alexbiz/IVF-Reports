@@ -1,0 +1,157 @@
+.yield_content
+  %h1="Contact the Best Clinics in Your Area".html_safe
+  %hr.top_divider
+  .grid_12.alpha.omega
+    .progress_bar
+      %span.step.filled.round.ivfblue
+        %span.number 1. 
+        %span.task Analyze Demographics
+        %span.icon ✔
+      %span.step.round.white
+        %span.number 2. 
+        %span.task Reach Out to Clinics
+        %span.icon →
+      %span.step.round.white
+        %span.number 3. 
+        %span.task Get Free Membership
+        %span.icon →
+  %hr.top_divider
+  .grid_4.alpha
+    .third.left
+      .info_form.round
+        %h2="Enter Contact Details"
+        =form_tag :action => 'lead_registration' do
+          %ul
+            %li
+              %span.label
+                = label_tag :name
+              %span.field
+                = text_field_tag :name, nil, :placeholder => "Name", :class => "field"
+            %li
+              %span.label
+                = label_tag :address
+              %span.field
+                = text_field_tag :address, nil, :placeholder => "Address", :class => "field"
+            %li.address
+              %span.field
+                = "#{@address}"
+            %li
+              %span.label
+                = label_tag :email
+              %span.field
+                = text_field_tag :email, nil, :placeholder => "Email", :class => "field"          
+            %li
+              %span.label
+                = label_tag :phone
+              %span.field
+                = text_field_tag :phone, nil, :class => "field phone_number", :placeholder => "(###) ###-####"
+          %span.contact_now
+            = submit_tag "Contact.", :class => "submit button ivfblue"
+  .grid_4
+    .third.middle
+      .clinic_rec_list.round
+        %h2 Clinics to Contact
+        %ul
+          %li.headers
+            %span.demographics Clinic Information
+            %span.score Score
+          -@clinic_results.each do |c|
+            %li
+              %span.demographics
+                %span.clinic_name=c["clinic_name"]
+                %span.citystate="#{c['city']}, #{c['state']}"
+              %span.score.round.ivfblue=c["ivf_reports_score"].round(1)
+  .grid_4.omega
+    .third.right
+      .google_map_listing
+        #google_map.mini_google_map_canvas
+%script{:type => "text/javascript", :src => "http://maps.googleapis.com/maps/api/js?key=AIzaSyBr81CBromVSoshojwDkMb7jEn2EtNkJ3g&sensor=true"}        
+:javascript
+  $(document).ready(function(){
+    $('input.phone_number').mask('(999) 999-9999');
+    
+    $.ajax({
+      url: "#{url_for(:action => 'clinicfind')}",
+      dataType: 'json',
+      async: true,
+      cache: false,
+      success: 	function(data){
+        plotClinics(data);
+      }
+    });
+    
+    
+    var map;
+    var geocoder;
+    var zip_code = #{params[:zip_code]};
+    var lat = #{@coordinates[0].latitude};
+    var lng = #{@coordinates[0].longitude};
+    var address = zip_code;
+    
+    
+    var latlng = new google.maps.LatLng(lat,lng);
+    
+    initializeMap();
+    
+    function initializeMap() {
+      
+      var myOptions = {
+        zoom: 8,
+        center: latlng,
+        panControl: false,
+        zoomControl: false,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      map = new google.maps.Map(document.getElementById("google_map"), myOptions);
+    }
+
+    function plotClinics(clinic_data){
+      $.each(clinic_data, function(k){
+        var contentString = '<div id="content">'+
+        '<h2><a href="/clinics/'+clinic_data[k].permalink+'" >'+ clinic_data[k].clinic_name +'</a></h2>'+
+        '<div class="gmap_score_section">'+
+        '<ul class="gmap">'+
+        '<li>IVF Reports Score: ' + '<span class="score">' + Math.round((clinic_data[k].ivf_reports_score)*100)/100 + '</span></li>'+
+        '<li>Quality Score: ' + '<span class="score">' + Math.round((clinic_data[k].quality_score)*100)/100 + '</span></li>'+
+        '<li>Safety Score: ' + '<span class="score">' + Math.round((clinic_data[k].safety_score)*100)/100 + '</span></li>'+
+        '<li>SART Score: ' + '<span class="score">' + Math.round((clinic_data[k].sart_score)*100)/100 + '</span></li>'+
+        '</ul>' + 
+        '</div>'+
+        '<div id="bodyContent">'+
+        '<p>'+ clinic_data[k].info +'</p>'+
+        '</div>'+
+        '</div>';
+
+        //initialize the infobox for the clinic
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+
+        //plot the clinic marker
+        if(clinic_data[k].ivf_reports_score >= 90){
+          var icon_image = new google.maps.MarkerImage('http://labs.google.com/ridefinder/images/mm_20_green.png');
+        }
+        else if(clinic_data[k].ivf_reports_score >= 80 && clinic_data[k].ivf_reports_score < 90){
+          var icon_image = new google.maps.MarkerImage('http://labs.google.com/ridefinder/images/mm_20_blue.png');
+        }
+        else if(clinic_data[k].ivf_reports_score >= 70 && clinic_data[k].ivf_reports_score < 80){
+          var icon_image = new google.maps.MarkerImage('http://labs.google.com/ridefinder/images/mm_20_yellow.png');				
+        }
+        else{
+          var icon_image = new google.maps.MarkerImage('http://labs.google.com/ridefinder/images/mm_20_gray.png');
+        }
+        var myLatLng = new google.maps.LatLng(clinic_data[k].latitude, clinic_data[k].longitude);
+        var clinicMarker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: clinic_data[k].clinic_name,
+          icon: icon_image
+        });
+
+        //assign the infobox to the clinic marker upon a click event
+        google.maps.event.addListener(clinicMarker, 'click', function() {
+          infowindow.open(map,clinicMarker);
+        });
+      });
+    }
+  });

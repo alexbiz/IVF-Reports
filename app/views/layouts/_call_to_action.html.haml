@@ -4,7 +4,7 @@
       %img{:src => "#{asset_path 'mother_baby.png'}", :width => '290'}
   .grid_4
     .call_to_action.middle.round
-      %h2.register="Find the Best Clinic for <i>You</i>:".html_safe
+      %h2.register="Find the Best Clinic for <i>You</i>".html_safe
       =form_tag :action => "lead_contact" do
         %ul
           %li
@@ -12,37 +12,37 @@
               = label_tag :gender
             %span.label
               -gender_select = options_for_select([['-'],['Male','male'],['Female','female']])
-              = select_tag(:gender, gender_select)
+              = select_tag(:gender, gender_select, :class => 'ivfblue')
             %span.field
               = text_field_tag :zip_code, nil, :placeholder => "Zip Code.", :class => "field"
           %li
             %span.label
               = label_tag :birthday
             %span.field
-              = date_select(:birthday,nil, {:start_year => Time.now.year-18,:end_year => 1900,:use_short_month => true,:order => [:month, :day, :year],:prompt => {:month => 'Month', :day => 'Day', :year => 'Year'}})
+              = date_select(:birthday,nil, {:start_year => Time.now.year-18,:end_year => 1900,:use_short_month => true,:order => [:month, :day, :year],:prompt => {:month => 'Month', :day => 'Day', :year => 'Year'}}, :class => 'ivfblue')
           %li
             %span.label
               = label_tag :ethnicity
             %span.field
               -ethnicity_select = options_for_select([['-'],['Caucasian','caucasian'],['East Asian','east_asian'],['South Asian','south_asian'],['Arabic','arabic'],['African','african'],['Hispanic','hispanic'],['Native American','native_american'],['Other','other']])
-              = select_tag(:ethnicity, ethnicity_select)
+              = select_tag(:ethnicity, ethnicity_select, :class => 'ivfblue')
           %li
             %span.label
               = label_tag :previous_cycles, "Previous Cycles"
             %span.field
               -cycles_select = options_for_select([['-'],['0',0],['1',1],['2',2],['3',3],['4',4],['5',5],['6',6]])
-              = select_tag(:previous_cycles, cycles_select)
+              = select_tag(:previous_cycles, cycles_select, :class => 'ivfblue')
           %li
             %span.label
               = label_tag :infertility_diagnosis, "Infertility Diagnosis"
             %span.field
-              -diagnosis_options = options_for_select([['-'],['Endometriosis','endometriosis'],['Low Ovarian Reserve','diminished_ovarian_reserve'],['Multi-Female Factors','multiple_female_factors'],['Ovulatory Dysfunction','ovulatory_dysfunction'],['Tubal Factor','tubal_factor'],['Female/Male Factors','female_and_male_factors'],['Male Factor','male_factor'],['Other Factor','other_factor'],['Uterine Factor','uterine_factor'],['Unknown Factor','unknown_factor']])
-              = select_tag(:infertility_diagnosis, diagnosis_options)
+              -diagnosis_options = options_for_select([['-'],['Endometriosis','endometriosis'],['Low Ovarian Reserve','diminished_ovarian_reserve'],['Multi-Female Factors','multiple_female_factors'],['Ovulatory Dysfunction','ovulatory_dysfunction'],['Tubal Factor','tubal_factor'],['Female/Male Factors','female_and_male_factors'],['Male Factor','male_factor'],['Other Factor','other_factor'],['Uterine Factor','uterine_factor'],['Unknown','unknown_factor']])
+              = select_tag(:infertility_diagnosis, diagnosis_options, :class => 'ivfblue')
         %span.register_now
           = submit_tag "Search.", :class => "submit button small ivfblue"
   .grid_4.omega
     .call_to_action.right.round
-      %h2 Advanced Algorithms Optimize Your Chance of Success
+      %h2 Advanced Algorithms Optimize Your Chances of Success
       %p IVF Reports uses advanced algorithms designed by leading experts in Fertility and Statistics to Help Match <b>You</b> with the Best Clinic to Help You Give birth to a Happy, Healthy, Baby.
       %span.button.ivfblue.learn_more
         =link_to "Learn More", '#', :class => 'round'

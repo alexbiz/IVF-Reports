@@ -5,10 +5,10 @@
       =form_for(:session, :url => sessions_path) do |f|
         .field
           =f.label :email
-          =f.text_field :email, :class => 'round'
+          =f.text_field :email
         .field
           =f.label :password
-          =f.password_field :password, :class => 'round'
+          =f.password_field :password
         .register_button
           =f.submit "Sign in", :class => "button ivfblue"
         %h3="Don't Have an Account? #{link_to 'Register', register_path} now!".html_safe
