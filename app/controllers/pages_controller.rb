@@ -59,10 +59,15 @@ class PagesController < ApplicationController
 	  unless params[:zip_code].nil?
 	    @coordinates = Geocoder.search(params[:zip_code])
 	    @address = "City, State"
+	    
 	    while (@coordinates.nil?)
 	      @coordinates = Geocoder.search(params[:zip_code])
       end
-      unless (@coodrinates.nil?)
+      
+      if (@coodrinates.nil?)
+        @coordinates[0].latitude = 37.769
+        @coordinates[0].longituded = -97.211
+      else
         @address = "#{@coordinates[0].city}, #{@coordinates[0].state_code}"
       end
     end
