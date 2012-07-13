@@ -65,8 +65,6 @@ class PagesController < ApplicationController
       end
       
       if (@coodrinates.nil?)
-        @coordinates[0].latitude = 37.769
-        @coordinates[0].longituded = -97.211
       else
         @address = "#{@coordinates[0].city}, #{@coordinates[0].state_code}"
       end
