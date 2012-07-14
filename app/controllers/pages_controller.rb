@@ -11,7 +11,7 @@ class PagesController < ApplicationController
   
   def lead_save
     randpass = "#{rand(36**8).to_s(36)}"
-    params[:name] = "#{params[:first_name]}#{params[:zip_code]}#{params[:last_name]}"
+    params[:name] = "#{params[:first_name]}#{params[:zip_code]}#{params['birthday(1i)']}#{params['birthday(2i)']}"
     params[:password] = randpass
     params[:password_confirmation] = randpass  
     @user = User.new(params)

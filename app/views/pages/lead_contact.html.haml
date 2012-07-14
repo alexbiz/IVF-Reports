@@ -67,6 +67,11 @@
                 = label_tag :phone
               %span.field
                 = text_field_tag :phone, nil, :class => "field phone_number", :placeholder => "(###) ###-####"
+            %li.about_me
+              %span.label
+                = label_tag :about_me, "About You"
+              %span.field
+                = text_area_tag :about_me, nil, :class => "field text_area", :placeholder => "Add any additional information you would like the Physician to know about."
           %span.contact_now
             = submit_tag "Contact.", :class => "submit button ivfblue"
   .grid_4
