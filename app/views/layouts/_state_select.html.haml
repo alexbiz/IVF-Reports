@@ -1,0 +1,13 @@
+%ul.state_select
+  %li.header Select States to Include in Ranking
+  %li.all_state
+    %span.all_state_label Select All States
+    %input{:checked => true, :type => "checkbox", :class => "select_all_state_checkbox", :name => "select_all_states", :value => "all_states", :style => "float:right;margin-top:9px;margin-right:10px;"}
+  %li.all_state.last
+    %span.all_state_label Unselect All States
+    %input{:type => "checkbox", :class => "unselect_all_state_checkbox",:name => "unselect_all_states", :value => "no_states", :style => "float:right;margin-top:9px;margin-right:10px;"}
+  -@states.each_with_index do |s, index|
+    %li.state
+      %span.state_span
+        =s.name
+        %input{:checked => true, :id => "state_#{s.name}", :class => "state_checkbox", :type => "checkbox", :name => "state", :value => "#{s.name}"}

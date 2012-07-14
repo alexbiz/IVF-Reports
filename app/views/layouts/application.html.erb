@@ -34,7 +34,7 @@
 			      <% elsif is_clinic_explorer? || is_clinic_comparator? || (is_controller?('statistics')) %>
 				      <div class="explorer_content">
 						    <% flash.each do |key, value| %>
-							    <div class="grid_9 alpha"><div class="flash <%= key %>"><%= value %></div></div>
+							    <div class="grid_9 alpha"><div class="flash <%= key %> white round"><%= value %><span class="flash_close"><span class="icon">X</span></span></div></div>
 						    <% end %>
                 <%= yield %>
 				      </div>
@@ -53,7 +53,7 @@
 				      <div class="grid_12 alpha omega">
 					      <div class="yield_content">
 						      <% flash.each do |key, value| %>
-							      <div class="grid_12 alpha omega"><div class="flash <%= key %>"><%= value %></div></div>
+							      <div class="grid_12 alpha omega"><div class="flash <%= key %> white round"><%= value %><span class="flash_close"><span class="icon">X</span></span></div></div>
 						      <% end %>
 		              <%= yield %>
 					      </div>
@@ -66,6 +66,13 @@
   	</div>
   	<%= render 'layouts/footer' %>
   </div>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('span.flash_close').click(function(){
+      $('div.flash').hide('slow');
+    });
+  });
+  </script>
 <%= debug(params) if Rails.env.development? %>
 </body>
 </html>

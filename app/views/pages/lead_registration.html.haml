@@ -1,16 +1,43 @@
-=form_for(@user) do |f|
-  %ul
-    %li
-      %span.field
-        = f.text_field :name, :placeholder => "Username", :class => "field"
-    %li
-      %span.field
-        = f.text_field :email, :placeholder => "Email", :class => "field"
-    %li
-      %span.field
-        = f.password_field :password, :placeholder => "Password", :class => "field"
-    %li
-      %span.field 
-        = f.password_field :password_confirmation, :placeholder => "Password Confirmation", :class => "field"
-  %span.register_now
-    = f.submit "Register", :class => "submit button ivfblue"
+.yield_content
+  %h1="What Next? Learn More About Fertility.".html_safe
+  %hr.top_divider
+  .grid_12.alpha.omega
+    .progress_bar
+      %span.step.filled.round.ivfblue
+        %span.number 1. 
+        %span.task Analyze Demographics
+        %span.icon ✔
+      %span.step.round.ivfblue
+        %span.number 2. 
+        %span.task Reach Out to Clinics
+        %span.icon ✔
+      %span.step.round.white
+        %span.number 3. 
+        %span.task Learn More
+        %span.icon →
+  %hr.top_divider
+  .grid_4.alpha
+    .third.left
+      .hear_back.round
+        %h2 When will I Hear Back?
+        %p 
+          Your information has been sent to the fertility clinics within our network who are most specialized in treating your specific profile of infertility. Typically, a representative from each clinic will review and contact you within the next three to five business days once they have properly evaluated your case.
+  .grid_4
+    .third.middle
+      .next_list.round
+        %h2 What Should I Do Next?
+        %p 
+          While you're waiting to hear back we encourage you to browse the members section with your new IVF Reports membership. A temporary password has been sent via email, and you are already logged in to your account. We encourage you to browse this site and learn more about fertility. You can also reach out to more clinics through our website.
+          ="You will find a Ranking of clinics at the #{link_to 'Ranking', ranking_path} page.".html_safe
+  .grid_4.omega
+    .third.right
+      .resource_list.round
+        %h2 Resources
+        %ul
+          %li=link_to 'Your Profile', current_user
+          %li=link_to 'Find a Clinic', find_a_clinic_path
+          %li=link_to 'Clinic Rankings', ranking_path
+          %li=link_to 'Infertility Diagnoses', infertility_diagnoses_path
+          %li=link_to 'About Us', about_path
+          %li=link_to 'Frequently Asked Questions', faqs_path
+            

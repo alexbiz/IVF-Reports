@@ -10,10 +10,10 @@
       %span.step.round.white
         %span.number 2. 
         %span.task Reach Out to Clinics
-        %span.icon →
+        %span.icon ✔
       %span.step.round.white
         %span.number 3. 
-        %span.task Get Free Membership
+        %span.task Learn More
         %span.icon →
   %hr.top_divider
   .grid_12.alpha.omega
@@ -23,14 +23,33 @@
     .third.left
       .info_form.round
         %h2="Enter Contact Details"
-        =form_tag :action => 'lead_registration' do
+        =form_tag({:action => 'lead_save', :controller => 'pages'},{:method => :post}) do
+          =hidden_field_tag :city, @city
+          =hidden_field_tag :state, @state
+          =hidden_field_tag 'birthday(1i)', @birthday1
+          =hidden_field_tag 'birthday(2i)', @birthday2
+          =hidden_field_tag 'birthday(3i)', @birthday3
+          =hidden_field_tag :gender, @gender
+          =hidden_field_tag :zip_code, @zip_code
+          =hidden_field_tag :ethnicity, @ethnicity
+          =hidden_field_tag :infertility_diagnosis, @infertility_diagnosis
+          =hidden_field_tag :diagnosis, @diagnosis
+          =hidden_field_tag :age_group, @age_group
+          =hidden_field_tag :previous_cycles, @previous_cycles
+          =hidden_field_tag :latitude, @latitude
+          =hidden_field_tag :longitude, @longitude
           %ul
             %li
               %span.label
-                = label_tag :name
+                = label_tag :first_name
               %span.field
-                = text_field_tag :name, nil, :placeholder => "Name", :class => "field"
+                = text_field_tag :first_name, nil, :placeholder => "First Name", :class => "field"
             %li
+              %span.label
+                = label_tag :last_name
+              %span.field
+                = text_field_tag :last_name, nil, :placeholder => "Last Name", :class => "field"
+            %li            
               %span.label
                 = label_tag :address
               %span.field
@@ -56,13 +75,11 @@
         %h2 Clinics to Contact
         %ul
           %li.headers
-            %span.demographics Clinic Information
+            %span.demographics Clinic Location
             %span.score Score
           -@clinic_results.each do |c|
             %li
-              %span.demographics
-                %span.clinic_name=c["clinic_name"]
-                %span.citystate="#{c['city']}, #{c['state']}"
+              %span.demographics="#{c['city']}, #{c['state']}"
               %span.score.round.ivfblue=c["ivf_reports_score"].round(1)
   .grid_4.omega
     .third.right
@@ -86,9 +103,9 @@
     
     var map;
     var geocoder;
-    var zip_code = #{params[:zip_code]};
-    var lat = #{@coordinates[0].latitude};
-    var lng = #{@coordinates[0].longitude};
+    var zip_code = #{@zip_code};
+    var lat = #{@latitude};
+    var lng = #{@longitude};
     var address = zip_code;
     
     
@@ -152,9 +169,9 @@
         });
 
         //assign the infobox to the clinic marker upon a click event
-        google.maps.event.addListener(clinicMarker, 'click', function() {
-          infowindow.open(map,clinicMarker);
-        });
+        //google.maps.event.addListener(clinicMarker, 'click', function() {
+          //infowindow.open(map,clinicMarker);
+        //});
       });
     }
   });

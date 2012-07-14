@@ -7,7 +7,7 @@
 */
 
 /*FONTS*/
-body {font-family:"Quicksand", Arial, sans-serif;font-weight:400;}
+body {font-family:"Quicksand", Arial, sans-serif;font-weight:400;color:#7a7a7a;}
 h1, h2, h3, h4, h5 {font-family: "Lato", Arial, sans-serif;font-weight:400;}
 
 /*BACKGROUND*/
@@ -15,6 +15,14 @@ h1, h2, h3, h4, h5 {font-family: "Lato", Arial, sans-serif;font-weight:400;}
 	background:#7e9ba6;
 }
 
+/*Flash Messages*/
+.flash{position:relative;display:inline-block;width:916px;;text-align:center;font-size:16px;height:40px;line-height:40px;margin-left:12px;margin-right:12px;margin-bottom:24px;}
+.flash.error{color:#990000;}
+.flash.success{color:#0a3445;}
+.flash span.flash_close {display:inline-block;position:relative;right:12px;float:right;}
+.flash span.flash_close:hover {font-weight:bold;cursor:pointer;font-size:18px;}
+.flash span.flash_close span.icon {}
+	
 /*WRAPPER*/
 .wrapper {
 	background:#ffffff;display:inline;float:left;box-shadow: 0px 0px 6px 6px #6b8b96;border-bottom:1px solid #cccccc;

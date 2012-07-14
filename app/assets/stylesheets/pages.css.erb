@@ -60,36 +60,30 @@ hr.top_divider {margin:12px;display:inline-block;float:left;width:916px;}
 .info_form ul li span {display:inline-block;}
 .info_form ul li span.label {float:left;}
 .info_form ul li span.field {float:right;}
-.info_form ul li span.field input.field {width:180px;height:20px;line-height:20px;text-align:center;}
+.info_form ul li span.field input.field {width:160px;height:20px;line-height:20px;text-align:center;}
 .info_form form span.contact_now {margin-top:24px;display:inline-block;margin-bottom:12px;}
 .clinic_rec_list {margin-top:12px;border:1px solid #cccccc;padding:12px;display:inline-block;margin-bottom:24px;}
 .clinic_rec_list h2 {color:#7795a1;font-size:18px;font-family:'Lato', Arial, sans-serif;font-weight:300;padding-bottom:3px;border-bottom:1px solid #7795a1;text-align:left;margin-bottom:24px;}
 .clinic_rec_list ul {list-style:none;display:inline-block;margin:0px;padding:0px;float:left;width:100%;}
-.clinic_rec_list ul li {list-style-type:none;display:inline-block;margin:0px;padding:0px;float:left;width:100%;margin-bottom:12px;}
-.clinic_rec_list ul li:hover {color:#cccccc;}
+.clinic_rec_list ul li {list-style-type:none;display:inline-block;margin:0px;padding:0px;float:left;width:270px;padding-left:6px;margin-bottom:12px;}
+.clinic_rec_list ul li:hover {width:270px;border-left:4px solid #0b3542;padding-left:2px;}
 .clinic_rec_list ul li span {display:inline-block;}
-.clinic_rec_list ul li span.demographics {width:200px;float:left;height:60px;font-size:12px;}
+.clinic_rec_list ul li span.demographics {width:200px;float:left;height:40px;font-size:14px;line-height:40px;}
 .clinic_rec_list ul li span.demographics span.clinic_name {height:40px;width:100%;float:left;display:inline-block;line-height:20px;overflow:hidden;font-weight:bold;}
 .clinic_rec_list ul li span.demographics span.citystate {height:20px;display:inline-block;width:100%;float:left;text-align:right;}
-.clinic_rec_list ul li span.score {width:44px;float:right;height:60px;line-height:60px;padding:5px;text-align:center;color:#ffffff;font-weight:bold;}
+.clinic_rec_list ul li span.score {width:44px;float:right;height:30px;line-height:30px;padding:5px;text-align:center;color:#ffffff;font-weight:bold;}
 .clinic_rec_list ul li.headers span {color:#0b3542;font-weight:bold;height:20px;line-height:20px;font-size:16px;padding:0px;padding-right:6px;margin-bottom:6px;}
+.clinic_rec_list ul li.headers:hover {border-left:0px;padding-left:6px;}
 .match_blurb {margin:10px;}
 .google_map_listing {border:3px solid #0b3542;margin-top:12px;}
 .google_map_listing #google_map {width:100%;height:320px;}
+.resource_list {}
+.resource_list ul {list-style:none;margin:0px;padding:0px;display:inline-block;float:left;width:100%;}
+.resource_list ul li {list-style-type:none;margin:0px;padding:0px;display:inline-block;float:left;width:100%;height:30px;line-height:30px;font-size:14px;}
+.resource_list ul li a{text-decoration:none;display:block;width:100%;height:30px;color:#0b3542;}
+.resource_list ul li a:hover{border-left:2px solid #0b3542;color:#7795a1;padding-left:4px;}
 
-
-
-
-
-
-
-
-
-
-/*clinicians page*/
-img.clinicians_page {display:inline-block;float:right;}
-
-/*US Region Map*/
+/*US REGION MAP*/
 div.region_map {display:inline-block;width:100%;height:480px;position:relative;}
 div.region_map h1 {text-align:center;}
 div.region_map div.map_region {position:absolute;display:inline-block;cursor:pointer;opacity:0.5;}
@@ -105,41 +99,46 @@ div.region_map div#WNC {left:390px;top:130px;background:url('<%= asset_path "reg
 div.region_map div#ENC {left:540px;top:130px;background:url('<%= asset_path "regions/encentral.png" %>') no-repeat;width:118px;height:129px;}
 div.region_map div#MA {left:670px;top:140px;background:url('<%= asset_path "regions/midatlantic.png" %>') no-repeat;width:93px;height:79px;}
 div.region_map div#NP {left:130px;top:100px;background:url("<%= asset_path 'regions/npacific.png' %>") no-repeat;width:80px;height:94px;}
-span.back_to_region_select {display:inline-block;width:60%;margin-left:20%;margin-right:20%;height:20px;background:#7895a3;cursor:pointer;color:#ffffff;line-height:20px;font-weight:bold;text-align:center;font-size:14px;margin-bottom:12px;}
-span.back_to_region_select:hover {color:#bbbbbb;}
 
-/*Ranking Page*/
-div.ranking_tabs {border:0px solid #ffffff;display:inline-block;width:100%;}
+/*RANKING*/
+div#ranking_content h1#ranking_title {text-align:center;}
+span.back_to_region_select {display:inline-block;width:60%;margin-left:20%;margin-right:20%;height:20px;cursor:pointer;color:#ffffff;line-height:20px;font-weight:bold;text-align:center;font-size:14px;margin-bottom:12px;}
+span.back_to_region_select:hover {color:#bbbbbb;}
+div.ranking_tabs {border:0px solid #ffffff;display:inline-block;margin-left:85px;width:440px;margin-right:85px;margin-bottom:24px;}
 div.ranking_tabs ul.jqueryui-ranking-tabs {width:431px;background:#E6E6E6 url(images/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x;display:inline-block;}
 div.ranking_tabs ul.jqueryui-ranking-tabs li.ranking_tab {height:30px;line-height:30px;text-align:center;width:140px;display:inline-block;}
 div.ranking_tabs ul.jqueryui-ranking-tabs li.ranking_tab a {text-align:center;display:inline-block;width:100%;}
-
-div.score_explanation {position:absolute;width:240px;height:200px;background:#7895a3;color:#ffffff;border:1px solid #325d64;padding:12px;}
-div.score_explanation h3 {font-size:16px;color:#ffffff;font-weight:bold;border-bottom:1px solid #ffffff;margin-bottom:6px;}
-div.score_explanation p {text-align:justify;color:#ffffff;font-size:13px;}
-
-div.star_explanation {position:absolute;width:200px;height:150px;background:#7895a3;color:#ffffff;border:1px solid #325d64;padding:12px;}
-div.star_explanation h3 {font-size:16px;color:#ffffff;font-weight:bold;border-bottom:1px solid #ffffff;margin-bottom:6px;}
-div.star_explanation ul {color:#ffffff;font-size:13px;list-style:none;padding:0px;margin:0px;float:left;display:inline-block;width:100%;margin-top:12px;}
+div.score_explanation {color:#7a7a7a;position:absolute;width:240px;height:200px;background:#ffffff;border:1px solid #325d64;padding:12px;}
+div.score_explanation h3 {font-size:16px;color:#0b3542;font-weight:bold;border-bottom:1px solid #0b3542;margin-bottom:3px;padding-bottom:3px;}
+div.score_explanation p {text-align:justify;font-size:13px;}
+div.star_explanation {color:#7a7a7a;position:absolute;width:200px;height:150px;background:#ffffff;border:1px solid #325d64;padding:12px;}
+div.star_explanation h3 {font-size:16px;color:#0b3542;font-weight:bold;border-bottom:1px solid #0b3542;margin-bottom:3px;padding-bottom:3px;}
+div.star_explanation ul {font-size:13px;list-style:none;padding:0px;margin:0px;float:left;display:inline-block;width:100%;margin-top:12px;}
 div.star_explanation ul li {list-style-type:none;padding:0px;margin:0px;float:left;display:inline-block;width:100%;margin-bottom:12px;}
 div.star_explanation ul li span.icon {display:inline-block;float:left;font-size:16px;text-align:left;width:20%;margin-right:5%;}
 div.star_explanation ul li span.explanation {display:inline-block;float:right;text-align:left;width:65%;margin-left:0%;line-height:16px;}
-
 .jqueryui-ranking-subselect {padding:0px;margin:0px;display:inline-block;width:431px;font-size:12px;border-left:1px solid #bcbcbc;border-right:1px solid #bcbcbc;}
 .jqueryui-ranking-subselect li {padding:0px;margin:0px;list-style-type:none;display:inline-block;width:83px;text-align:center;height:30px;line-height:30px;cursor:pointer;padding-right:0px;}
 .jqueryui-ranking-subselect .ui-selectee {color:#325d64; }
 .jqueryui-ranking-subselect .ui-selecting { background: #FECA40; }
 .jqueryui-ranking-subselect .ui-selected { background: #7895a3; color: white; height:30px;}
-
 .jqueryui-ranking-subselect-diagnosis {padding:0px;margin:0px;display:inline-block;width:431px;font-size:12px;border-left:1px solid #bcbcbc;border-right:1px solid #bcbcbc;}
 .jqueryui-ranking-subselect-diagnosis li {padding:0px;margin:0px;list-style-type:none;display:inline-block;width:140px;text-align:center;height:30px;line-height:30px;cursor:pointer;padding-right:0px;}
 .jqueryui-ranking-subselect-diagnosis .ui-selectee {color:#325d64; }
 .jqueryui-ranking-subselect-diagnosis .ui-selecting { background: #FECA40; }
 .jqueryui-ranking-subselect-diagnosis .ui-selected { background: #7895a3; color: white; height:30px;}
-
-ul.clinic_rank {border-bottom:1px solid #bcbcbc;margin:0px;padding:0px;display:inline-block;float:left;width:410px;margin:10px;padding-top:10px;padding-bottom:20px;margin-bottom:0px;}
+div.clinic_rank_item {display:inline-block;width:100%;float:left;position:relative;border-bottom:1px solid #bcbcbc;}
+div.clinic_rank_item span.clinic_contact_button {float:left;display:inline-block;width:90px;height:80px;text-align:center;line-height:26px;border:1px solid #cccccc;color:#ffffff;font-weight:bold;margin-top:34px;cursor:pointer;}
+div.clinic_rank_item span.clinic_contact_button:hover {color:#cccccc;}
+div.clinic_rank_item span.already_contacted {background:#f5f5f5;color:#7895a3;cursor:auto;float:left;display:inline-block;width:90px;height:80px;text-align:center;line-height:26px;border:0px solid #f5f5f5;font-weight:bold;margin-top:34px;}
+div.clinic_rank_item span.register_to_contact {float:left;display:inline-block;width:90px;height:80px;text-align:center;line-height:26px;border:1px solid #cccccc;background:#7895a3;color:#ffffff;font-weight:bold;margin-top:34px;cursor:pointer;}
+div.clinic_rank_item span.register_to_contact a {text-decoration:none;color:#ffffff;display:block;height:80px;}
+div.clinic_rank_item span.register_to_contact a:hover {color:#cccccc;}
+div.clinic_rank_item h3.clinic_name {display:inline-block;width:96%;margin-top:24px;margin-bottom:12px;margin-left:4%;}
+ul.clinic_rank {margin:0px;padding:0px;display:inline-block;float:left;width:298px;margin:10px;padding-bottom:20px;margin-bottom:0px;}
+ul.clinic_rank:last-child {border-bottom:0px;}
 ul.clinic_rank.bottom {border-bottom:0px solid #ffffff;}
-ul.clinic_rank li {list-style-type:none;display:inline-block;margin:0px;padding:0px;float:left;width:410px;}
+ul.clinic_rank li {list-style-type:none;display:inline-block;margin:0px;padding:0px;float:left;width:410px;overflow:hidden;}
 ul.clinic_rank li.clinic_name {padding-left:0px;height:25px;line-height:25px;}
 ul.clinic_rank li.clinic_name a {display:block;text-decoration:none;color:#325d5d;height:25px;line-height:25px;}
 ul.clinic_rank li.clinic_name a:hover {color:#103b3b;}
@@ -148,64 +147,29 @@ ul.clinic_rank li.clinic_stats {padding-left:20px;width:60%;font-size:12px;paddi
 ul.clinic_rank li.clinic_stats span.score_type {display:inline-block;float:left;height:16px;line-height:16px;}
 ul.clinic_rank li.clinic_stats span.score_result {display:inline-block;float:right;}
 ul.clinic_rank li.clinic_stats span.score_result span.icon {display:inline-block;padding-left:5px;font-size:16px;height:16px;}
-div.clinic_rank_item {display:inline-block;width:100%;float:left;}
-div.clinic_rank_item span.clinic_contact_button {float:right;position:absolute;display:inline-block;width:90px;height:80px;text-align:center;line-height:26px;border:1px solid #cccccc;background:#7895a3;color:#ffffff;font-weight:bold;margin-left:-120px;margin-top:74px;cursor:pointer;}
-div.clinic_rank_item span.clinic_contact_button:hover {color:#cccccc;}
-div.clinic_rank_item span.already_contacted {background:#f5f5f5;color:#7895a3;cursor:auto;float:right;position:absolute;display:inline-block;width:90px;height:80px;text-align:center;line-height:26px;border:0px solid #f5f5f5;font-weight:bold;margin-left:-120px;margin-top:74px;}
-div.clinic_rank_item span.register_to_contact {float:right;position:absolute;display:inline-block;width:90px;height:80px;text-align:center;line-height:26px;border:1px solid #cccccc;background:#7895a3;color:#ffffff;font-weight:bold;margin-left:-120px;margin-top:74px;cursor:pointer;}
-div.clinic_rank_item span.register_to_contact a {text-decoration:none;color:#ffffff;display:block;height:80px;}
-div.clinic_rank_item span.register_to_contact a:hover {color:#cccccc;}
 span.all_state_label {font-size:14px;color:#325d64;}
-
 div.ranking_tab_content {padding:0px;margin:0px;width:100%;display:inline-block;}
-h2.age_ranking_title {padding:0px;margin:0px;width:431px;float:left;display:inline-block;text-align:center;background:#7895a3;border:1px solid #bcbcbc;border-top:0px solid #7895a3;color:#ffffff;height:30px;line-height:30px;border-bottom:0px solid #7895a3;}
+h2.age_ranking_title {padding:0px;margin:0px;width:431px;float:left;display:inline-block;text-align:center;border:1px solid #bcbcbc;border-top:0px solid #7895a3;color:#ffffff;height:30px;line-height:30px;border-bottom:0px solid #7895a3;}
 h2.age_ranking_title.hidden {display:none;}
 div.ranking_results {background:#f5f5f5;min-height:500px;display:inline-block;width:431px;border:1px solid #bcbcbc;border-top:0px solid #e5e5e5;}
 div.ranking_results div.clinic_rank_list {display:inline-block;width:100%;min-height:500px;}
-
-ul.ranking_nav {width:100%;padding:0px;margin:0px;height:30px;float:left;display:inline-block;background:#7895a3;}
+ul.ranking_nav {width:100%;padding:0px;margin:0px;height:30px;float:left;display:inline-block;}
 ul.ranking_nav li {list-style-type:none;padding:0px;margin:0px;height:30px;display:inline-block;width:10%;color:#ffffff;font-size:20px;line-height:30px;padding-left:15px;padding-right:15px;cursor:pointer;}
-ul.ranking_nav li span.icon {cursor:pointer;}
+ul.ranking_nav li span.icon {cursor:pointer;color:#0b3542;}
 ul.ranking_nav li:hover {color:#cccccc;}
 ul.ranking_nav li.left_button {float:left;text-align:left;}
 ul.ranking_nav li.right_button {float:right;text-align:right;}
 
-
-
-/*contact_info*/
-ul.contact_info {margin:0px;padding:0px;display:inline-block;width:100%;margin-top:20px;}
-ul.contact_info li {margin:0px;padding:0px;display:inline-block;width:100%;list-style-type:none;margin-bottom:5px;}
-
-/*sidebars*/
-div.left_sidebar{margin-top:10px;padding-left:12px;}
-div.right_sidebar {margin-top:10px;padding-right:12px;}
-ul.sidebar_module {display:inline-block;margin:0px;padding:0px;width:100%;border:1px solid #7895a3;padding:1px;margin-bottom:10px;}
-ul.sidebar_module li {list-style-type:none;display:inline-block;float:left;width:192px;margin-right:5px;margin-left:5px;padding-left:5px;height:30px;line-height:30px;margin-right:10px;border-bottom:1px solid #7895a3;overflow:hidden;}
-ul.sidebar_module li a {text-decoration:none;color:#325d64;display:block;height:30px;font-size:12px;}
-ul.sidebar_module li.social_media {height:auto;text-align:center;}
-ul.sidebar_module li.state {border-bottom:0px solid #ffffff;}
-ul.sidebar_module li.state span.state_span {display:inline-block;width:50%;float:left;color:#325d64;font-size:14px;}
-ul.sidebar_module li.state span.state_span input {float:right;margin-right:40px;margin-top:9px;}
-div.facebookbadge {border:1px solid #7895a3;margin:10px;}
-div.twitterbadge {border:1px solid #7895a3;margin:10px;padding-top:20px;padding-bottom:20px;}
-ul.sidebar_module li.bottom {border:0px;}
-ul.sidebar_module li.header {margin-left:0px;padding-left:5px;width:202px;background:#7895a3;color:#ffffff;font-weight:bold;height:40px;line-height:40px;}
-ul.sidebar_module.tips_for_success li.tip{height:auto;color:#325d64;display:block;font-size:13px;text-align:justify;line-height:14px;padding-top:24px;padding-bottom:24px;}
-ul.sidebar_module.tips_for_success li.tip a{display:inline;width:auto;margin:0px;padding:0px;line-height:14px;height:auto;font-weight:bold;}
-ul.sidebar_module.tips_for_success li.tip a:hover {color:#000000;}
-ul.sidebar_module div.clinics_contacted{display:inline-block;width:100%;float:left;max-height:420px;overflow:scroll;}
-
-/*IVFr Gradients*/
-dark-green-gradient{
-	background: rgb(50,93,100); /* Old browsers */
-	background: -moz-linear-gradient(top, rgba(50,93,100,1) 0%, rgba(120,149,163,1) 80%, rgba(120,149,163,1) 99%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(50,93,100,1)), color-stop(80%,rgba(120,149,163,1)), color-stop(99%,rgba(120,149,163,1))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, rgba(50,93,100,1) 0%,rgba(120,149,163,1) 80%,rgba(120,149,163,1) 99%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, rgba(50,93,100,1) 0%,rgba(120,149,163,1) 80%,rgba(120,149,163,1) 99%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top, rgba(50,93,100,1) 0%,rgba(120,149,163,1) 80%,rgba(120,149,163,1) 99%); /* IE10+ */
-	background: linear-gradient(top, rgba(50,93,100,1) 0%,rgba(120,149,163,1) 80%,rgba(120,149,163,1) 99%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#325d64', endColorstr='#7895a3',GradientType=0 ); /* IE6-9 */
-}
+/*STATE SELECT*/
+div.state_select{margin-top:84px;display:inline-block;width:266px;padding:12px;}
+div.state_select.hidden {display:none;}
+ul.state_select{list-style:none;padding:0px;margin:0px;width:100%;display:inline-block;float:left;}
+ul.state_select li {list-style-type:none;padding:0px;margin:0px;display:inline-block;float:left;}
+ul.state_select li.header {font-size:16px;font-family:'Lato', Arial, sans-serif;font-weight:300;color:#0b3542;padding-bottom:3px;border-bottom:1px solid #0b3542;margin-bottom:12px;}
+ul.state_select li.all_state {width:100%;height:30px;line-height:30px;}
+ul.state_select li.all_state.last{margin-bottom:12px;}
+ul.state_select li.state {width:60px;font-size:12px;margin-left:6px;}
+ul.state_select li.state input {float:right;margin-right:18px;display:inline-block;}
 
 
 /*Review Writing*/

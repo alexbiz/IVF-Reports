@@ -24,13 +24,14 @@ IVFReports::Application.routes.draw do
   resources :payment_notifications, :only => [:create]
 	
 	resources :datapoints
+	match '/lead-save', :to => 'pages#lead_save', :as => :lead_save, :via => :post
 	match '/register', :to => 'users#new'
 	match '/signin', :to => 'sessions#new'
 	match '/signout', :to => 'sessions#destroy'
 
   root :to => "pages#home"
   match "/complete-contact-form", :to => "pages#lead_contact", :as => :complete_contact_form
-  match "/complete-registration", :to => "pages#lead_registration", :as => :complete_registration
+  match "/learn-more", :to => "pages#lead_registration", :as => :learn_more
   
   match "/find-a-clinic", :to => "pages#clinicfind", :as => :find_a_clinic
   match "/ranking", :to => "pages#ranking"

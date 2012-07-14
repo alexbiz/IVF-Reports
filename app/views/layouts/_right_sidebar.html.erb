@@ -39,28 +39,6 @@
 	<% end %>
 	<% else # Nothing else displayed... %>
 	<% end %>
-
-	<% if is_controller?('pages') and is_action?('ranking') %>
-		<ul class="sidebar_module">
-			<li class="header">Select States</li>
-			<li><span class="all_state_label">Select All States</span><input checked type="checkbox" class="select_all_state_checkbox" name="select_all_states" value="all_states" style="float:right;margin-top:9px;margin-right:10px;"></li>
-
-			<li><span class="all_state_label">Unselect All States</span><input type="checkbox" class="unselect_all_state_checkbox" name="unselect_all_states" value="no_states" style="float:right;margin-top:9px;margin-right:10px;"></li>
-			<% @states.each_with_index do |s, index| %>
-				<% if index%2 == 0 %>
-				<li class="state">
-				<span class="state_span">
-					<%= s.name %><input checked id="state_<%= s.name %>" class="state_checkbox" type="checkbox" name="state" value="<%= s.name %>">
-				</span>
-				<% else %>
-				<span class="state_span">
-					<%= s.name %><input checked id="state_<%= s.name %>" class="state_checkbox" type="checkbox" name="state" value="<%= s.name %>">
-				</span>
-				</li>
-				<% end %>
-			<% end %>
-		</ul>
-	<% end %>
 	
 <ul class="sidebar_module">
 	<li class="header">Links</li>
