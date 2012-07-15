@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
 	                      :on => :update
 	
 	
-	before_save :encrypt_password, :unless => "password.blank?" || "confirmation.blank?"
+	before_save :encrypt_password, :unless => "password.blank?" || "confirmation.blank?" || "password.length==0"
   
 	before_save :create_permalink
 	
