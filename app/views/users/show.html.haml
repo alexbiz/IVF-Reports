@@ -1,147 +1,169 @@
-.profile_top
-  .gravatar-and-name
-    = gravatar_for @user
-    .user_info
-      %h1= @user.name
-      %span.user_subtitle="Joined #{@user.created_at.strftime("%B %d, %Y")}"
-
-  .edit-profile-link
-    -if current_user?(@user)
-      -unless current_user.clinician?
-        =link_to edit_user_path(current_user), :class => "edit-button" do
-          %span.icon⚙
-          Edit Your Profile
--if current_user?(@user) && current_user.clinician?
-  %ul.clinic_account_options
-    %li
-      = link_to clinic_path(current_user.clinics.first) do |l|
-        %span.clinic_rec_rank.round
-          %span.icon ⌂
-        View My Clinic
-    %li
-      = link_to edit_clinic_path(current_user.clinics.first) do |l|
-        %span.clinic_rec_rank.round
-          %span.icon ⚙
-        Edit My Clinic Information
-    %li
-      = link_to clinic_requests_path(Clinic.find_by_user_id(current_user.id)) do |l|
-        %span.clinic_rec_rank.round
-          %span.icon u
-        View My Clinic's Leads
-    %li
-      = link_to edit_user_path(current_user) do |l|
-        %span.clinic_rec_rank.round
-          %span.icon ⚙
-        Edit My Account
-    %li
-      = link_to [Clinic.find_by_user_id(current_user.id), :statistics] do |l|
-        %span.clinic_rec_rank.round
-          %span.icon C
-        View In Depth Reporting
--elsif @user.clinician? #If this is a different clinician account than the clinic being viewed
--else #What normal users see (about themselves and other users?) need to make sure no contact information exists when viewed by others. %>
-  .personal_info.user_info_section
-    %h2 Personal Information
-    %hr
-    %table.personal_info
-      %tr
-        %td Username
-        %td= @user.name
-      -if current_user?(@user)
-        %tr
-          %td Email
-          %td= link_to @user.email, @user.email
-      %tr
-        %td Gender
-        %td= @user.gender.capitalize unless @user.gender.nil?
-      %tr
-        %td Ethnicity
-        %td= @user.ethnicity.gsub("_"," ").capitalize unless @user.ethnicity.nil?
-      %tr
-        %td Age
-        %td
-          -if @user.birthday.nil?
-            ="-"
-          -else
-            ="#{(Date.today - @user.birthday).to_i/365} Years Old"
-      %tr
-        %td Zip Code
-        %td
-          -if @user.zip_code.nil?
-            ="-"
-          -else 
-            = @user.zip_code
-      %tr
-        %td IVF Attempts
-        %td= @user.previous_cycles unless @user.previous_cycles.nil?
-      %tr
-        %td Infertility Diagnosis
-        %td= @user.infertility_diagnosis.gsub("_"," ").capitalize unless @user.infertility_diagnosis.nil?
-      %tr
-        %td Member Since
-        %td= @user.created_at.strftime("%B %d, %Y")
-      -if current_user?(@user)
-        %tr
-          %td Name
-          %td="#{@user.first_name} #{@user.last_name}"
-        %tr
-          %td About You
-          %td.about_me= @user.about_me
-  -if current_user?(@user)
-    .personal_info.user_info_section
-      %h2 Personalized Clinic Recommendations
-      %hr
-      -unless @user.zip_code.nil? || @user.zip_code.empty?
-        %span.recommendation_distance="Currently showing clinics within #{@user.zip_distance} miles of #{@user.zip_code}."
-        = form_for @user do |f|
-          %table.personal_info.zip_search
-            -zip_distance_options = options_for_select([['-'],['25','25'],['50','50'],['100','100'],['200','200'], ['All Distances','ALL']], @user.zip_distance)
+.grid_1.alpha
+  .profile_nav
+    %ul
+      %li.section#home
+        %span.icon ⌂
+        Home
+      %li.active.section#profile
+        %span.icon u
+        Profile
+      %li.section#recs
+        %span.icon +
+        Clinic Recs 
+      %li.section#contact
+        %span.icon i
+        Contact Requests
+      %li.section#messages
+        %span.icon ✉
+        Messages
+      %li.active_section
+        %span.icon ←
+.grid_11.omega
+  .profile.round
+    #home_section.hidden
+    #profile_section
+      .profile_top
+        .name
+          = gravatar_for @user
+          .user_info
+            %h1= @user.name
+            %span.user_subtitle="Joined #{@user.created_at.strftime("%B %d, %Y")}"
+        .edit-profile-link
+          -if current_user?(@user)
+            -unless current_user.clinician?
+              =link_to edit_user_path(current_user), :class => "edit-button" do
+                %span.icon⚙
+                Edit Your Profile
+      .personal_info.user_info_section
+        %table.personal_info
+          %tr
+            %td Username
+            %td= @user.name
+          -if current_user?(@user)
             %tr
-              %td= f.label :zip_distance, 'Miles to Search Within'
-              %td= f.select(:zip_distance, zip_distance_options)
-              %td= f.submit :value => "Update"
-      %ul.personal_rec_table
-        -count = 0
-        -@clinic_results.each do |c|
-          -count += 1
-          %li
-            %a.rank_link{:href => "../clinics/#{c['permalink']}"}
-            %span.clinic_rec_rank.round=count
-            %span.clinic_name
-              %a{:href => "../clinics/#{c['permalink']}", :target => "_blank"}
-                =c['clinic_name']
-            %span.clinic_location="#{c['city']}, #{c['state']}"
-    .personal_info.user_info_section
-      %h2="Clinics Contacted (#{contacts_remaining(@user)} Requests Remaining)"
-      #contacted_accordion
-        -if @user.requests.empty?
-          %h3
-            %a{:href => "#"}None Contacted Yet.
-        -else
-          -@user.requests.each do |r|
-            %h3
-              %a{:href => "#"}="#{r.clinic.clinic_name} - #{r.clinic.city}, #{r.clinic.state}"
-            %div
-              %table.contacted_table
+              %td Email
+              %td= link_to @user.email, @user.email
+          %tr
+            %td Gender
+            %td= @user.gender.capitalize unless @user.gender.nil?
+          %tr
+            %td Ethnicity
+            %td= @user.ethnicity.gsub("_"," ").capitalize unless @user.ethnicity.nil?
+          %tr
+            %td Age
+            %td
+              -if @user.birthday.nil?
+                ="-"
+              -else
+                ="#{(Date.today - @user.birthday).to_i/365} Years Old"
+          %tr
+            %td Zip Code
+            %td
+              -if @user.zip_code.nil?
+                ="-"
+              -else 
+                = @user.zip_code
+          %tr
+            %td IVF Attempts
+            %td= @user.previous_cycles unless @user.previous_cycles.nil?
+          %tr
+            %td Infertility Diagnosis
+            %td= @user.infertility_diagnosis.gsub("_"," ").capitalize unless @user.infertility_diagnosis.nil?
+          %tr
+            %td Member Since
+            %td= @user.created_at.strftime("%B %d, %Y")
+          -if current_user?(@user)
+            %tr
+              %td Name
+              %td="#{@user.first_name} #{@user.last_name}"
+            %tr
+              %td About You
+              %td.about_me= @user.about_me
+    #recs_section.hidden
+      -if current_user?(@user)
+        .profile_top
+          %h2 Personalized Clinic Recommendations
+        .personal_info.user_info_section
+          -unless @user.zip_code.nil? || @user.zip_code.empty?
+            %span.recommendation_distance="Currently showing clinics within #{@user.zip_distance} miles of #{@user.zip_code}."
+            = form_for @user do |f|
+              %table.personal_info.zip_search
+                -zip_distance_options = options_for_select([['-'],['25','25'],['50','50'],['100','100'],['200','200'], ['All Distances','ALL']], @user.zip_distance)
                 %tr
-                  %td.label Clinic
-                  %td.value
-                    = link_to r.clinic do |l|
-                      %span.icon ⌂
-                      = r.clinic.clinic_name
-                %tr
-                  %td.label Contacted
-                  %td.value= r.created_at.strftime("%B %d, %Y")
-                %tr
-                  %td.label Response
-                  %td.value
-                    -if r.visible==true
-                      ="Contact Accepted - #{r.updated_at.strftime("%B %d, %Y")}"
-                    -elsif r.declined==true
-                      ="Contact Declined - #{r.updated_at.strftime("%B %d, %Y")}"
-                    -else
-                      ="No Response Yet"
+                  %td= f.label :zip_distance, 'Miles to Search Within'
+                  %td= f.select(:zip_distance, zip_distance_options)
+                  %td= f.submit :value => "Update"
+          %ul.personal_rec_table
+            -count = 0
+            -@clinic_results.each do |c|
+              -count += 1
+              %li
+                %a.rank_link{:href => "../clinics/#{c['permalink']}"}
+                %span.clinic_rec_rank.round=count
+                %span.clinic_name
+                  %a{:href => "../clinics/#{c['permalink']}", :target => "_blank"}
+                    =c['clinic_name']
+                %span.clinic_location="#{c['city']}, #{c['state']}"
+    #contact_section.hidden
+      -if current_user?(@user)
+        .profile_top
+          %h2="Clinics Contacted (#{contacts_remaining(@user)} Requests Remaining)"
+        .personal_info.user_info_section
+          #contacted_accordion
+            -if @user.requests.empty?
+              %h3
+                %a{:href => "#"}None Contacted Yet.
+            -else
+              -@user.requests.each do |r|
+                %h3
+                  %a{:href => "#"}="#{r.clinic.clinic_name} - #{r.clinic.city}, #{r.clinic.state}"
+                %div
+                  %table.contacted_table
+                    %tr
+                      %td.label Clinic
+                      %td.value
+                        = link_to r.clinic do |l|
+                          %span.icon ⌂
+                          = r.clinic.clinic_name
+                    %tr
+                      %td.label Contacted
+                      %td.value= r.created_at.strftime("%B %d, %Y")
+                    %tr
+                      %td.label Response
+                      %td.value
+                        -if r.visible==true
+                          ="Contact Accepted - #{r.updated_at.strftime("%B %d, %Y")}"
+                        -elsif r.declined==true
+                          ="Contact Declined - #{r.updated_at.strftime("%B %d, %Y")}"
+                        -else
+                          ="No Response Yet"
+
+    #messages_section  
 :javascript
   $(document).ready(function(){
     $('#contacted_accordion').accordion();
+    $('div.profile_nav ul li.section').click(function(){
+      $(this).siblings().removeClass('active');
+      $(this).addClass('active');
+      var section_id = $(this).attr('id');
+      if(section_id=="home"){
+        $('li.active_section').animate({top:'0px'},500);
+      }
+      else if(section_id=="profile"){
+        $('li.active_section').animate({top:'80px'},500);      
+      }
+      else if(section_id=="recs"){
+        $('li.active_section').animate({top:'160px'},500);      
+      }
+      else if(section_id=="contact"){
+        $('li.active_section').animate({top:'240px'},500);      
+      }
+      else if(section_id=="messages"){
+        $('li.active_section').animate({top:'320px'},500);      
+      }
+      
+      var show_section = "div#" + section_id + "_section";
+      $(show_section).siblings().addClass('hidden');
+      $(show_section).removeClass('hidden');
+    });
   });
