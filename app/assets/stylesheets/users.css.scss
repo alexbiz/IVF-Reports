@@ -136,6 +136,15 @@ span.terms_agreement {
 					}
 					&.data{
 						width:340px;text-align:left;display:inline-block;float:right;
+						input{
+							height:18px;line-height:18px;font-size:15px;color:#0b3542;
+						}
+						select{
+							height:18px;line-height:18px;
+						}
+						textarea{
+							height:200px;
+						}
 					}
 					&.about_me{
 						text-align:justify;

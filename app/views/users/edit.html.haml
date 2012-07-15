@@ -43,17 +43,17 @@
             %li
               %span.field=f.label :gender
               -gender_select = options_for_select([['-'],['Male','male'],['Female','female']], @user.gender)
-              %span.data=f.select(:gender, gender_select)
+              %span.data=f.select(:gender, gender_select, {},:class => 'ivfblue')
             %li
               %span.field=f.label :zip_code
               %span.data=f.text_field :zip_code
             %li
               %span.field=f.label :birthday
-              %span.data=f.date_select :birthday, {:start_year => Time.now.year, :end_year => 1900, :use_short_month => true, :order => [:month, :day, :year], :prompt => {:month => 'Month', :day => 'Day', :year => 'Year'}}
+              %span.data=f.date_select :birthday, {:start_year => Time.now.year, :end_year => 1900, :use_short_month => true, :order => [:month, :day, :year], :prompt => {:month => 'Month', :day => 'Day', :year => 'Year'}},:class => "ivfblue"
             %li
               %span.field=f.label :ethnicity
               -ethnicity_select = options_for_select([['-'],['Caucasian','caucasian'],['Ease Asian','east_asian'],['South Asian','south_asian'],['Arabic','arabic'],['African','african'],['Hispanic','hispanic'],['Native American','native_american'],['Other','other']], @user.ethnicity)
-              %span.data=f.select(:ethnicity, ethnicity_select)
+              %span.data=f.select(:ethnicity, ethnicity_select,{}, :class => 'ivfblue')
             %li
               %span.field=f.label :phone, 'Phone # (Clinic Contact)'
               %span.data=f.text_field :phone, :class => "phone_number"
