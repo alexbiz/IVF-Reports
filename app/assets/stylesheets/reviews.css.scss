@@ -1,0 +1,57 @@
+// Place all the styles related to the reviews controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+/*REVIEW WRITING*/
+div.review_dark_bg {
+	position:fixed;left:0;right:0;top:0;bottom:0;background:#325d46;z-index:50;opacity:0.6;
+}
+span.close_button {
+	display:inline-block;width:60px;height:60px;font-size:50px;line-height:60px;text-align:center;right:0;top:0;float:right;color:#ffffff;cursor:pointer;
+	&:hover {
+		color:#bbbbbb;
+	}
+}
+
+div.review_form {
+	position:absolute;width:436px;margin-left:250px;margin-right:250px;z-index:100;background:#0b3542;top:60px;border:1px solid #cccccc;color:#ffffff;padding:8px;
+	h2 {
+		border-bottom:1px solid #ffffff;font-size:18px;color:#ffffff;
+	}
+	ul.star_rating {
+		list-style:none;width:100%;display:inline-block;float:left;
+		li {
+			list-style-type:none;margin:0px;padding:0px;width:100%;float:left;height:40px;line-height:40px;margin-top:6px;margin-bottom:6px;display:inline-block;
+			&.review_space {
+				height:200px;
+			}
+			span.star_label {
+				float:left;display:inline-block;
+			}
+			span.stars {
+				float:right;display:inline-block;font-size:24px;
+				input {
+					width:300px;height:30px;
+				}
+				textarea {
+					width:300px;height:200px;
+				}
+				span.icon {
+					display:inline-block;cursor:pointer;
+				}
+				span.icon.yellow {
+					color:#EEC900;
+				}
+				span.icon.permyellow {
+					color:#ffd900;
+				}
+			}
+			&.review_space{
+				height:200px;
+			}
+		}
+	}
+	.submit_button{
+		text-align:center;margin-top:24px;margin-bottom:24px;display:inline-block;width:100%;
+	}
+}

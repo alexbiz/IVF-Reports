@@ -1,15 +1,20 @@
 module ClinicsHelper
 
+
+  def active_section(url, section_name)
+    
+    return "active"
+  end
   def print_score_color(score)
     score = score.to_f
     if(score>=90.0)
-      return "green"
+      return "green_star"
     elsif(score<90.0 && score >=80.0)
-      return "blue"      
+      return "blue_star"      
     elsif(score<80.0 && score >=70.0)
-      return "yellow"      
+      return "yellow_star"      
     else
-      return "gray"      
+      return "gray_star"      
     end
 
   end

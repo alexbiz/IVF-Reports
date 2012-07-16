@@ -1,0 +1,442 @@
+.grid_1.alpha
+  .profile_nav
+    %ul
+      %li.section#report
+        =link_to '#report' :class => "active" do
+          %span.icon ★
+          Report Card
+      %li.section#info
+        =link_to '#info' do
+          %span.icon ⌂
+          Clinic Info
+      %li.section#reviews
+        =link_to '#reviews' do
+          %span.icon ✎
+          Reviews
+      %li.section#stats
+        =link_to '#stats' do
+          %span.icon C
+          Statistics
+      %li.active_section
+        %span.icon ←
+.grid_11.omega
+  .clinic_profile.round
+    #report_section
+      .profile_top
+        .name
+          %h1="IVF Reports - #{@clinic.clinic_name}."
+          %span.user_subtitle="Based on Data from 2010."
+        .gravatar.box_shadow
+          = gravatar_for User.find_by_email('info@ivfreports.org'), {:size => 200}
+          .personal_info
+            %ul
+              %li.location="#{@clinic.city}, #{@clinic.state}"
+      .profile_body
+        #tabs
+          %ul.ranking_tabs
+            %li
+              %a{:href => '#rankingtabs_1'} Overall
+            %li
+              %a{:href => '#rankingtabs_2'} <35
+            %li
+              %a{:href => '#rankingtabs_3'} 35-37
+            %li
+              %a{:href => '#rankingtabs_4'} 38-40
+            %li
+              %a{:href => '#rankingtabs_5'} 41-42
+            %li
+              %a{:href => '#rankingtabs_6'} >42
+          #rankingtabs_1.tab_content.round
+            %table.score_table
+              -if(@scores_all_ages.empty?)
+                %tr
+                  %td.score_label.ivfr_score IVF Reports Score
+                  %td.score_result 
+                    No Ranking Data
+                    %span{:class => "icon score_icon #{print_score_color(0.0)}"} ★
+                %tr
+                  %td.score_label.ivfr_score Quality Score
+                  %td.score_result 
+                    No Ranking Data
+                    %span{:class => "icon score_icon #{print_score_color(0.0)}"} ★
+                %tr
+                  %td.score_label.ivfr_score Safety Score
+                  %td.score_result 
+                    No Ranking Data
+                    %span{:class => "icon score_icon #{print_score_color(0.0)}"} ★
+                %tr
+                  %td.score_label.ivfr_score SART Score
+                  %td.score_result 
+                    No Ranking Data
+                    %span{:class => "icon score_icon #{print_score_color(0.0)}"} ★
+              -else                        
+                %tr
+                  %td.score_label.ivfr_score IVF Reports Score
+                  %td.score_result
+                    = number_with_precision(@scores_all_ages[0].ivf_reports_score, :precision => 2, :separator => '.')
+                    %span{:class => "icon score_icon #{print_score_color(@scores_all_ages[0].ivf_reports_score)}"} ★
+                %tr
+                  %td.score_label.ivfr_score Quality Score
+                  %td.score_result
+                    = number_with_precision(@scores_all_ages[0].quality_score, :precision => 2, :separator => '.')
+                    %span{:class => "icon score_icon #{print_score_color(@scores_all_ages[0].quality_score)}"} ★
+                %tr
+                  %td.score_label.ivfr_score Safety Score
+                  %td.score_result
+                    = number_with_precision(@scores_all_ages[0].safety_score, :precision => 2, :separator => '.')
+                    %span{:class => "icon score_icon #{print_score_color(@scores_all_ages[0].safety_score)}"} ★
+                %tr
+                  %td.score_label.ivfr_score SART Score
+                  %td.score_result
+                    = number_with_precision(@scores_all_ages[0].sart_score, :precision => 2, :separator => '.')
+                    %span{:class => "icon score_icon #{print_score_color(@scores_all_ages[0].sart_score)}"} ★
+          #rankingtabs_2.tab_content
+            %table.score_table
+              -if(@scores_35.empty?)
+                %tr
+                  %td.score_label.ivfr_score IVF Reports Score
+                  %td.score_result 
+                    No Ranking Data
+                    %span{:class => "icon score_icon #{print_score_color(0.0)}"} ★
+                %tr
+                  %td.score_label.ivfr_score Quality Score
+                  %td.score_result 
+                    No Ranking Data
+                    %span{:class => "icon score_icon #{print_score_color(0.0)}"} ★
+                %tr
+                  %td.score_label.ivfr_score Safety Score
+                  %td.score_result 
+                    No Ranking Data
+                    %span{:class => "icon score_icon #{print_score_color(0.0)}"} ★
+                %tr
+                  %td.score_label.ivfr_score SART Score
+                  %td.score_result 
+                    No Ranking Data
+                    %span{:class => "icon score_icon #{print_score_color(0.0)}"} ★
+              -else                        
+                %tr
+                  %td.score_label.ivfr_score IVF Reports Score
+                  %td.score_result
+                    = number_with_precision(@scores_35[0].ivf_reports_score, :precision => 2, :separator => '.')
+                    %span{:class => "icon score_icon #{print_score_color(@scores_35[0].ivf_reports_score)}"} ★
+                %tr
+                  %td.score_label.ivfr_score Quality Score
+                  %td.score_result
+                    = number_with_precision(@scores_35[0].quality_score, :precision => 2, :separator => '.')
+                    %span{:class => "icon score_icon #{print_score_color(@scores_35[0].quality_score)}"} ★
+                %tr
+                  %td.score_label.ivfr_score Safety Score
+                  %td.score_result
+                    = number_with_precision(@scores_35[0].safety_score, :precision => 2, :separator => '.')
+                    %span{:class => "icon score_icon #{print_score_color(@scores_35[0].safety_score)}"} ★
+                %tr
+                  %td.score_label.ivfr_score SART Score
+                  %td.score_result
+                    = number_with_precision(@scores_35[0].sart_score, :precision => 2, :separator => '.')
+                    %span{:class => "icon score_icon #{print_score_color(@scores_35[0].sart_score)}"} ★
+          #rankingtabs_3.tab_content
+            %table.score_table
+              -if(@scores_35_37.empty?)
+                %tr
+                  %td.score_label.ivfr_score IVF Reports Score
+                  %td.score_result 
+                    No Ranking Data
+                    %span{:class => "icon score_icon #{print_score_color(0.0)}"} ★
+                %tr
+                  %td.score_label.ivfr_score Quality Score
+                  %td.score_result 
+                    No Ranking Data
+                    %span{:class => "icon score_icon #{print_score_color(0.0)}"} ★
+                %tr
+                  %td.score_label.ivfr_score Safety Score
+                  %td.score_result 
+                    No Ranking Data
+                    %span{:class => "icon score_icon #{print_score_color(0.0)}"} ★
+                %tr
+                  %td.score_label.ivfr_score SART Score
+                  %td.score_result 
+                    No Ranking Data
+                    %span{:class => "icon score_icon #{print_score_color(0.0)}"} ★
+              -else                        
+                %tr
+                  %td.score_label.ivfr_score IVF Reports Score
+                  %td.score_result
+                    = number_with_precision(@scores_35_37[0].ivf_reports_score, :precision => 2, :separator => '.')
+                    %span{:class => "icon score_icon #{print_score_color(@scores_35_37[0].ivf_reports_score)}"} ★
+                %tr
+                  %td.score_label.ivfr_score Quality Score
+                  %td.score_result
+                    = number_with_precision(@scores_35_37[0].quality_score, :precision => 2, :separator => '.')
+                    %span{:class => "icon score_icon #{print_score_color(@scores_35_37[0].quality_score)}"} ★
+                %tr
+                  %td.score_label.ivfr_score Safety Score
+                  %td.score_result
+                    = number_with_precision(@scores_35_37[0].safety_score, :precision => 2, :separator => '.')
+                    %span{:class => "icon score_icon #{print_score_color(@scores_35_37[0].safety_score)}"} ★
+                %tr
+                  %td.score_label.ivfr_score SART Score
+                  %td.score_result
+                    = number_with_precision(@scores_35_37[0].sart_score, :precision => 2, :separator => '.')
+                    %span{:class => "icon score_icon #{print_score_color(@scores_35_37[0].sart_score)}"} ★
+          #rankingtabs_4.tab_content
+            %table.score_table
+              -if(@scores_38_40.empty?)
+                %tr
+                  %td.score_label.ivfr_score IVF Reports Score
+                  %td.score_result 
+                    No Ranking Data
+                    %span{:class => "icon score_icon #{print_score_color(0.0)}"} ★
+                %tr
+                  %td.score_label.ivfr_score Quality Score
+                  %td.score_result 
+                    No Ranking Data
+                    %span{:class => "icon score_icon #{print_score_color(0.0)}"} ★
+                %tr
+                  %td.score_label.ivfr_score Safety Score
+                  %td.score_result 
+                    No Ranking Data
+                    %span{:class => "icon score_icon #{print_score_color(0.0)}"} ★
+                %tr
+                  %td.score_label.ivfr_score SART Score
+                  %td.score_result 
+                    No Ranking Data
+                    %span{:class => "icon score_icon #{print_score_color(0.0)}"} ★
+              -else                        
+                %tr
+                  %td.score_label.ivfr_score IVF Reports Score
+                  %td.score_result
+                    = number_with_precision(@scores_38_40[0].ivf_reports_score, :precision => 2, :separator => '.')
+                    %span{:class => "icon score_icon #{print_score_color(@scores_38_40[0].ivf_reports_score)}"} ★
+                %tr
+                  %td.score_label.ivfr_score Quality Score
+                  %td.score_result
+                    = number_with_precision(@scores_38_40[0].quality_score, :precision => 2, :separator => '.')
+                    %span{:class => "icon score_icon #{print_score_color(@scores_38_40[0].quality_score)}"} ★
+                %tr
+                  %td.score_label.ivfr_score Safety Score
+                  %td.score_result
+                    = number_with_precision(@scores_38_40[0].safety_score, :precision => 2, :separator => '.')
+                    %span{:class => "icon score_icon #{print_score_color(@scores_38_40[0].safety_score)}"} ★
+                %tr
+                  %td.score_label.ivfr_score SART Score
+                  %td.score_result
+                    = number_with_precision(@scores_38_40[0].sart_score, :precision => 2, :separator => '.')
+                    %span{:class => "icon score_icon #{print_score_color(@scores_38_40[0].sart_score)}"} ★
+          #rankingtabs_5.tab_content
+            %table.score_table
+              -if(@scores_41_42.empty?)
+                %tr
+                  %td.score_label.ivfr_score IVF Reports Score
+                  %td.score_result 
+                    No Ranking Data
+                    %span{:class => "icon score_icon #{print_score_color(0.0)}"} ★
+                %tr
+                  %td.score_label.ivfr_score Quality Score
+                  %td.score_result 
+                    No Ranking Data
+                    %span{:class => "icon score_icon #{print_score_color(0.0)}"} ★
+                %tr
+                  %td.score_label.ivfr_score Safety Score
+                  %td.score_result 
+                    No Ranking Data
+                    %span{:class => "icon score_icon #{print_score_color(0.0)}"} ★
+                %tr
+                  %td.score_label.ivfr_score SART Score
+                  %td.score_result 
+                    No Ranking Data
+                    %span{:class => "icon score_icon #{print_score_color(0.0)}"} ★
+              -else                        
+                %tr
+                  %td.score_label.ivfr_score IVF Reports Score
+                  %td.score_result
+                    = number_with_precision(@scores_41_42[0].ivf_reports_score, :precision => 2, :separator => '.')
+                    %span{:class => "icon score_icon #{print_score_color(@scores_41_42[0].ivf_reports_score)}"} ★
+                %tr
+                  %td.score_label.ivfr_score Quality Score
+                  %td.score_result
+                    = number_with_precision(@scores_41_42[0].quality_score, :precision => 2, :separator => '.')
+                    %span{:class => "icon score_icon #{print_score_color(@scores_41_42[0].quality_score)}"} ★
+                %tr
+                  %td.score_label.ivfr_score Safety Score
+                  %td.score_result
+                    = number_with_precision(@scores_41_42[0].safety_score, :precision => 2, :separator => '.')
+                    %span{:class => "icon score_icon #{print_score_color(@scores_41_42[0].safety_score)}"} ★
+                %tr
+                  %td.score_label.ivfr_score SART Score
+                  %td.score_result
+                    = number_with_precision(@scores_41_42[0].sart_score, :precision => 2, :separator => '.')
+                    %span{:class => "icon score_icon #{print_score_color(@scores_41_42[0].sart_score)}"} ★
+          #rankingtabs_6.tab_content
+            %table.score_table
+              -if(@scores_42.empty?)
+                %tr
+                  %td.score_label.ivfr_score IVF Reports Score
+                  %td.score_result 
+                    No Ranking Data
+                    %span{:class => "icon score_icon #{print_score_color(0.0)}"} ★
+                %tr
+                  %td.score_label.ivfr_score Quality Score
+                  %td.score_result 
+                    No Ranking Data
+                    %span{:class => "icon score_icon #{print_score_color(0.0)}"} ★
+                %tr
+                  %td.score_label.ivfr_score Safety Score
+                  %td.score_result 
+                    No Ranking Data
+                    %span{:class => "icon score_icon #{print_score_color(0.0)}"} ★
+                %tr
+                  %td.score_label.ivfr_score SART Score
+                  %td.score_result 
+                    No Ranking Data
+                    %span{:class => "icon score_icon #{print_score_color(0.0)}"} ★
+              -else                        
+                %tr
+                  %td.score_label.ivfr_score IVF Reports Score
+                  %td.score_result
+                    = number_with_precision(@scores_42[0].ivf_reports_score, :precision => 2, :separator => '.')
+                    %span{:class => "icon score_icon #{print_score_color(@scores_42[0].ivf_reports_score)}"} ★
+                %tr
+                  %td.score_label.ivfr_score Quality Score
+                  %td.score_result
+                    = number_with_precision(@scores_42[0].quality_score, :precision => 2, :separator => '.')
+                    %span{:class => "icon score_icon #{print_score_color(@scores_42[0].quality_score)}"} ★
+                %tr
+                  %td.score_label.ivfr_score Safety Score
+                  %td.score_result
+                    = number_with_precision(@scores_42[0].safety_score, :precision => 2, :separator => '.')
+                    %span{:class => "icon score_icon #{print_score_color(@scores_42[0].safety_score)}"} ★
+                %tr
+                  %td.score_label.ivfr_score SART Score
+                  %td.score_result
+                    = number_with_precision(@scores_42[0].sart_score, :precision => 2, :separator => '.')
+                    %span{:class => "icon score_icon #{print_score_color(@scores_42[0].sart_score)}"} ★
+    #info_section.hidden
+      .profile_top
+        .name
+          %h1= @clinic.clinic_name
+          %span.user_subtitle="Information about #{@clinic.clinic_name}."
+        .gravatar.box_shadow
+          -if @clinic.user.nil?
+            = gravatar_for User.find_by_email('info@ivfreports.org'), {:size => 200}
+          -else
+            = gravatar_for @clinic.user, {:size => 200}
+          .personal_info
+            %ul
+              %li.location="#{@clinic.city}, #{@clinic.state}"
+        .edit_profile
+          -if current_user?(@clinic.user) || current_user.admin?
+            =link_to edit_clinic_path(@clinic), :class => "edit button ivfblue" do
+              %span.icon⚙ 
+              Edit
+      .profile_body
+        %ul
+    #reviews_section.hidden
+      .profile_top
+        .name
+          %h1 Clinic Reviews.
+          %span.user_subtitle="Reviews written for #{@clinic.clinic_name}."
+        .edit_profile
+          %span.write_a_review.button.ivfblue 
+            %span.icon ✎
+            Write a Review.
+      .profile_body
+        %ul
+    #stats_section.hidden
+      .profile_top
+        .name
+          %h1="Clinic Statistics."
+          %span.user_subtitle="A In-Depth View of Clinic Performance."
+      .profile_body
+.review_dark_bg.hidden
+  %span.close_button.icon X
+:javascript
+  $(document).ready(function(){
+    $('span.star_icon').hover(
+      function(){
+        var cur_id = $(this).attr('id').split('star');
+        var star_num = cur_id[1];
+        for(var i = 0; i < (star_num); i++){
+          var cur_change_icon = "span#star"+(i+1);
+          $(cur_change_icon).addClass('yellow');
+        }
+      },
+      function(){
+        $('span.star_icon').removeClass('yellow');
+      }
+    );
+    $('span.star_icon').click(function(){
+      $('span.star_icon').removeClass('permyellow');
+      var cur_id = $(this).attr('id').split('star');
+      var star_num = cur_id[1];
+      for(var i = 0; i < (star_num); i++){
+        var cur_change_icon = "span#star"+(i+1);
+        $(cur_change_icon).addClass('permyellow');
+      }
+      //Need to update the hidden field for the form to finalize the rank.
+      $('input#review_rating').val(star_num);
+    });
+    $('span.close_button').click(function(){
+      $('div.review_dark_bg').fadeOut('slow');
+      $('div.review_form').fadeOut('slow');
+    });
+    $('span.write_a_review').click(function(){			
+      $('div.review_dark_bg').fadeIn('slow');
+      $('div.review_form').fadeIn('slow');
+    });
+  });
+.review_form.round.hidden
+  %h2 Review this Clinic
+  -if signed_in?
+    =form_for @review do |f|
+      = f.hidden_field :user_id, :value => current_user.id
+      = f.hidden_field :clinic_id, :value => @clinic.id
+      = f.hidden_field :rating, :value => 0
+      %ul.star_rating
+        %li
+          %span.star_label Rate This Clinic
+          %span.stars
+            %span#star1.icon.star_icon ★
+            %span#star2.icon.star_icon ★
+            %span#star3.icon.star_icon ★
+            %span#star4.icon.star_icon ★
+            %span#star5.icon.star_icon ★
+      %ul.star_rating
+        %li
+          %span.star_label Write a Title
+          %span.stars= f.text_field :title
+      %ul.star_rating
+        %li.review_space
+          %span.star_label Write a Review
+          %span.stars.review_content= f.text_area :content
+      .submit_button= f.submit :value => 'Submit Review', :class => 'button ivfblue'
+:javascript
+  $(document).ready(function(){
+    $( "#tabs" ).tabs();
+    $('div.profile_nav ul li.section').click(function(){
+      $(this).siblings().removeClass('active');
+      $(this).addClass('active');
+      var section_id = $(this).attr('id');
+      if(section_id=="report"){
+        $('li.active_section').animate({top:'0px'},500);
+        window.open(window.location.href+addon);
+      }
+      else if(section_id=="info"){
+        $('li.active_section').animate({top:'80px'},500);      
+        window.open(window.location.href+addon);        
+      }
+      else if(section_id=="reviews"){
+        $('li.active_section').animate({top:'160px'},500);      
+        document.location.search(window.location.href+addon);        
+      }
+      else if(section_id=="stats"){
+        $('li.active_section').animate({top:'240px'},500);      
+        window.href(window.location.href+addon);        
+      }      
+      var show_section = "div#" + section_id + "_section";
+      $(show_section).siblings().fadeOut(250, function(){
+        setTimeout(function(){
+          $(show_section).fadeIn(250);
+        }, 250);
+      });
+    });
+  });
