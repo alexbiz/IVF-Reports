@@ -17,6 +17,11 @@
         =link_to '#stats' do
           %span.icon C
           Statistics
+      -if signed_in? && (current_user==@clinic.user || current_user.admin?)
+        %li.section#leads_li
+          =link_to '#leads' do
+            %span.icon u
+            Patient Leads
       %li.active_section
         %span.icon ←
 .grid_11.omega
@@ -31,6 +36,18 @@
           .personal_info
             %ul
               %li.location="#{@clinic.city}, #{@clinic.state}"
+              %li.contact
+                -unless signed_in? && (current_user.clinician? || current_user.admin?)
+                  -if signed_in?
+                    -if @clinic.requests.where(:user_id => current_user.id).count >= 1
+                      %span.button.white Contact Request Sent
+                    -else
+                      =form_for @request, :remote => :true do |f|
+                        = f.hidden_field :user_id, :value => current_user.id
+                        = f.hidden_field :clinic_id, :value => @clinic.id
+                        = f.submit :value => 'Click Here to Contact', :class => "button ivfblue"
+                  -else
+                    =link_to 'Register to Contact', register_path, :class => 'button ivfblue'
       .profile_body
         #tabs
           %ul.ranking_tabs
@@ -400,6 +417,50 @@
             %li 41-42
             %li >42
           .legend= "Graph shows the number of cycles performed for various diagnostic groups by this clinic.<br/>Click a wedge to learn more.".html_safe
+    -if signed_in? && (current_user.admin? || current_user==@clinic.user)
+      #leads_section
+        .profile_top
+          .name
+            %h1="Your Patient Leads."
+            %span.user_subtitle="Potential Patients that Have Requested Your Clinic."
+        .profile_body
+          %ul.leads
+            -@requests.each do |r|
+              -user_info = User.find_by_id(r.user_id)
+              -if r.visible? #Show full information if they have paid for the lead.
+                %li
+                  %span.username="Username: #{user_info.name}"
+                  %span.age
+                    ="Age: "
+                    -if user_info.birthday.nil?
+                      ="No Response"
+                    -else
+                      =(Date.today - user_info.birthday).to_i/365
+                  %span.created= r.created_at.strftime("%B %d, %Y")
+                  = link_to clinic_request_path(@clinic, r) do
+                    %span.button.ivfblue
+                      %span.icon
+                        E
+                      View Lead
+              -else
+                %li
+                  %span.username
+                    ="Username: "
+                    = user_info.name
+                  %span.age
+                    ="Age: "
+                    -if user_info.birthday.nil?
+                      ="No Response"
+                    -else
+                      = (Date.today - user_info.birthday).to_i/365
+                  %span.created
+                    ="Contacted: "
+                    = r.created_at.strftime("%B %d, %Y")
+                  = link_to clinic_request_path(@clinic, r, :class=>'contact') do
+                    %span.button.ivfblue
+                      %span.icon
+                        E
+                      View Lead
 .review_dark_bg.hidden
   %span.close_button.icon X
 .review_form.round.hidden
@@ -706,7 +767,10 @@
       }
       else if(curpage=="stats"){
         $('li.active_section').animate({top:'240px'},500);      
-      }      
+      }
+      else if(curpage=="leads"){
+        $('li.active_section').animate({top:'320px'},500);      
+      }
       var menu_item = 'li#' + curpage + '_li a';
       $(menu_item).addClass('active');
       $(menu_item).parent().siblings().children().removeClass('active');
@@ -733,6 +797,9 @@
       }
       else if(section_id=="stats_li"){
         $('li.active_section').animate({top:'240px'},500);      
+      }
+      else if(section_id=="leads_li"){
+        $('li.active_section').animate({top:'320px'},500);      
       }      
       var show_section = "div#" + section_id.split("_")[0] + "_section";
       $(show_section).siblings().fadeOut(250, function(){

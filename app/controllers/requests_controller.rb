@@ -6,15 +6,7 @@ class RequestsController < ApplicationController
   def index #Clinics can see all requests made to them and opt to purchase them here. Admins can see all requests.
     if params[:clinic_id].nil? && params[:user_id].nil? && current_user.admin? #Only the admins can see the full request index
       @title = "All Leads"
-      @requests = Request.all
-    elsif !params[:clinic_id].nil?
-      @clinic = Clinic.find(params[:clinic_id])
-      @requests = @clinic.requests.where(:declined => false)
-      @title = "Leads for #{@clinic.clinic_name}"
-    elsif !params[:user_id].nil?
-      @user = User.find_by_permalink(params[:user_id])
-      @requests = @user.requests
-      @title = "Clinics You Have Contacted"
+      @requests = Request.all? { |e|  }
     end
   end
   

@@ -44,6 +44,7 @@ class ClinicsController < ApplicationController
     @request = Request.new
     @review = Review.new
     @clinic = Clinic.find(params[:id])
+    @requests = @clinic.requests.where(:declined => false)
     unless @clinic.user_id.nil?
       @clinic_user = User.find(@clinic.user_id)
     end

@@ -45,12 +45,18 @@
 			padding:0px;margin:0px;margin-left:10px;margin-bottom:0px;line-height:50px;color:#0b3542;font-size:24px;font-family:'Lato', Arial, sans-serif;
 		}
 		div.gravatar {
-			display:inline-block;float:right;border:6px solid #ffffff;background:#ffffff;
+			display:inline-block;float:right;border:6px solid #ffffff;background:#ffffff;z-index:40;
 			.personal_info{
 				ul{
-					display:inline-block;width:200px;margin:0px;padding:0px;list-style:none;float:left;margin-top:12px;
+					display:inline-block;width:200px;margin:0px;padding:0px;list-style:none;float:left;margin-top:12px;position:relative;
 					li{
-						display:inline-block;width:100%;margin:0px;padding:0px;list-style-type:none;float:left;overflow:hidden;height:16px;line-height:16px;
+						display:inline-block;width:100%;margin:0px;padding:0px;list-style-type:none;float:left;overflow:hidden;line-height:16px;margin-top:6px;position:relative;
+						input{
+							z-index:100;position:relative;
+						}
+						&.contact{
+							text-align:center;
+						}
 						span{
 							&.field{
 								font-size:13px;float:left;text-align:left;overflow:hidden;
@@ -99,6 +105,27 @@
 			width:580px;
 			.tab_content{
 				width:580px;display:inline-block;
+			}
+		}
+		ul.leads{
+			width:800px;
+			li{
+				font-size:13px;
+				a{
+					float:right;display:inline-block;
+				}
+				span{
+					display:inline-block;overflow:hidden;
+					&.username{
+						width:280px;
+					}
+					&.age{
+						width:100px;
+					}
+					&.created{
+						width:200px;
+					}
+				}
 			}
 		}
 		ul.reviews{

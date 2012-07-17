@@ -3,7 +3,7 @@ if(parseInt(server_response)===5){
 	alert("You have already contacted 5 clinics.");
 }
 else{
-	$('li.request_button').html("<a href='#'><span class='request_button_old'>Contact Request Sent</span></a>");	
+	$('li.contact').html("<span class='button white'>Contact Request Sent</span>");	
 	if(parseInt(server_response)===3){
 		alert("You have " + (4 - parseInt(server_response)) + " clinic left to contact.");
 	}
