@@ -418,7 +418,7 @@
             %li >42
           .legend= "Graph shows the number of cycles performed for various diagnostic groups by this clinic.<br/>Click a wedge to learn more.".html_safe
     -if signed_in? && (current_user.admin? || current_user==@clinic.user)
-      #leads_section
+      #leads_section.hidden
         .profile_top
           .name
             %h1="Your Patient Leads."
