@@ -37,7 +37,7 @@
 			span{
 				display:inline-block;float:left;
 				&.user_subtitle{
-					font-size:12px;margin-left:12px;height:18px;color:#cccccc;
+					font-size:12px;margin-left:12px;height:20px;color:#cccccc;line-height:12px;
 				}
 			}
 		}
@@ -94,7 +94,7 @@
 		}
 	}
 	.profile_body{
-		width:812px;padding:12px;display:inline-block;max-height:400px;overflow:scroll;
+		width:812px;padding:12px;display:inline-block;
 		#tabs{
 			width:580px;
 			.tab_content{
