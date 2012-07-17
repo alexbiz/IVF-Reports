@@ -1,12 +1,14 @@
 .grid_1.alpha
   .profile_nav
     %ul
-      %li.active.section#personal
-        %span.icon u
-        Personal Info
-      %li.section#account
-        %span.icon ⚙
-        Account Info 
+      %li.active.section#personal_li
+        =link_to '#personal', :class => "active" do      
+          %span.icon u
+          Personal Info
+      %li.section#account_li
+        =link_to '#account' do
+          %span.icon ⚙
+          Account Info 
       %li.active_section
         %span.icon ←
 .grid_11.omega
@@ -94,17 +96,42 @@
 :javascript
   $(document).ready(function(){
     $('input.phone_number').mask('(999) 999-9999');  
-    $('div.profile_nav ul li.section').click(function(){
-      $(this).siblings().removeClass('active');
-      $(this).addClass('active');
-      var section_id = $(this).attr('id');
-      if(section_id=="personal"){
+    
+    var urlitems=window.location.href.split("#");
+    var curpage=urlitems[1];
+    if(curpage==null){
+    
+    }
+    else{
+      if(curpage=="personal"){
         $('li.active_section').animate({top:'0px'},500);
       }
-      else if(section_id=="account"){
-        $('li.active_section').animate({top:'80px'},500);      
+      else if(curpage=="account"){
+        $('li.active_section').animate({top:'80px'},500);
       }
-      var show_section = "div#" + section_id + "_section";
+      var menu_item = 'li#' + curpage + '_li a';
+      $(menu_item).addClass('active');
+      $(menu_item).parent().siblings().children().removeClass('active');
+      
+      var show_section = "div#" + curpage + "_section";  
+      $(show_section).siblings().fadeOut(250, function(){
+        setTimeout(function(){
+          $(show_section).fadeIn(250);
+        }, 250);
+      });
+    }
+    
+    $('div.profile_nav ul li.section a').click(function(){
+      $(this).parent().siblings().children().removeClass('active');
+      $(this).addClass('active');
+      var section_id = $(this).parent().attr('id');
+      if(section_id=="personal_li"){
+        $('li.active_section').animate({top:'0px'},500);
+      }
+      else if(section_id=="account_li"){
+        $('li.active_section').animate({top:'80px'},500);
+      }
+      var show_section = "div#" + section_id.split("_")[0] + "_section";
       $(show_section).siblings().fadeOut(250, function(){
         setTimeout(function(){
           $(show_section).fadeIn(250);

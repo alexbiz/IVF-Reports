@@ -39,19 +39,23 @@ span.terms_agreement {
 	ul{
 		display:inline-block;width:100%;padding:0px;margin:0px;float:left;list-style:none;margin-top:20px;position:relative;padding-left:6px;
 		li{
-			display:inline-block;width:100%;padding:0px;margin:0px;float:left;list-style-type:none;height:80px;text-align:center;font-size:12px;position:relative;cursor:pointer;opacity:0.5;
-			span.icon {display:inline-block;width:100%;font-size:36px;}
+			display:inline-block;width:100%;padding:0px;margin:0px;float:left;list-style-type:none;height:80px;text-align:center;font-size:12px;position:relative;cursor:pointer;
+			a{
+				text-decoration:none;color:#b5b5b5;display:block;height:80px;cursor:pointer;
+				span.icon {display:inline-block;width:100%;font-size:36px;}
+				&.active{
+					color:#0b3542;opacity:1.0;
+				}
+				&:hover{
+					color:#0b3542;opacity:1.0;
+				}
+				
+			}
 			&.active_section{
 				position:absolute;top:0px;left:8px;line-height:50px;opacity:1.0;
 				span.icon{
-					display:inline-block;font-size:15px;color:#e5e5e5;text-align:right;
+					width:100%;display:inline-block;font-size:15px;color:#e5e5e5;text-align:right;
 				}
-			}
-			&.active{
-				color:#0b3542;opacity:1.0;
-			}
-			&:hover{
-				color:#0b3542;opacity:1.0;
 			}
 		}
 	}
