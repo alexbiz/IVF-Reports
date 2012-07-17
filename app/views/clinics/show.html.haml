@@ -363,7 +363,7 @@
             %li 
               This clinic does not currently have any reviews. 
               -if signed_in? && !current_user.clinician?
-                %span.write_a_review Be the first!
+                %span.write_a_review.button.ivfblue Be the first!
           -else
             -@reviews.each do |r|
               -cur_user = User.find_by_id(r.user_id)
@@ -400,7 +400,7 @@
             %li 41-42
             %li >42
           .legend= "Graph shows the number of cycles performed for various diagnostic groups by this clinic.<br/>Click a wedge to learn more.".html_safe
-          .review_dark_bg.hidden
+.review_dark_bg.hidden
   %span.close_button.icon X
 .review_form.round.hidden
   %h2 Review this Clinic
@@ -658,7 +658,7 @@
       $('div.review_dark_bg').fadeOut('slow');
       $('div.review_form').fadeOut('slow');
     });
-    $('span.write_a_review').click(function(){			
+    $('span.write_a_review').click(function(){	
       $('div.review_dark_bg').fadeIn('slow');
       $('div.review_form').fadeIn('slow');
     });
