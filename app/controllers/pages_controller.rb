@@ -5,6 +5,10 @@ class PagesController < ApplicationController
     @user = User.new
   end
   
+  def healthcare_register
+    @title = "Medical Professionals - Register"
+  end
+  
   def lead_registration    
     @title = "Contacting Clinics Complete"
   end

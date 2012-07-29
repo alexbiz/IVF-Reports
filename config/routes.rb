@@ -5,6 +5,10 @@ IVFReports::Application.routes.draw do
     resources :requests
   end
   
+  resources :patients
+  resources :professionals
+  resources :admins
+  
 	resources :sessions, :only => [:new, :create, :destroy]
 	
 	resources :clinics do
@@ -25,7 +29,7 @@ IVFReports::Application.routes.draw do
 	
 	resources :datapoints
 	match '/lead-save', :to => 'pages#lead_save', :as => :lead_save, :via => :post
-	match '/register', :to => 'users#new'
+	match '/register', :to => 'patients#new'
 	match '/signin', :to => 'sessions#new'
 	match '/signout', :to => 'sessions#destroy'
 
@@ -34,6 +38,7 @@ IVFReports::Application.routes.draw do
   match "/learn-more", :to => "pages#lead_registration", :as => :learn_more
   
   match "/find-a-clinic", :to => "pages#clinicfind", :as => :find_a_clinic
+  match "/healthcare-register", :to => "pages#healthcare_register", :as => :healthcare_register
   match "/ranking", :to => "pages#ranking"
   match "/our-system", :to => "pages#system", :as => :our_system
   match "/faqs", :to => "pages#faqs"

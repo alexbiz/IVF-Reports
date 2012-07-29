@@ -10,7 +10,7 @@ namespace :db do
 	  diagnoses = ["All Diagnoses", "Endometriosis", "Diminished Ovarian Reserve", "Multiple Female Factors", "Ovulatory Dysfunction", "Tubal Factor", "Female and Male Factors", "Male Factor", "Other Factor", "Unknown Factor", "Uterine Factor"]
 	  clinics = Clinic.all
 	  
-	  year_index = 5 #Just loading 2010	  
+	  year_index = 0 #Just loading 2010	  
 	  while(year_index < 6)
 	    age_group_index = 0
 	    while(age_group_index < 6)

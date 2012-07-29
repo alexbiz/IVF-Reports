@@ -1,20 +1,15 @@
 class User < ActiveRecord::Base
-  has_many :reviews
-  has_many :requests
-  has_many :clinics
+  has_one :admin
+  has_one :professional
+  has_one :patient
+  belongs_to :clinic
 
 	attr_accessor :password
-	attr_accessible :name, :email, :password, :password_confirmation, :gender, :zip_code, :ethnicity, :birthday, :previous_cycles, :infertility_diagnosis, :abo_blood_type, :rh_factor, :height_ft, :height_inches, :weight, :day_3_fsh, :day_3_e2, :day_3_lh, :day_10_fsh, :day_10_e2, :day_10_lh, :prolactin, :uterine_fibroids, :uterine_tumors, :phone, :about_me, :zip_distance, :address, :city, :state, :first_name, :last_name
+	attr_accessible :email, :password, :password_confirmation, :professional_account, :patient_account, :clinic_account, :admin_account
 	
 	
 	email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-	username_regex = /^[A-Za-z\d_]+$/
-	
-	validates :name,	:presence => true,
-						        :length => { :maximum => 50 },
-						        :format => { :with => username_regex },
-						        :uniqueness => { :case_sensitive => false }
-						
+
 	validates :email,	:presence => true, 
 						        :format => { :with => email_regex }, 
 						        :uniqueness => { :case_sensitive => false }
@@ -30,11 +25,7 @@ class User < ActiveRecord::Base
 	
 	before_save :encrypt_password, :unless => "password.blank?" || "confirmation.blank?" || "password.length==0"
   
-	before_save :create_permalink
 	
-	def to_param
-		permalink
-	end
 	
 	
 	#Return true if the user's password matches the submitted password.
@@ -73,7 +64,4 @@ class User < ActiveRecord::Base
 			Digest::SHA2.hexdigest(string)
 		end
 		
-		def create_permalink
-			self.permalink = name.downcase
-		end
 end

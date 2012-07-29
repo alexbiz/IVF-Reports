@@ -3,7 +3,7 @@ class Clinic < ActiveRecord::Base
   has_many :scores
   has_many :reviews
   has_many :requests
-  belongs_to :user
+  has_many :users
   
   default_scope :order => 'state ASC'
   

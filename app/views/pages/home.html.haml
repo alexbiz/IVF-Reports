@@ -1,0 +1,21 @@
+.grid_4.alpha
+  .third.left
+    .healthcare_cta.round
+      %h2 Are You a Healthcare Professional?
+      %p Register for IVF Reports to gain access to advanced statistics and analytical tools:
+      %ul
+        %li Analysis of Yearly Changes
+        %li Comparison of Groups
+        %li Clinicians - Claim your Profile
+      %p Try out this free service with no commitment absolutely free!
+      .register_button  
+        =link_to "Register Now.", healthcare_register_path, :class => 'button ivfblue'
+.grid_4
+  .third
+    %h2 A Fair Ranking System for IVF Clinics
+    %p IVF Reports is an independent organization dedicated to providing accurate and useful information about in vitro fertilization (IVF) clinics in the USA.
+    %h2 The Ranking System
+    %p To quantify safety, quality and consistency, we have gathered publicly available statistics from the Society for Assisted Reproductive Technology, and we have made use of two key measurements: the average number of embryos ransferred per cycle, and the average implantation rate per embryo.
+.grid_4.omega
+  .third.right
+    =render 'layouts/advertisement'

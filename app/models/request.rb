@@ -1,6 +1,6 @@
 class Request < ActiveRecord::Base
   belongs_to :clinic
-  belongs_to :user
+  belongs_to :patient
   
   default_scope :order => 'created_at DESC'
   

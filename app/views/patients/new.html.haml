@@ -1,0 +1,33 @@
+%h1 Register
+.grid_4.alpha
+  .third.left
+    %p Register for an IVF Reports account to receive FREE access to some of our premium features including:
+    %ul.content_list
+      %li Clinic Review Access
+      %li Favorite Clinics List
+      %li Personalized Clinic Recommendations
+      %li Contact a Clinic
+      %li Cycle Tracking System
+      %li A Community of Engaged Patients Like You
+.grid_8.omega
+  .twothirds.right
+    = form_for(@patient) do |f|
+      %h2.register_blurb Join the IVF Reports Community
+      =fields_for(@user) do |p|
+        = render 'shared/error_messages', :object => f.object
+        %table.register_form
+          %tr
+            %td.label= f.label :username, 'Username'
+            %td.input= f.text_field :username
+          %tr
+            %td.label= p.label :email
+            %td.input= p.text_field :email
+          %tr
+            %td.label= p.label :password
+            %td.input= p.password_field :password
+          %tr
+            %td.label= p.label :password_confirmation, "Confirmation"
+            %td.input= p.password_field :password_confirmation
+        .register_button= f.submit "Register", :class => 'button ivfblue'
+      %span.terms_agreement
+        %i="*By registering, you acknowledge that you agree to our #{link_to "Terms and Conditions", terms_and_conditions_path} and have reviewed our #{link_to "Privacy Policy", privacy_policy_path}".html_safe

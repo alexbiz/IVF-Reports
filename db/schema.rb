@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120713193336) do
+ActiveRecord::Schema.define(:version => 20120727154153) do
+
+  create_table "admins", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "clinics", :force => true do |t|
     t.string   "clinic_name"
@@ -69,33 +78,63 @@ ActiveRecord::Schema.define(:version => 20120713193336) do
   add_index "datapoints", ["diagnosis"], :name => "index_datapoints_on_diagnosis"
   add_index "datapoints", ["year"], :name => "index_datapoints_on_year"
 
+  create_table "patients", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "username"
+    t.string   "gender"
+    t.string   "zip_code"
+    t.string   "ethnicity"
+    t.date     "birthday"
+    t.integer  "previous_cycles"
+    t.string   "infertility_diagnosis"
+    t.string   "phone"
+    t.text     "about"
+    t.string   "permalink"
+    t.integer  "zip_distance"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
   create_table "payment_notifications", :force => true do |t|
     t.text     "params"
     t.integer  "request_id"
     t.string   "status"
     t.string   "transaction_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "professionals", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "username"
+    t.string   "profession"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "requests", :force => true do |t|
-    t.integer  "user_id"
+    t.integer  "patient_id"
     t.integer  "clinic_id"
     t.boolean  "visible",      :default => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.datetime "purchased_at"
     t.boolean  "declined",     :default => false
   end
 
   create_table "reviews", :force => true do |t|
     t.integer  "clinic_id"
-    t.integer  "user_id"
+    t.integer  "patient_id"
     t.integer  "rating"
     t.string   "title"
     t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "scores", :force => true do |t|
@@ -126,7 +165,18 @@ ActiveRecord::Schema.define(:version => 20120713193336) do
     t.datetime "updated_at"
   end
 
-# Could not dump table "users" because of following StandardError
-#   Unknown type 'weight' for column 'weight'
+  create_table "users", :force => true do |t|
+    t.string   "email"
+    t.string   "encrypted_password"
+    t.string   "salt"
+    t.integer  "height_weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "professional_account", :default => false
+    t.boolean  "clinic_account",       :default => false
+    t.boolean  "patient_account",      :default => false
+    t.boolean  "admin_account",        :default => false
+    t.integer  "clinic_id"
+  end
 
 end

@@ -1,7 +1,7 @@
 require 'csv'
 
 namespace :db do
-  desc "Fill database with Chromosome data."
+  desc "Fill database with Admin Account."
   task :add_admin_users => :environment do
 	
 	  #create administrative user
@@ -9,21 +9,14 @@ namespace :db do
                          :email => "alex@alx.bz",
                          :password => "foobar",
                          :password_confirmation => "foobar")
-    admin.toggle!(:admin)
-    
-    #create administrative user
-  	admin2 = User.create!(:name => "chriscleveland",
-                           :email => "cfclevel@gmail.com",
-                           :password => "foobar",
-                           :password_confirmation => "foobar")
-    admin2.toggle!(:admin)
+    admin.toggle!(:admin_account)
       
-    admin3 = User.create!(  :name => "ivfreports",
+    admin2 = User.create!(  :name => "ivfreports",
                             :email => 'info@ivfreports.org',
                             :password => "foobar",
                             :password_confirmation => "foobar"
     )
-	
+	  admin2.toggle!(:admin_account)
 	
   end
 end
