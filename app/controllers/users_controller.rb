@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
   
   def update
-	  @user = User.find_by_permalink(params[:id])
+	  @user = User.find_by_id(params[:id])
 	  
     success = false
     
@@ -17,12 +17,6 @@ class UsersController < ApplicationController
         success = true
 	    end
     end
-	  
-	  unless params[:medical_info].nil?
-	    if @user.update_attributes(params[:medical_info])
-        success = true
-	    end
-	  end
 
 	  unless params[:account_info].nil?	  
 	    if @user.update_attributes(params[:account_info])
@@ -62,7 +56,7 @@ class UsersController < ApplicationController
   private
 	
 	def correct_user
-	  @user = User.find_by_permalink(params[:id])
+	  @user = User.find_by_id(params[:id])
 	  redirect_to(root_path) unless current_user?(@user)
 	end
 	

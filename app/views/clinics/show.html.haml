@@ -17,7 +17,7 @@
         =link_to '#stats' do
           %span.icon C
           Statistics
-      -if signed_in? && (current_user==@clinic.user || current_user.admin?)
+      -if signed_in? && (@clinic.users.include? current_user || current_user.admin_account?)
         %li.section#leads_li
           =link_to '#leads' do
             %span.icon u
@@ -37,13 +37,13 @@
             %ul
               %li.location="#{@clinic.city}, #{@clinic.state}"
               %li.contact
-                -unless signed_in? && (current_user.clinician? || current_user.admin?)
+                -unless signed_in? && (current_user.clinic_account? || current_user.admin_account? || current_user.professional_account?)
                   -if signed_in?
-                    -if @clinic.requests.where(:user_id => current_user.id).count >= 1
+                    -if @clinic.requests.where(:patient_id => current_user.patient.id).count >= 1
                       %span.button.white Contact Request Sent
                     -else
                       =form_for @request, :remote => :true do |f|
-                        = f.hidden_field :user_id, :value => current_user.id
+                        = f.hidden_field :patient_id, :value => current_user.patient.id
                         = f.hidden_field :clinic_id, :value => @clinic.id
                         = f.submit :value => 'Click Here to Contact', :class => "button ivfblue"
                   -else
@@ -333,15 +333,15 @@
           %h1= @clinic.clinic_name
           %span.user_subtitle="Information about #{@clinic.clinic_name}."
         .gravatar.box_shadow
-          -if @clinic.user.nil?
+          -if @clinic.users.empty?
             = gravatar_for User.find_by_email('info@ivfreports.org'), {:size => 200}
           -else
-            = gravatar_for @clinic.user, {:size => 200}
+            = gravatar_for @clinic.users.first, {:size => 200}
           .personal_info
             %ul
               %li.location="#{@clinic.city}, #{@clinic.state}"
         .edit_profile
-          -if current_user?(@clinic.user) || current_user.admin?
+          -if current_user?(@clinic.users) || current_user.admin_account?
             =link_to edit_clinic_path(@clinic), :class => "edit button ivfblue" do
               %span.icon⚙ 
               Edit
@@ -379,11 +379,12 @@
           -if @reviews.empty?
             %li 
               This clinic does not currently have any reviews. 
-              -if signed_in? && !current_user.clinician?
+              -if signed_in? && !current_user.clinic_account? && !current_user.professional_account?
                 %span.write_a_review.button.ivfblue Be the first!
           -else
             -@reviews.each do |r|
-              -cur_user = User.find_by_id(r.user_id)
+              -cur_patient = Patient.find_by_id(r.patient_id)
+              -cur_user = cur_patient.user
               %li.single_review
                 %span.review_title= r.title
                 %span.review_stars
@@ -392,7 +393,7 @@
                   %span.star3.icon{:class => "#{get_star_color(r.rating,3)}"} ★
                   %span.star2.icon{:class => "#{get_star_color(r.rating,2)}"} ★
                   %span.star1.icon{:class => "#{get_star_color(r.rating,1)}"} ★
-                %span.review_author= "Posted by: #{link_to cur_user.name, cur_user}".html_safe
+                %span.review_author= "Posted by: #{link_to cur_patient.username, cur_patient}".html_safe
                 %span.review_date= r.created_at.strftime("%B %d, %Y @ %I:%M %p")
                 .review_content= r.content
     #stats_section.hidden
@@ -417,7 +418,7 @@
             %li 41-42
             %li >42
           .legend= "Graph shows the number of cycles performed for various diagnostic groups by this clinic.<br/>Click a wedge to learn more.".html_safe
-    -if signed_in? && (current_user.admin? || current_user==@clinic.user)
+    -if signed_in? && (current_user.admin_account? || @clinic.users.include?(current_user))
       #leads_section.hidden
         .profile_top
           .name
@@ -426,7 +427,7 @@
         .profile_body
           %ul.leads
             -@requests.each do |r|
-              -user_info = User.find_by_id(r.user_id)
+              -user_info = Patient.find_by_id(r.patient_id)
               -if r.visible? #Show full information if they have paid for the lead.
                 %li
                   %span.username="Username: #{user_info.name}"
@@ -467,7 +468,7 @@
   %h2 Review this Clinic
   -if signed_in?
     =form_for @review do |f|
-      = f.hidden_field :user_id, :value => current_user.id
+      = f.hidden_field :patient_id, :value => current_user.patient.id
       = f.hidden_field :clinic_id, :value => @clinic.id
       = f.hidden_field :rating, :value => 0
       %ul.star_rating

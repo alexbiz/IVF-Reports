@@ -10,7 +10,7 @@ namespace :db do
 	  diagnoses = ["All Diagnoses", "Endometriosis", "Diminished Ovarian Reserve", "Multiple Female Factors", "Ovulatory Dysfunction", "Tubal Factor", "Female and Male Factors", "Male Factor", "Other Factor", "Unknown Factor", "Uterine Factor"]
 	  clinics = Clinic.all
 	  
-	  year_index = 5 #Housekeeping for the year loop, but we should do a separate file for each year (moving forward we would only do one year at a time)
+	  year_index = 0 #Housekeeping for the year loop, but we should do a separate file for each year (moving forward we would only do one year at a time)
 	  while(year_index < 6)
 	    diagnosis_index = 0 #Housekeeping for the diagnosis loop
 	    while(diagnosis_index < 11)	      

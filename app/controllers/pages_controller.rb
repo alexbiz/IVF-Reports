@@ -238,7 +238,7 @@ class PagesController < ApplicationController
   	age = "All Ages"
   	diagnosis = "All Diagnoses"
   	cycle_type = "fresh"
-    @states = State.all.collect { |state| state.name }
+    @states = State.all.collect { |state| state.abbrev }
   	
   	respond_to do |format|
   	  format.html {}

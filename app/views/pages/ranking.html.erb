@@ -74,6 +74,30 @@
   </div>
 </div>
 </div>
+<% unless signed_in? %>
+<script type="text/javascript">
+    $(document).ready(function(){
+      $('div.background_fade').fadeIn('slow');
+      $('div.register_box').fadeIn('slow');
+    });
+</script>
+<div class="background_fade hidden">
+</div>
+<div class="register_box hidden">
+    <h2>Create an Account to View this Page</h2>
+    <p>To gain access to the IVF Reports Find a Clinic feature (helping to locate the best clinics in your area!), please register for an IVF Reports account:</p>
+    <h3>Patients:</h3>
+    <div class="register_button">
+      <%=link_to "Register Here", register_path, :class => 'button ivfblue'%>
+    </div>
+    <h3>Healthcare Professionals:</h3>
+    <div class="register_button">
+      <%=link_to "Register Here", healthcare_register_path, :class => 'button ivfblue'%>
+    </div>
+    <p class="signin">Already have an account? <%=link_to "Sign In.", signin_path %></p>
+</div>
+<% end %>
+
 </div>
 <div class="grid_4 omega">
   <div class="third right">
@@ -102,9 +126,9 @@ var region = "ALL";
 var states = [
 <% @states.each_with_index do |s, index| %>
 <% if index==50 %>
-"<%= s.name %>"
+"<%= s.abbrev %>"
 <% else %>
-"<%= s.name %>",
+"<%= s.abbrev %>",
 <% end %>
 <% end %>
 ];
@@ -220,11 +244,11 @@ $(document).ready(function(){
 	$(document).on("click", 'span.clinic_contact_button', function(){
 		var id_values = $(this).attr('id');
 		var id_arrays = id_values.split('o');
-		var user_id = id_arrays[0];
+		var patient_id = id_arrays[0];
 		var clinic_id = id_arrays[1];
 		var current_object = this;
 		var data = {
-			user_id: user_id,
+			patient_id: patient_id,
 			clinic_id: clinic_id
 		}
 		
@@ -333,9 +357,9 @@ $(document).ready(function(){
 		states = [
 		<% @states.each_with_index do |s, index| %>
 		<% if index==50 %>
-		"<%= s.name %>"
+		"<%= s.abbrev %>"
 		<% else %>
-		"<%= s.name %>",
+		"<%= s.abbrev %>",
 		<% end %>
 		<% end %>
 		];
@@ -412,11 +436,11 @@ function PrintOverallRankingResults(){
 								clinic_html = clinic_html + "<li class='clinic_stats'><span id='safety_score' class='score_type'>Safety Score:</span> " + "<span class='score_result'>" +  Math.round(10*data[k]['safety_score'])/10 + "<span class='icon " + PrintStarIcon(data[k]['safety_score']) + "'>★</span></span></li>";
 								clinic_html = clinic_html + "<li class='clinic_stats'><span id='sart_score' class='score_type'>SART Score:</span> " + "<span class='score_result'>" +  Math.round(10*data[k]['sart_score'])/10 + "<span class='icon " + PrintStarIcon(data[k]['sart_score']) + "'>★</span></span></li>";
 								clinic_html = clinic_html + "</ul>";
-								<% if signed_in? && !current_user.clinician? %>
-									var current_user_id = <%= current_user.id %>;
+								<% if signed_in? && !current_user.clinic_account? && !current_user.admin_account? && !current_user.professional_account? %>
+									var current_user_id = <%= current_user.patient.id %>;
 									var current_span_id = "span#"+ current_user_id + "o" + data[k]['clinic_id'];									
 									var check_data = {
-										user_id: current_user_id,
+										patient_id: current_user_id,
 										clinic_id: data[k]['clinic_id']
 									}
 									$.ajax({ //Need to check if a database entry exists for this userid clinicid combo via ajax in the requests table
@@ -439,7 +463,7 @@ function PrintOverallRankingResults(){
 											}
 										}
 									});
-								<% elsif signed_in? && current_user.clinician? #Display no contact link %>
+								<% elsif signed_in? && current_user.clinic_account? #Display no contact link %>
 									clinic_html = clinic_html + "</div>";
 
 									$('div#overall_ranking_results div.clinic_rank_list').append(clinic_html);
@@ -486,11 +510,11 @@ function PrintAgeRankingResults(){
 								clinic_html = clinic_html + "<li class='clinic_stats'><span id='safety_score' class='score_type'>Safety Score:</span> " + "<span class='score_result'>" +  Math.round(10*data[k]['safety_score'])/10 + "<span class='icon " + PrintStarIcon(data[k]['safety_score']) + "'>★</span></span></li>";
 								clinic_html = clinic_html + "<li class='clinic_stats'><span id='sart_score' class='score_type'>SART Score:</span> " + "<span class='score_result'>" +  Math.round(10*data[k]['sart_score'])/10 + "<span class='icon " + PrintStarIcon(data[k]['sart_score']) + "'>★</span></span></li>";
 								clinic_html = clinic_html + "</ul>"
-								<% if signed_in? && !current_user.clinician?%>
-									var current_user_id = <%= current_user.id %>;
+								<% if signed_in? && !current_user.clinic_account? && !current_user.admin_account? && !current_user.professional_account? %>
+									var current_user_id = <%= current_user.patient.id %>;
 									var current_span_id = "span#"+ current_user_id + "o" + data[k]['clinic_id'];									
 									var check_data = {
-										user_id: current_user_id,
+										patient_id: current_user_id,
 										clinic_id: data[k]['clinic_id']
 									}
 									$.ajax({ //Need to check if a database entry exists for this userid clinicid combo via ajax in the requests table
@@ -511,7 +535,7 @@ function PrintAgeRankingResults(){
 											}
 										}
 									});
-									<% elsif signed_in? && current_user.clinician? #Display no contact link %>
+									<% elsif signed_in? && current_user.clinic_account? #Display no contact link %>
 										clinic_html = clinic_html + "</div>";
 
 										$('div#age_ranking_results div.clinic_rank_list').append(clinic_html);
@@ -559,11 +583,11 @@ function PrintDiagnosisRankingResults(){
 								clinic_html = clinic_html + "<li class='clinic_stats'><span id='safety_score' class='score_type'>Safety Score:</span> " + "<span class='score_result'>" +  Math.round(10*data[k]['safety_score'])/10 + "<span id='star_icon' class='icon " + PrintStarIcon(data[k]['safety_score']) + "'>★</span></span></li>";
 								clinic_html = clinic_html + "<li class='clinic_stats'><span id='sart_score' class='score_type'>SART Score:</span> " + "<span class='score_result'>" +  Math.round(10*data[k]['sart_score'])/10 + "<span id='star_icon' class='icon " + PrintStarIcon(data[k]['sart_score']) + "'>★</span></span></li>";
 								clinic_html = clinic_html + "</ul>"
-								<% if signed_in? && !current_user.clinician?%>
-									var current_user_id = <%= current_user.id %>;
+								<% if signed_in? && !current_user.clinic_account? && !current_user.admin_account? && !current_user.professional_account? %>
+									var current_user_id = <%= current_user.patient.id %>;
 									var current_span_id = "span#"+ current_user_id + "o" + data[k]['clinic_id'];									
 									var check_data = {
-										user_id: current_user_id,
+										patient_id: current_user_id,
 										clinic_id: data[k]['clinic_id']
 									}
 									$.ajax({ //Need to check if a database entry exists for this userid clinicid combo via ajax in the requests table
@@ -584,7 +608,7 @@ function PrintDiagnosisRankingResults(){
 											}
 										}
 									});
-									<% elsif signed_in? && current_user.clinician? #Display no contact link %>
+									<% elsif signed_in? && current_user.clinic_account? #Display no contact link %>
 										clinic_html = clinic_html + "</div>";
 										$('div#diagnosis_ranking_results div.clinic_rank_list').append(clinic_html);
 									<% else #Need to add text and link about: Register to Contact %>

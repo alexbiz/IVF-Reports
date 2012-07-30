@@ -1,3 +1,181 @@
 // Place all the styles related to the Patients controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/*SHOW: PROFILE PAGE*/
+.profile_nav{
+	width:80px;
+	ul{
+		display:inline-block;width:100%;padding:0px;margin:0px;float:left;list-style:none;margin-top:20px;position:relative;padding-left:6px;
+		li{
+			display:inline-block;width:100%;padding:0px;margin:0px;float:left;list-style-type:none;height:80px;text-align:center;font-size:12px;position:relative;cursor:pointer;
+			a{
+				text-decoration:none;color:#b5b5b5;display:block;height:80px;cursor:pointer;
+				span.icon {display:inline-block;width:100%;font-size:36px;}
+				&.active{
+					color:#0b3542;opacity:1.0;
+				}
+				&:hover{
+					color:#0b3542;opacity:1.0;
+				}
+				
+			}
+			&.active_section{
+				position:absolute;top:0px;left:8px;line-height:50px;opacity:1.0;
+				span.icon{
+					width:100%;display:inline-block;font-size:15px;color:#e5e5e5;text-align:right;
+				}
+			}
+		}
+	}
+}
+.profile {
+	width:836px;margin:12px;background:#e5e5e5;display:inline-block;min-height:400px;margin-bottom:24px;
+	.profile_top {
+		display:inline-block;float:left;height:50px;border-bottom:1px solid #cccccc;width:812px;padding:12px;
+		div.name {
+			display:inline-block;float:left;height:50px;
+			h1 {
+				margin-left:10px;margin-bottom:0px;line-height:50px;color:#0b3542;
+			}
+			span{
+				display:inline-block;float:left;
+				&.user_subtitle{
+					font-size:12px;margin-left:12px;margin-top:-12px;
+				}
+			}
+		}
+		h2{
+			padding:0px;margin:0px;margin-left:10px;margin-bottom:0px;line-height:50px;color:#0b3542;font-size:24px;font-family:'Lato', Arial, sans-serif;
+		}
+		div.gravatar {
+			display:inline-block;float:right;border:6px solid #ffffff;background:#ffffff;
+			.personal_info{
+				ul{
+					display:inline-block;width:200px;margin:0px;padding:0px;list-style:none;float:left;margin-top:12px;
+					li{
+						display:inline-block;width:100%;margin:0px;padding:0px;list-style-type:none;float:left;overflow:hidden;height:16px;line-height:16px;
+						span{
+							&.field{
+								font-size:13px;float:left;text-align:left;
+								a{
+									text-decoration:none;color:#666666;font-weight:bold;display:inline;
+								}
+							}
+							&.data{
+								font-size:12px;float:right;text-align:left;
+								a{
+									text-decoration:none;color:#666666;font-weight:bold;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		div.edit_profile {
+			height:50px;line-height:50px;float:right;display:inline-block;margin-right:12px;
+			ul.zip_search{
+				display:inline-block;float:right;list-style:none;padding:0px;margin:0px;
+				li{
+					display:inline-block;float:right;width:100%;list-style-type:none;padding:0px;margin:0px;
+					span{
+						&.label{
+							
+						}
+						&.select{
+							
+						}
+						&.submit{
+							
+						}
+					}
+				}
+			}
+		}
+	}
+	.profile_body{
+		width:812px;padding:12px;display:inline-block;
+		ul{
+			display:inline-block;width:588px;margin:0px;padding:0px;list-style:none;float:left;margin-left:12px;
+			li{
+				display:inline-block;width:100%;margin:0px;padding:0px;list-style-type:none;float:left;height:40px;line-height:40px;
+				&.about_me{
+					line-height:20px;height:auto;margin-top:12px;
+				}
+				span{
+					&.field{
+						width:216px;text-align:right;display:inline-block;font-weight:bold;float:left;padding-right:24px;
+					}
+					&.data{
+						width:340px;text-align:left;display:inline-block;float:right;
+						input{
+							height:18px;line-height:18px;font-size:15px;color:#0b3542;
+						}
+						select{
+							height:18px;line-height:18px;
+						}
+						textarea{
+							height:200px;
+						}
+					}
+					&.about_me{
+						text-align:justify;
+					}
+				}
+				&.update_button{
+					text-align:center;margin-top:12px;
+				}
+			}
+		}
+		
+		ul.personal_rec_table {
+			width:100%;display:inline-block;float:left;padding:0px;margin:0px;margin-left:12px;
+			li {
+				height:50px;width:100%;display:inline-block;float:left;padding:0px;margin:0px;margin-bottom:12px;overflow:hidden;
+				span.clinic_rec_rank {
+					height:48px;line-height:48px;display:inline-block;text-align:center;width:50px;float:left;font-size:18px;color:#ffffff;font-weight:bold;margin-right:24px;
+				}
+				a.rank_link {
+					text-decoration:none;
+					&:hover {
+						color:#7895a3;
+					}
+				}
+				span.clinic_name {
+					width:460px;display:inline-block;height:20px;line-height:20px;float:left;overflow:hidden;margin-top:6px;
+					a {
+						text-decoration:none;color:#325d5d;
+						&:hover {
+							color:#102b42;
+						}
+					}
+				}
+				span.clinic_location {
+					width:460px;display:inline-block;height:20px;line-height:20px;float:left;color:#666666;font-size:14px;
+				}
+			}
+		}
+		ul.contacted{
+			display:inline-block;float:left;padding:0px;margin:0px;
+			li{
+				height:20px;width:100%;display:inline-block;float:left;padding:0px;margin:0px;margin-bottom:12px;overflow:hidden;line-height:20px;
+			}
+		}
+		div.update_results {
+			margin-bottom:20px;text-align:center;line-height:30px;width:100%;display:inline-block;float:left;margin-top:20px;min-height:30px;margin-bottom:24px;
+			&.hidden {
+				display:none;
+			}
+			&.success {
+				color:#009900;
+			}
+			&.error {
+				color:#990000;
+			}
+			span.close_button {
+				display:inline-block;float:right;cursor:pointer;color:#325d5d;font-size:16px;margin-right:5px;
+			}
+		}
+	}
+}

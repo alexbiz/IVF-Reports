@@ -9,5 +9,5 @@
   -@states.each_with_index do |s, index|
     %li.state
       %span.state_span
-        =s.name
-        %input{:checked => true, :id => "state_#{s.name}", :class => "state_checkbox", :type => "checkbox", :name => "state", :value => "#{s.name}"}
+        =s.abbrev
+        %input{:checked => true, :id => "state_#{s.abbrev}", :class => "state_checkbox", :type => "checkbox", :name => "state", :value => "#{s.abbrev}"}

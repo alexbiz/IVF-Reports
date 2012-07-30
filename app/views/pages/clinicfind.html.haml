@@ -3,6 +3,26 @@
   %input{:type => "text", :id => "zip_code", :onkeypress => "return findZip(event)", :class => 'zipbox round', :placeholder => 'Enter Your Zipcode.'}
   %input{:id => "zip_submit", :type=> "submit", :value => "Find!", :class => 'button ivfblue'}
 #map_canvas.google_map_canvas
+-unless signed_in?
+  :javascript
+    $(document).ready(function(){
+      $('div.background_fade').fadeIn('slow');
+      $('div.register_box').fadeIn('slow');
+    });
+  .background_fade.hidden
+  .register_box.hidden
+    %h2 Create an Account to View this Page
+    %p To gain access to the IVF Reports Find a Clinic feature (helping to locate the best clinics in your area!), please register for an IVF Reports account:
+    %h3 Patients:
+    .register_button
+      =link_to "Register Here", register_path, :class => 'button ivfblue'
+    %h3 Healthcare Professionals:
+    .register_button
+      =link_to "Register Here", healthcare_register_path, :class => 'button ivfblue'
+    %p.signin
+      ="Already have an account?"
+      =link_to "Sign In.", signin_path
+
 %script{:type => "text/javascript", :src => "http://maps.googleapis.com/maps/api/js?key=AIzaSyBr81CBromVSoshojwDkMb7jEn2EtNkJ3g&sensor=true"}
 :javascript
   var map;

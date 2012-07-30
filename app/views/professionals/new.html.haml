@@ -1,17 +1,20 @@
-%h1 Register - Patient
+%h1 Register - Healthcare Professional
 .grid_4.alpha
   .third.left
-    %p Register for an IVF Reports account to receive FREE access to some of our premium features including:
+    %p Register for an IVF Reports Account to receive FREE access to:
     %ul.content_list
-      %li Clinic Review Access
-      %li Favorite Clinics List
-      %li Personalized Clinic Recommendations
-      %li Contact a Clinic
-      %li Cycle Tracking System
-      %li A Community of Engaged Patients Like You
+      %li Clinic Rankings
+      %li Geographic Clinic Search
+      %li Basic Statistics
+      %li Claim Your Clinic
+    %p Upgrade for Premium Features
+    %ul.content_list
+      %li Advanced Statistics
+      %li Historical Performance Tracking
+      %li Contextual and National Comparisons
 .grid_8.omega
   .twothirds.right
-    = form_for(@patient) do |f|
+    = form_for(@professional) do |f|
       %h2.register_blurb Join the IVF Reports Community
       =fields_for(@user) do |p|
         = render 'shared/error_messages', :object => f.object

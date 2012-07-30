@@ -38,7 +38,7 @@ IVFReports::Application.routes.draw do
   match "/learn-more", :to => "pages#lead_registration", :as => :learn_more
   
   match "/find-a-clinic", :to => "pages#clinicfind", :as => :find_a_clinic
-  match "/healthcare-register", :to => "pages#healthcare_register", :as => :healthcare_register
+  match "/healthcare-register", :to => "professionals#new", :as => :healthcare_register
   match "/ranking", :to => "pages#ranking"
   match "/our-system", :to => "pages#system", :as => :our_system
   match "/faqs", :to => "pages#faqs"
