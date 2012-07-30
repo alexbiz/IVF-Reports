@@ -26,7 +26,6 @@ class ChangeUsersTable < ActiveRecord::Migration
     remove_column :users, :uterine_tumors
     remove_column :users, :phone
     remove_column :users, :clinician
-    remove_column :users, :about
     remove_column :users, :about_me
     remove_column :users, :user_type
     remove_column :users, :zip_distance   
@@ -69,7 +68,6 @@ class ChangeUsersTable < ActiveRecord::Migration
     add_column :users, :uterine_tumors, :string
     add_column :users, :phone, :string
     add_column :users, :clinician, :boolean
-    add_column :users, :about, :text
     add_column :users, :about_me, :text
     add_column :users, :user_type, :string
     add_column :users, :zip_distance, :integer
