@@ -175,7 +175,7 @@
 				}
 			}
 			li{
-				display:inline-block;width:100%;margin:0px;padding:0px;list-style-type:none;float:left;height:40px;line-height:40px;
+				display:inline-block;width:100%;margin:0px;padding:0px;list-style-type:none;float:left;height:40px;line-height:40px;overflow:hidden;
 				&.about_me{
 					line-height:20px;height:auto;margin-top:12px;
 				}
