@@ -34,7 +34,7 @@
       .resource_list.round
         %h2 Resources
         %ul
-          %li=link_to 'Your Profile', current_user
+          %li=link_to 'Your Profile', patient_path(current_user.patient)
           %li=link_to 'Find a Clinic', find_a_clinic_path
           %li=link_to 'Clinic Rankings', ranking_path
           %li=link_to 'Infertility Diagnoses', infertility_diagnoses_path

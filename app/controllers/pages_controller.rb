@@ -15,11 +15,14 @@ class PagesController < ApplicationController
   
   def lead_save
     randpass = "#{rand(36**8).to_s(36)}"
-    params[:name] = "#{params[:first_name]}#{params[:zip_code]}#{params['birthday(1i)']}#{params['birthday(2i)']}"
-    params[:password] = randpass
-    params[:password_confirmation] = randpass  
-    @user = User.new(params)
+    randuserstring = "#{rand(36**8).to_s(36)}"
+    params[:patient][:username] = "#{params[:patient][:first_name]}#{params['birthday(1i)']}#{randuserstring}"
+    params[:user][:password] = randpass
+    params[:user][:password_confirmation] = randpass
+    @user = User.new(params[:user])
+    @patient = @user.build_patient(params[:patient])
 	  if @user.save
+	    @user.toggle!(:patient_account)
 	    sign_in @user
 	    flash[:success] = "Welcome to IVF Reports!"
 	    
@@ -28,7 +31,7 @@ class PagesController < ApplicationController
 	    email_body += "<h1>Welcome to IVF Reports</h1>"
 	    email_body += "<p>IVF Reports is the premier website for finding accurate information about U.S. Fertility Clinics. Our data specialists will help you find the best clinic <i>for you</i>.</p>"
 	    email_body += "<p>Your Account Information:</p>"
-	    email_body += "<ul><li><b>Username: </b>#{@user.name}</li>"
+	    email_body += "<ul><li><b>Username: </b>#{@user.patient.username}</li>"
 	    email_body += "<li><b>Email: </b> #{@user.email}</li></ul>"
 	    email_body += "<li><b>Temporary Password: </b> #{randpass}</li></ul>"
 	    email_body += "<p><a href='http://ivfreports.org/signin'>Log in</a> to view personal recommendations for clinics best suited to treat you. You may contact up to five clinics through our system. Our relationships with Fertility Clinics will allow your case to receive high-level attention from a physician who can help you get pregnant.</p>"
@@ -51,9 +54,18 @@ class PagesController < ApplicationController
 	    cycle_type = "fresh"
   	  @year = "2010"
   	  zip_distance = 100
+  	  @city = params[:patient][:city]
+  	  @state = params[:patient][:state]
+      @birthday1 = params[:patient][:birthday]["(1i)"]
+  	  @birthday2 = params[:patient][:birthday]["(2i)"]
+  	  @birthday3 = params[:patient][:birthday]["(3i)"]	  	  
+      @gender = params[:patient][:gender]
+      @ethnicity = params[:patient][:ethnicity]
+      @infertility_diagnosis = params[:patient][:infertility_diagnosis]
+      @previous_cycles = params[:patient][:previous_cycles]
   	  @latitude = params[:latitude]
   	  @longitude = params[:longitude]
-  	  @zip_code = params[:zip_code]
+  	  @zip_code = params[:patient][:zip_code]
   	  @diagnosis = params[:diagnosis]
   	  @age_group = params[:age_group]
       lat_offset = 1.5
@@ -93,7 +105,7 @@ class PagesController < ApplicationController
   end
   
   def lead_contact
-    if params[:birthday]['(1i)']=="" || params[:birthday]['(2i)']=="" || params[:birthday]['(3i)']=="" || params[:zip_code]=="" || params[:infertility_diagnosis]=="-" || params[:previous_cycles]=="-" || params[:gender]=="-" || params[:ethnicity]=="-"
+    if params[:patient][:birthday]['(1i)']=="" || params[:patient][:birthday]['(2i)']=="" || params[:patient][:birthday]['(3i)']=="" || params[:patient][:zip_code]=="" || params[:patient][:infertility_diagnosis]=="-" || params[:patient][:previous_cycles]=="-" || params[:patient][:gender]=="-" || params[:patient][:ethnicity]=="-"
       flash[:error] = "Please Fill Out All Information to Find Clinics Best Fit For You."
       redirect_to root_path
     else
@@ -103,42 +115,42 @@ class PagesController < ApplicationController
   	  cycle_type = "fresh"
   	  @year = "2010"
   	  zip_distance = 100
-  	  @zip_code = params[:zip_code]
-  	  @birthday1 = params[:birthday]["(1i)"]
-  	  @birthday2 = params[:birthday]["(2i)"]
-  	  @birthday3 = params[:birthday]["(3i)"]	  	  
-      @gender = params[:gender]
-      @ethnicity = params[:ethnicity]
-      @infertility_diagnosis = params[:infertility_diagnosis]
-      @previous_cycles = params[:previous_cycles]
+  	  @zip_code = params[:patient][:zip_code]
+  	  @birthday1 = params[:patient][:birthday]["(1i)"]
+  	  @birthday2 = params[:patient][:birthday]["(2i)"]
+  	  @birthday3 = params[:patient][:birthday]["(3i)"]	  	  
+      @gender = params[:patient][:gender]
+      @ethnicity = params[:patient][:ethnicity]
+      @infertility_diagnosis = params[:patient][:infertility_diagnosis]
+      @previous_cycles = params[:patient][:previous_cycles]
     
-  	  if(params[:birthday].nil?)
+  	  if(params[:patient][:birthday].nil?)
   	    user_age = 0
       else
-        user_age = ((Date.today) - Date.new(params[:birthday]["(1i)"].to_i, params[:birthday]["(2i)"].to_i, params[:birthday]["(3i)"].to_i)).to_i/365
+        user_age = ((Date.today) - Date.new(params[:patient][:birthday]["(1i)"].to_i, params[:patient][:birthday]["(2i)"].to_i, params[:patient][:birthday]["(3i)"].to_i)).to_i/365
       end  
     
-      if(params[:infertility_diagnosis].nil?)
+      if(params[:patient][:infertility_diagnosis].nil?)
         @diagnosis = "All Diagnoses"
-  	  elsif(params[:infertility_diagnosis]=="endometriosis")
+  	  elsif(params[:patient][:infertility_diagnosis]=="endometriosis")
   	    @diagnosis = "Endometriosis"
-  	  elsif(params[:infertility_diagnosis]=="diminished_ovarian_reserve")
+  	  elsif(params[:patient][:infertility_diagnosis]=="diminished_ovarian_reserve")
   	    @diagnosis = "Diminished Ovarian Reserve"
-  	  elsif(params[:infertility_diagnosis]=="multiple_female_factors")
+  	  elsif(params[:patient][:infertility_diagnosis]=="multiple_female_factors")
   	    @diagnosis = "Multiple Female Factors"
-  	  elsif(params[:infertility_diagnosis]=="ovulatory_dysfunction")
+  	  elsif(params[:patient][:infertility_diagnosis]=="ovulatory_dysfunction")
   	    @diagnosis = "Ovulatory Dysfunction"
-  	  elsif(params[:infertility_diagnosis]=="tubal_factor")
+  	  elsif(params[:patient][:infertility_diagnosis]=="tubal_factor")
   	    @diagnosis = "Tubal Factor"
-  	  elsif(params[:infertility_diagnosis]=="female_and_male_factors")
+  	  elsif(params[:patient][:infertility_diagnosis]=="female_and_male_factors")
   	    @diagnosis = "Female and Male Factors"
-  	  elsif(params[:infertility_diagnosis]=="male_factor")
+  	  elsif(params[:patient][:infertility_diagnosis]=="male_factor")
   	    @diagnosis = "Male Factor"
-  	  elsif(params[:infertility_diagnosis]=="other_factor")
+  	  elsif(params[:patient][:infertility_diagnosis]=="other_factor")
   	    @diagnosis = "Other Factor"
-  	  elsif(params[:infertility_diagnosis]=="uterine_factor")
+  	  elsif(params[:patient][:infertility_diagnosis]=="uterine_factor")
   	    @diagnosis = "Uterine Factor"
-  	  elsif(params[:infertility_diagnosis]=="unknown_factor")
+  	  elsif(params[:patient][:infertility_diagnosis]=="unknown_factor")
   	    @diagnosis = "All Diagnoses"
   	  else
   	    @diagnosis = "All Diagnoses"
@@ -156,12 +168,12 @@ class PagesController < ApplicationController
   	    @age_group = ">42"
   	  end
 	  
-  	  unless params[:zip_code].nil?
-  	    @coordinates = Geocoder.search(params[:zip_code])
+  	  unless params[:patient][:zip_code].nil?
+  	    @coordinates = Geocoder.search(params[:patient][:zip_code])
   	    @address = "City, State"
 	    
   	    while (@coordinates.nil?)
-  	      @coordinates = Geocoder.search(params[:zip_code])
+  	      @coordinates = Geocoder.search(params[:patient][:zip_code])
         end
       
         unless (@coordinates.nil?)

@@ -24,54 +24,54 @@
       .info_form.round
         %h2="Enter Contact Details"
         =form_tag({:action => 'lead_save', :controller => 'pages'},{:method => :post}) do
-          =hidden_field_tag :city, @city
-          =hidden_field_tag :state, @state
-          =hidden_field_tag 'birthday(1i)', @birthday1
-          =hidden_field_tag 'birthday(2i)', @birthday2
-          =hidden_field_tag 'birthday(3i)', @birthday3
-          =hidden_field_tag :gender, @gender
-          =hidden_field_tag :zip_code, @zip_code
-          =hidden_field_tag :ethnicity, @ethnicity
-          =hidden_field_tag :infertility_diagnosis, @infertility_diagnosis
+          =hidden_field_tag 'patient[city]', @city
+          =hidden_field_tag 'patient[state]', @state
+          =hidden_field_tag 'patient[birthday(1i)]', @birthday1
+          =hidden_field_tag 'patient[birthday(2i)]', @birthday2
+          =hidden_field_tag 'patient[birthday(3i)]', @birthday3
+          =hidden_field_tag 'patient[gender]', @gender
+          =hidden_field_tag 'patient[zip_code]', @zip_code
+          =hidden_field_tag 'patient[ethnicity]', @ethnicity
+          =hidden_field_tag 'patient[infertility_diagnosis]', @infertility_diagnosis
+          =hidden_field_tag 'patient[previous_cycles]', @previous_cycles
           =hidden_field_tag :diagnosis, @diagnosis
           =hidden_field_tag :age_group, @age_group
-          =hidden_field_tag :previous_cycles, @previous_cycles
           =hidden_field_tag :latitude, @latitude
           =hidden_field_tag :longitude, @longitude
           %ul
             %li
               %span.label
-                = label_tag :first_name
+                = label_tag 'patient[first_name]', "First Name"
               %span.field
-                = text_field_tag :first_name, nil, :placeholder => "First Name", :class => "field"
+                = text_field_tag 'patient[first_name]', nil, :placeholder => "First Name", :class => "field"
             %li
               %span.label
-                = label_tag :last_name
+                = label_tag 'patient[last_name]', "Last Name"
               %span.field
-                = text_field_tag :last_name, nil, :placeholder => "Last Name", :class => "field"
+                = text_field_tag 'patient[last_name]', nil, :placeholder => "Last Name", :class => "field"
             %li            
               %span.label
-                = label_tag :address
+                = label_tag 'patient[address]', "Address"
               %span.field
-                = text_field_tag :address, nil, :placeholder => "Address", :class => "field"
+                = text_field_tag 'patient[address]', nil, :placeholder => "Address", :class => "field"
             %li.address
               %span.field
-                = "#{@address}"
+                ="#{@address}"
             %li
               %span.label
-                = label_tag :email
+                = label_tag 'user[email]', "Email"
               %span.field
-                = text_field_tag :email, nil, :placeholder => "Email", :class => "field"          
+                = text_field_tag 'user[email]', nil, :placeholder => "Email", :class => "field"          
             %li
               %span.label
-                = label_tag :phone
+                = label_tag 'patient[phone]', "Phone"
               %span.field
-                = text_field_tag :phone, nil, :class => "field phone_number", :placeholder => "(###) ###-####"
+                = text_field_tag 'patient[phone]', nil, :class => "field phone_number", :placeholder => "(###) ###-####"
             %li.about_me
               %span.label
-                = label_tag :about_me, "About You"
+                = label_tag 'patient[about]', "About You"
               %span.field
-                = text_area_tag :about_me, nil, :class => "field text_area", :placeholder => "Add any additional information you would like the Physician to know about."
+                = text_area_tag 'patient[about]', nil, :class => "field text_area", :placeholder => "Add any additional information you would like the Physician to know about."
           %span.contact_now
             = submit_tag "Contact.", :class => "submit button ivfblue"
   .grid_4
