@@ -6,6 +6,7 @@ class ProfessionalsController < ApplicationController
   def show
 	  @professional = Professional.find_by_permalink(params[:id])
 	  @user = @professional.user
+	  @title = "#{@professional.username}"
   end
 
   def new
@@ -50,18 +51,18 @@ class ProfessionalsController < ApplicationController
 
   def edit
 	  @title = "Settings"
-	  @patient = Patient.find_by_permalink(params[:id])
-	  @user = @patient.user
+	  @professional = Professional.find_by_permalink(params[:id])
+	  @user = @professional.user
   end
 
   def update
-	  @patient = Patient.find_by_permalink(params[:id])
-	  @user = @patient.user
+	  @professional = Professional.find_by_permalink(params[:id])
+	  @user = @professional.user
 
     success = false
 
     unless params[:personal_info].nil?
-      if @patient.update_attributes(params[:personal_info])
+      if @professional.update_attributes(params[:personal_info])
         success = true
 	    end
     end
@@ -77,9 +78,9 @@ class ProfessionalsController < ApplicationController
 
 	  respond_to do |format|
 	    format.html do |f| 
-	        if @patient.update_attributes(params[:patient])
+	        if @professional.update_attributes(params[:patient])
             flash[:success] = "Zip Code Radius Successfully Updated"
-    	      redirect_to @patient
+    	      redirect_to @professional
   	      else
   	        flash[:error] = "There was an error processing your request."
   	        render 'show'
@@ -104,16 +105,12 @@ class ProfessionalsController < ApplicationController
 
   private
   	def correct_user
-  	  @patient = Patient.find_by_permalink(params[:id])
-  	  @user = @patient.user
+  	  @professional = Professional.find_by_permalink(params[:id])
+  	  @user = @professional.user
   	  redirect_to(root_path) unless current_user?(@user)
   	end
 
   	def admin_user
   	  redirect_to(root_path) unless current_user.admin?
-  	end
-
-  	def insurance_user
-  	  redirect_to(root_path) unless current_user.insurer?
-  	end
+    end
 end

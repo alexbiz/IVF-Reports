@@ -371,15 +371,16 @@
           %h1 Clinic Reviews.
           %span.user_subtitle="Reviews written for #{@clinic.clinic_name}."
         .edit_profile
-          %span.write_a_review.button.ivfblue 
-            %span.icon ✎
-            Write a Review.
+          -if signed_in? && current_user.patient_account?
+            %span.write_a_review.button.ivfblue 
+              %span.icon ✎
+              Write a Review.
       .profile_body
         %ul.reviews
           -if @reviews.empty?
             %li 
               This clinic does not currently have any reviews. 
-              -if signed_in? && !current_user.clinic_account? && !current_user.professional_account?
+              -if signed_in? && current_user.patient_account?
                 %span.write_a_review.button.ivfblue Be the first!
           -else
             -@reviews.each do |r|
@@ -466,7 +467,7 @@
   %span.close_button.icon X
 .review_form.round.hidden
   %h2 Review this Clinic
-  -if signed_in?
+  -if signed_in? && current_user.patient_account?
     =form_for @review do |f|
       = f.hidden_field :patient_id, :value => current_user.patient.id
       = f.hidden_field :clinic_id, :value => @clinic.id

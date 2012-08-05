@@ -1,6 +1,6 @@
 class Professional < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :profession, :username
+  attr_accessible :profession, :username, :first_name, :last_name, :phone, :about, :education
   
   username_regex = /^[A-Za-z\d_]+$/
 	

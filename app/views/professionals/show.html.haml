@@ -5,14 +5,18 @@
         =link_to '#profile', :class => "active" do
           %span.icon u
           Profile
-      %li.section#recs_li
-        =link_to '#recs' do
+      %li.section#stats_li
+        =link_to '#stats' do
+          %span.icon C
+          Statistics
+      %li.section#upgrade_li
+        =link_to '#upgrade' do
           %span.icon +
-          Clinic Recs 
-      %li.section#contact_li
-        =link_to '#contact' do
-          %span.icon i
-          Contact Requests
+          Upgrade
+        -if current_user.clinic_account?
+          =link_to '#clinic' do
+            %span.icon ⌂
+            Your Clinic
       %li.active_section
         %span.icon ←
 .grid_11.omega
@@ -33,7 +37,7 @@
                   %span.data="#{@professional.username}"
                 %li
                   %span.field Email
-                  %span.data= link_to @user.email, @user.email
+                  %span.data=link_to @user.email,"mailto:#{@user.email}"
         .edit_profile
           -if current_user?(@user)
             =link_to edit_professional_path(current_user.professional), :class => "edit button ivfblue" do
@@ -42,11 +46,32 @@
       .profile_body
         %ul
           %li 
-            %span.field Profile Body Items
-            %span.data Need to Think About What Goes Here
-    #recs_section.hidden
-    #contact_section.hidden
-    #reviews_section  
+            %span.field Name
+            %span.data="#{@professional.first_name} #{@professional.last_name}"
+          %li 
+            %span.field Profession
+            %span.data= @professional.profession
+          %li 
+            %span.field Education Level
+            %span.data= @professional.education
+            -profession_select = options_for_select([["-",""],["Reproductive Endocrinologist", "Reproductive Endocrinologist"], ["Obstetrician/Gynecologist", "Obstetrician/Gynecologist"], ["Genetic Counselor", "Genetic Counselor"], ["Embryologist", "Embryologist"], ["Other Professional", "Other Professional"]], @professional.profession)
+          %li 
+            %span.field Phone #
+            %span.data= @professional.phone
+          %li 
+            %span.field About You
+            %span.data= @professional.about
+    #stats_section.hidden
+      .profile_top
+        .name
+          %h1 Advanced Statistics for US Fertility Clinics
+          %span.user_subtitle Analysis of Clinics Relative to the National Average    
+    #upgrade_section.hidden
+      .profile_top
+        .name
+          %h1 Upgrade to a Premium Provider Account
+          %span.user_subtitle Gain Access to Full Statistics and Download Privilages
+    #clinic_section  
 :javascript
   $(document).ready(function(){
     $('#contacted_accordion').accordion();
@@ -60,11 +85,14 @@
       if(curpage=="profile"){
         $('li.active_section').animate({top:'0px'},500);
       }
-      else if(curpage=="recs"){
+      else if(curpage=="stats"){
         $('li.active_section').animate({top:'80px'},500);
       }
-      else if(curpage=="contact"){
+      else if(curpage=="upgrade"){
         $('li.active_section').animate({top:'160px'},500);      
+      }
+      else if(curpage=="upgrade"){
+        $('li.active_section').animate({top:'240px'},500);      
       }
       var menu_item = 'li#' + curpage + '_li a';
       $(menu_item).addClass('active');
@@ -85,12 +113,15 @@
       if(section_id=="profile_li"){
         $('li.active_section').animate({top:'0px'},500);
       }
-      else if(section_id=="recs_li"){
+      else if(section_id=="stats_li"){
         $('li.active_section').animate({top:'80px'},500);
       }
-      else if(section_id=="contact_li"){
+      else if(section_id=="upgrade_li"){
         $('li.active_section').animate({top:'160px'},500);      
       }
+      else if(section_id=="clinic_li"){
+        $('li.active_section').animate({top:'240px'},500);      
+      }      
       var show_section = "div#" + section_id.split("_")[0] + "_section";
       $(show_section).siblings().fadeOut(250, function(){
         setTimeout(function(){
