@@ -54,4 +54,5 @@
             = link_to "FAQs", faqs_path
           %li.search
             %span.icon z
-            %input.search_box.round{:type => "text", :placeholder => "Find a Clinic."}
+            =form_tag({:action => 'index', :controller => 'clinics'}, :method => :get) do
+              %input.search_box.round{:type => "text", :placeholder => "Find a Clinic.", :name => :search}

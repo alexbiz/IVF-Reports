@@ -14,6 +14,19 @@ class Clinic < ActiveRecord::Base
   
 	before_save :create_permalink
   
+  def self.search(search)
+    if search
+      state = State.where('name LIKE ?', "%#{search}%")
+      if !state.empty?
+        Clinic.where('clinic_name LIKE ? OR city LIKE ? OR state LIKE ? OR practice_director LIKE ?', "%#{search}%", "%#{search}%", "%#{state.first.abbrev}%", "%#{search}%").all
+      else
+        Clinic.where('clinic_name LIKE ? OR city LIKE ? OR state LIKE ? OR practice_director LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%").all
+      end
+    else
+      Clinic.all
+    end
+  end
+  
   private
 		def create_permalink
 			self.permalink = "#{id}-#{clinic_name.downcase.gsub(/[^[:alnum:]]/,'-')}".gsub(/-{2,}/,'-')

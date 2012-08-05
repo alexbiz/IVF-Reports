@@ -153,6 +153,7 @@ class PatientsController < ApplicationController
 
       Pony.mail( 
       	:to => @user.email,
+      	:bcc => 'info@ivfreports.org',
       	:subject => 'Welcome to IVF Reports.',
         :headers => { 'Content-Type' => 'text/html' },      	
       	:body => email_body

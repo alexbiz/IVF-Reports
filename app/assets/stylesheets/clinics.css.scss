@@ -1,3 +1,32 @@
+/*INDEX: CLINIC BY STATE LIST and SEARCH RESULTS*/
+ul.clinics_index_list{
+	display:inline-block;float:left;width:100%;margin:0px;padding:0px;list-style:none;margin-bottom:24px;
+	li{
+		display:inline-block;float:left;width:100%;margin:0px;padding:0px;list-style-type:none;height:20px;line-height:20px;font-size:12px;
+		&.state_name{
+			margin-top:12px;font-size:16px;
+			&:first-child{
+				margin-top:0px;
+			}
+		}
+		span{
+			display:inline-block;float:left;overflow:hidden;height:20px;
+			&.clinic_name{
+				width:480px;
+				a{
+					text-decoration:none;color:#0b3542;
+				}
+			}
+			&.clinic_citystate{
+				float:right;width:130px;
+			}
+			&.score_card{
+				
+			}
+		}
+	}
+}
+
 /*SHOW: CLINIC PROFILE PAGE*/
 .clinic_profile_nav{
 	width:80px;

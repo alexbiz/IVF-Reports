@@ -1,0 +1,23 @@
+-if params[:search]
+  %h1="Clinics Matching '#{params[:search]}' (#{@clinics.count}):"
+-else
+  %h1="Showing All Clinics (#{@clinics.count})"
+.grid_8.alpha
+  .twothirds.left
+    -if @clinics.nil? || @clinics.empty?
+      %p There were no clinics that matched your search query.
+    -else
+      %ul.clinics_index_list
+        -@states.each do |s|
+          -unless @clinics.select{|key,hash| key["state"]=="#{s.abbrev}"}.empty?
+            %li.state_name="#{s.name}"
+            -@clinics.each do |c|
+              -if s.abbrev==c.state
+                %li
+                  %span.clinic_name
+                    =link_to c.clinic_name, c
+                  %span.clinic_citystate="#{c.city}, #{c.state}"
+                  %span.score_card
+.grid_4.omega
+  .third.right
+    =render 'layouts/advertisement'    

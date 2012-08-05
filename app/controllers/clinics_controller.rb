@@ -2,16 +2,16 @@ require 'csv'
 require 'json'
 
 class ClinicsController < ApplicationController
-  before_filter :admin_user, 	:except => [:index, :show, :find_clinics_in_state, :pull_clinic_data, :edit, :update]
+  before_filter :admin_user, 	:only => [:create, :new, :destroy]
   before_filter :correct_user, :only => [:edit, :update]
   
   def index
-    @title = "All Clinics"
-  	@clinics = Clinic.paginate(:page => params[:page])
-  	@all_clinics = Clinic.all
+    @title = "IVF Clinics"
+    @states = State.all
+    @clinics = Clinic.search(params[:search])
   	respond_to do |format|
   	  format.html {}
-  	  format.json { render :json => @all_clinics.to_json() }
+  	  format.json { render :json => @clinics.to_json() }
 	  end
   end
   
@@ -137,7 +137,7 @@ class ClinicsController < ApplicationController
   private
 	
 	  def admin_user
-	    redirect_to(root_path) unless current_user.admin?
+	    redirect_to(root_path) unless current_user.admin_account?
 	  end
 		  
     def correct_user
