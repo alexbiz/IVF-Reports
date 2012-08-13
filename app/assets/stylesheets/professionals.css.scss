@@ -189,6 +189,9 @@
 			&.masked{
 				opacity:0.4;padding-bottom:6px;padding-top:6px;cursor:pointer;
 			}
+			li{
+				overflow:hidden;
+			}
 		}
 	}
 	.comparator_content{
