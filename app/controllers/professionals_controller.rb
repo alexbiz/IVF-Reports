@@ -5,6 +5,7 @@ class ProfessionalsController < ApplicationController
 
   def show
 	  @professional = Professional.find_by_permalink(params[:id])
+	  @clinics = Clinic.all
 	  @user = @professional.user
 	  @title = "#{@professional.username}"
   end
@@ -64,6 +65,7 @@ class ProfessionalsController < ApplicationController
     unless params[:personal_info].nil?
       if @professional.update_attributes(params[:personal_info])
         success = true
+        @response = @professional.errors
 	    end
     end
 
@@ -71,21 +73,13 @@ class ProfessionalsController < ApplicationController
 	  unless params[:account_info].nil?	  
 	    if @user.update_attributes(params[:account_info])
         success = true
+        @response = @user.errors        
 	    end
     end
 
-	  @response = @user.errors
+
 
 	  respond_to do |format|
-	    format.html do |f| 
-	        if @professional.update_attributes(params[:patient])
-            flash[:success] = "Zip Code Radius Successfully Updated"
-    	      redirect_to @professional
-  	      else
-  	        flash[:error] = "There was an error processing your request."
-  	        render 'show'
-    	    end
-      end
 	    format.js {render :layout => false }
     end
   end

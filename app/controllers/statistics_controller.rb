@@ -1,6 +1,4 @@
 class StatisticsController < ApplicationController
-  before_filter :correct_user, :index
-
   def index
     @clinic = Clinic.find_by_id(params[:clinic_id])
     @title = "#{@clinic.clinic_name} | Reports"

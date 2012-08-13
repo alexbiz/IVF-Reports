@@ -3,7 +3,6 @@ require 'json'
 
 class ReportsController < ApplicationController
   before_filter :authenticate, :only => [:clinic_explorer, :clinic_comparator]
-  before_filter :admin_or_insurance_user, 	:only => [:clinic_explorer, :clinic_comparator]
   
   def the_ivf_process
     @title = "The IVF Process"

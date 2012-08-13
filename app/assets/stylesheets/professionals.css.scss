@@ -30,9 +30,9 @@
 	}
 }
 .profile {
-	width:836px;margin:12px;background:#e5e5e5;display:inline-block;min-height:400px;margin-bottom:24px;
+	width:836px;margin:12px;background:#e5e5e5;display:inline-block;min-height:400px;margin-bottom:24px;position:relative;
 	.profile_top {
-		display:inline-block;float:left;height:50px;border-bottom:1px solid #cccccc;width:812px;padding:12px;
+		display:inline-block;float:left;height:50px;border-bottom:1px solid #cccccc;width:812px;padding:12px;position:relative;z-index:10;
 		div.name {
 			display:inline-block;float:left;height:50px;
 			h1 {
@@ -58,15 +58,15 @@
 						span{
 							display:inline-block;
 							&.field{
-								font-size:12px;float:left;text-align:left;
+								font-size:12px;float:left;text-align:left;width:100px;overflow:hidden;
 								a{
 									text-decoration:none;color:#666666;font-weight:bold;display:inline;
 								}
 							}
 							&.data{
-								font-size:10px;float:right;text-align:right;overflow:hidden;width:120px;
+								font-size:10px;float:right;text-align:right;overflow:hidden;width:100px;
 								a{
-									text-decoration:none;color:#666666;font-weight:bold;
+									text-decoration:none;color:#666666;font-weight:bold;z-index:10;display:block;
 								}
 							}
 						}
@@ -176,6 +176,28 @@
 			}
 			span.close_button {
 				display:inline-block;float:right;cursor:pointer;color:#325d5d;font-size:16px;margin-right:5px;
+			}
+		}
+	}
+}
+
+/*Clinic Comparator*/
+.profile_body_comparator{
+	.sidebar{
+		width:180px;padding:12px;margin-top:24px;
+		ul{
+			&.masked{
+				opacity:0.4;padding-bottom:6px;padding-top:6px;cursor:pointer;
+			}
+		}
+	}
+	.comparator_content{
+		margin-left:12px;margin-top:24px;
+		.clinic_selection{
+			margin-bottom:48px;display:inline-block;margin-left:12px;margin-top:24px;
+		}
+		#comparator_results{
+			canvas{
 			}
 		}
 	}

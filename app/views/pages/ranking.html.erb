@@ -179,6 +179,10 @@ $(document).ready(function(){
 			states = ["MT","ID","WY","NV","UT","CO","AZ","NM"];
 		}
 		
+		overall_page = 0;
+		diagnosis_page = 0;
+		age_page = 0;
+		
 		$('input.state_checkbox').attr('checked',false);
 		$('input.select_all_state_checkbox').attr('checked',false);
 		$('input.unselect_all_state_checkbox').attr('checked',false);
@@ -463,7 +467,7 @@ function PrintOverallRankingResults(){
 											}
 										}
 									});
-								<% elsif signed_in? && current_user.clinic_account? #Display no contact link %>
+								<% elsif signed_in? && (current_user.clinic_account? || current_user.professional_account? || current_user.admin_account?) #Display no contact link %>
 									clinic_html = clinic_html + "</div>";
 
 									$('div#overall_ranking_results div.clinic_rank_list').append(clinic_html);
@@ -535,7 +539,7 @@ function PrintAgeRankingResults(){
 											}
 										}
 									});
-									<% elsif signed_in? && current_user.clinic_account? #Display no contact link %>
+									<% elsif signed_in? && (current_user.clinic_account? || current_user.professional_account? || current_user.admin_account?) #Display no contact link %>
 										clinic_html = clinic_html + "</div>";
 
 										$('div#age_ranking_results div.clinic_rank_list').append(clinic_html);
@@ -608,7 +612,7 @@ function PrintDiagnosisRankingResults(){
 											}
 										}
 									});
-									<% elsif signed_in? && current_user.clinic_account? #Display no contact link %>
+									<% elsif signed_in? && (current_user.clinic_account? || current_user.professional_account? || current_user.admin_account?) #Display no contact link %>
 										clinic_html = clinic_html + "</div>";
 										$('div#diagnosis_ranking_results div.clinic_rank_list').append(clinic_html);
 									<% else #Need to add text and link about: Register to Contact %>

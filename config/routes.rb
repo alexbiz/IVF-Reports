@@ -8,7 +8,7 @@ IVFReports::Application.routes.draw do
   resources :patients
   resources :professionals
   resources :admins
-  
+  resources :statistics, :only => :index
 	resources :sessions, :only => [:new, :create, :destroy]
 	
 	resources :clinics do

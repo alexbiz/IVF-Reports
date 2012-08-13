@@ -1,3 +1,7 @@
+.breadcrumbs
+  =link_to "U.S. IVF Clinics", clinics_path, :class => "button small ivfblue"
+  >>
+  =link_to"#{@clinic.clinic_name}", @clinic, :class => "button small white"
 .grid_1.alpha
   .clinic_profile_nav
     %ul.clinic_nav
