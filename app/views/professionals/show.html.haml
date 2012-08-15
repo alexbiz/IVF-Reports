@@ -73,10 +73,137 @@
         .name
           %h1 Upgrade to a Premium Provider Account
           %span.user_subtitle Gain Access to Full Statistics and Download Privilages
+      .profile_body
+        #account_descs
+          %h3 
+            Your Current Account Type:
+            %span.account_type Basic
+          %ul.account_descriptions.round
+            %li.account_desc.header.top-round
+              %span.feature Feature
+              %span.basic Basic Account
+              %span.pro Pro Account
+            %li.account_desc
+              %span.feature Ranking Data
+              %span.basic 
+                %span.icon.green_txt ✔
+              %span.pro 
+                %span.icon.green_txt ✔            
+            %li.account_desc
+              %span.feature Clinic Search
+              %span.basic 
+                %span.icon.green_txt ✔            
+              %span.pro 
+                %span.icon.green_txt ✔  
+            %li.account_desc
+              %span.feature Basic Statistics
+              %span.basic
+                %span.icon.green_txt ✔            
+              %span.pro
+                %span.icon.green_txt ✔            
+            %li.account_desc
+              %span.feature Advanced Statistics
+              %span.basic
+                %span.icon.red_txt ×            
+              %span.pro 
+                %span.icon.green_txt ✔            
+            %li.account_desc
+              %span.feature Data Downloads
+              %span.basic
+                %span.icon.red_txt ×            
+              %span.pro 
+                %span.icon.green_txt ✔
+            %li.account_desc
+              %span.feature Clinic Comparisons
+              %span.basic
+                %span.icon.red_txt ×            
+              %span.pro 
+                %span.icon.green_txt ✔
+            %li.account_desc
+              %span.feature Claim Your Clinic
+              %span.basic
+                %span.icon.red_txt ×            
+              %span.pro 
+                %span.icon.green_txt ✔
+            %li.account_desc
+              %span.feature Expert Support
+              %span.basic
+                %span.icon.red_txt ×            
+              %span.pro 
+                %span.icon.green_txt ✔
+            %li.account_desc.bottom.bottom-round
+              %span.feature Cost
+              %span.basic Free
+              %span.pro $50/month               
+          .upgrade_button
+            %span Upgrade to a Professional Account Now!
+            %span#upgrade_button.button.ivfblue Upgrade
+        #upgrade_form.hidden
+          %h3 Upgrade to a Professional Account.
+          =form_for [@user, @subscription] do |f|          
+            =# f.hidden_field :stripe_card_token       
+            -if false#@subscription.stripe_card_token.present?
+              Credit card has been provided.
+            -else
+              %ul
+                %li 
+                  %span.field= label_tag :card_number, "Credit Card Number"
+                  %span.data= text_field_tag :card_number, nil, name: nil
+                %li 
+                  %span.field= label_tag :card_code, "Security Code on Card (CVV)"
+                  %span.data= text_field_tag :card_code, nil, name: nil
+                %li
+                  %span.field=label_tag :card_month, "Expiration Date"
+                  %span.data
+                    =select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
+                    =select_year nil, {start_year: Date.today.year, end_year: Date.today.year + 15}, {name: nil, id: "card_year"}
+              .submit_button=f.submit :value => 'Upgrade.', :class => 'button white'
+              #stripe_error
+      :javascript
+        var purchase;
+        $(document).ready(function(){
+          Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'));
+          return subscription.setupForm();
+        });
+        subscription = {
+          setupForm: function(){
+            $('#new_subscription').submit(function(){
+              $("input[type=submit]").attr('disabled', true);
+              subscription.processCard();
+              return false;
+            });
+          },
+
+          processCard: function(){
+            var card;
+            card = {
+              number: $('#card_number').val(),
+              cvc: $('#card_code').val(),
+              expMonth: $('#card_month').val(),
+              expYear: $('#card_year').val()
+            };
+            return Stripe.createToken(card, subscription.stripeResponseHandler);
+          },
+
+          stripeResponseHandler: function(status, response){
+            if(status == 200){
+              alert(response.id);
+            }
+            else{
+              alert(response.error.message);
+            }
+          }
+        };
     #clinic_section  
 :javascript
   $(document).ready(function(){
-    $('#contacted_accordion').accordion();
+    $('#upgrade_button').click(function(){
+      $('#account_descs').fadeOut(250, function(){
+        setTimeout(function(){
+          $('#upgrade_form').fadeIn(250);
+        }, 250);
+      });
+    });
     
     var urlitems=window.location.href.split("#");
     var curpage=urlitems[1];

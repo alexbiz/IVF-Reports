@@ -7,6 +7,7 @@ class ProfessionalsController < ApplicationController
 	  @professional = Professional.find_by_permalink(params[:id])
 	  @clinics = Clinic.all
 	  @user = @professional.user
+	  @subscription = @user.subscriptions.build
 	  @title = "#{@professional.username}"
   end
 

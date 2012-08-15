@@ -3,6 +3,7 @@ IVFReports::Application.routes.draw do
 
   resources :users, :except => :index do 
     resources :requests
+    resources :subscriptions
   end
   
   resources :patients

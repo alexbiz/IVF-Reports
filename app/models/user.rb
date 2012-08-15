@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_one :admin
   has_one :professional
   has_one :patient
+  has_many :subscriptions
   belongs_to :clinic
 
 	attr_accessor :password

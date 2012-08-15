@@ -97,8 +97,54 @@
 	}
 	.profile_body{
 		width:812px;padding:12px;display:inline-block;
+		h3{
+			padding-left:12px;margin-top:12px;font-size:18px;margin-bottom:24px;
+			span.account_type{
+				font-weight:bold;
+			}
+		}
+		.upgrade_button{
+			display:inline-block;width:200px;text-align:center;float:left;padding-left:10px;padding-top:120px;
+			span{
+				line-height:20px;font-weight:bold;display:inline-block;margin-top:12px;
+			}
+		}
+
 		ul{
 			display:inline-block;width:588px;margin:0px;padding:0px;list-style:none;float:left;margin-left:12px;
+			&.account_descriptions{
+				border:1px solid #888888;margin-bottom:24px;
+				li.account_desc{
+					float:left;display:inline-block;
+					&.header{
+						background:#888888;color:#ffffff;font-weight:bold;
+					}
+					&.bottom{
+						border-top:1px solid #888888;font-weight:bold;
+					}
+					span{
+						display:inline-block;float:left;
+						&.feature{
+							width:216px;padding-left:24px;
+						}
+						&.basic{
+							width:170px;text-align:center;
+						}
+						&.pro{
+							width:170px;text-align:center;
+						}
+						span.icon{
+							display:inline-block;float:left;width:100%;text-align:center;
+							&.green_txt{
+								color:#009900;
+							}
+							&.red_txt{
+								color:#990000;
+							}
+						}
+					}
+				}
+			}
 			li{
 				display:inline-block;width:100%;margin:0px;padding:0px;list-style-type:none;float:left;height:40px;line-height:40px;
 				&.about_me{
@@ -127,6 +173,30 @@
 				&.update_button{
 					text-align:center;margin-top:12px;
 				}
+			}
+		}
+		
+		#upgrade_form{
+			display:inline-block;width:100%;position:relative;
+			&.hidden{
+				display:none;
+			}
+			ul{
+				width:100%;
+				li{
+					width:100%;
+					span{
+						&.field{
+							width:40%;
+						}
+						&.data{
+							width:40%;
+						}
+					}
+				}
+			}
+			.submit_button{
+				display:inline-block;width:100%;text-align:center;margin-top:24px;
 			}
 		}
 		
