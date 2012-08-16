@@ -7,7 +7,7 @@ class ClinicsController < ApplicationController
   
   def index
     @title = "IVF Clinics"
-    @states = State.all
+    @states = State.order("name").all
     @clinics = Clinic.search(params[:search])
   	respond_to do |format|
   	  format.html {}
