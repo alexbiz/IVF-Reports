@@ -15,12 +15,18 @@ class Clinic < ActiveRecord::Base
 	before_save :create_permalink
   
   def self.search(search)
+    like_operator = "LIKE"
+    if Rails.env.production?
+      like_operator = "ILIKE"
+    else
+      like_operator = "LIKE"
+    end
     if search
       state = State.where('name LIKE ?', "%#{search}%")
       if !state.empty?
-        Clinic.where("clinic_name #{DATABASE_OPERATOR[:like_operator]} ? OR city #{DATABASE_OPERATOR[:like_operator]} ? OR state #{DATABASE_OPERATOR[:like_operator]} ? OR practice_director #{DATABASE_OPERATOR[:like_operator]} ?", "%#{search}%", "%#{search}%", "%#{state.first.abbrev}%", "%#{search}%").order("clinic_name").all
+        Clinic.where("clinic_name #{like_operator} ? OR city #{like_operator} ? OR state #{like_operator} ? OR practice_director #{like_operator} ?", "%#{search}%", "%#{search}%", "%#{state.first.abbrev}%", "%#{search}%").order("clinic_name").all
       else
-        Clinic.where("clinic_name #{DATABASE_OPERATOR[:like_operator]} ? OR city #{DATABASE_OPERATOR[:like_operator]} ? OR state #{DATABASE_OPERATOR[:like_operator]} ? OR practice_director #{DATABASE_OPERATOR[:like_operator]} ?", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%").order("clinic_name").all
+        Clinic.where("clinic_name #{like_operator} ? OR city #{like_operator} ? OR state #{like_operator} ? OR practice_director #{like_operator} ?", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%").order("clinic_name").all
       end
     else
       Clinic.order("clinic_name").all
