@@ -27,4 +27,8 @@ IVFReports::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+  DATABASE_OPERATOR = {
+      :like_operator => 'LIKE' #postgres awfulness
+  }
+  
 end

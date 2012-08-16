@@ -18,12 +18,12 @@ class Clinic < ActiveRecord::Base
     if search
       state = State.where('name LIKE ?', "%#{search}%")
       if !state.empty?
-        Clinic.where('clinic_name LIKE ? OR city LIKE ? OR state LIKE ? OR practice_director LIKE ?', "%#{search}%", "%#{search}%", "%#{state.first.abbrev}%", "%#{search}%").order("clinic_name").all
+        Clinic.where("clinic_name #{DATABASE_OPERATOR[:like_operator]} ? OR city #{DATABASE_OPERATOR[:like_operator]} ? OR state #{DATABASE_OPERATOR[:like_operator]} ? OR practice_director #{DATABASE_OPERATOR[:like_operator]} ?", "%#{search}%", "%#{search}%", "%#{state.first.abbrev}%", "%#{search}%").order("clinic_name").all
       else
-        Clinic.where('clinic_name LIKE ? OR city LIKE ? OR state LIKE ? OR practice_director LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%").order("clinic_name").all
+        Clinic.where("clinic_name #{DATABASE_OPERATOR[:like_operator]} ? OR city #{DATABASE_OPERATOR[:like_operator]} ? OR state #{DATABASE_OPERATOR[:like_operator]} ? OR practice_director #{DATABASE_OPERATOR[:like_operator]} ?", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%").order("clinic_name").all
       end
     else
-      Clinic.all
+      Clinic.order("clinic_name").all
     end
   end
   
