@@ -8,7 +8,7 @@ class ClinicsController < ApplicationController
   def index
     @title = "IVF Clinics"
     @states = State.all
-    @clinics = Clinic.search(params[:search]).order("name")
+    @clinics = Clinic.search(params[:search])
   	respond_to do |format|
   	  format.html {}
   	  format.json { render :json => @clinics.to_json() }
