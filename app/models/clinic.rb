@@ -24,9 +24,9 @@ class Clinic < ActiveRecord::Base
     if search
       state = State.where("name  ? #{like_operator}", "%#{search}%")
       if !state.empty?
-        Clinic.where("clinic_name #{like_operator} ? OR city #{like_operator} ? OR state #{like_operator} ? OR practice_director #{like_operator} ? OR laboratory_director #{like_operator} ? OR medical_director #{like_operator}", "%#{search}%", "%#{search}%", "%#{state.first.abbrev}%", "%#{search}%", "%#{search}%", "%#{search}%").order("clinic_name").all
+        Clinic.where("clinic_name #{like_operator} ? OR city #{like_operator} ? OR state #{like_operator} ? OR practice_director #{like_operator} ? OR laboratory_director #{like_operator} ? OR medical_director #{like_operator} ?", "%#{search}%", "%#{search}%", "%#{state.first.abbrev}%", "%#{search}%", "%#{search}%", "%#{search}%").order("clinic_name").all
       else
-        Clinic.where("clinic_name #{like_operator} ? OR city #{like_operator} ? OR state #{like_operator} ? OR practice_director #{like_operator} ? OR laboratory_director #{like_operator} ? OR medical_director #{like_operator}", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%").order("clinic_name").all
+        Clinic.where("clinic_name #{like_operator} ? OR city #{like_operator} ? OR state #{like_operator} ? OR practice_director #{like_operator} ? OR laboratory_director #{like_operator} ? OR medical_director #{like_operator} ?", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%").order("clinic_name").all
       end
     else
       Clinic.order("clinic_name").all
