@@ -22,7 +22,7 @@ class Clinic < ActiveRecord::Base
       like_operator = "LIKE"
     end
     if search
-      state = State.where('name LIKE ?', "%#{search}%")
+      state = State.where("name  ? #{like_operator}", "%#{search}%")
       if !state.empty?
         Clinic.where("clinic_name #{like_operator} ? OR city #{like_operator} ? OR state #{like_operator} ? OR practice_director #{like_operator} ?", "%#{search}%", "%#{search}%", "%#{state.first.abbrev}%", "%#{search}%").order("clinic_name").all
       else

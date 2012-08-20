@@ -5,7 +5,7 @@ class PagesController < ApplicationController
     @user = User.new
     if signed_in?
       if current_user.patient_account?
-        redirect_to current_user.patient      
+        redirect_to current_user.patient
       elsif current_user.professional_account? && !current_user.clinic_account?
         redirect_to current_user.professional
       elsif current_user.clinic_account? && current_user.professional_account?
