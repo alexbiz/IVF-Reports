@@ -35,6 +35,15 @@
                 = link_to professional_path(current_user.professional), :class=> is_active?("patients#show") do
                   %span.icon u
                   My Profile
+            -if current_user.admin_account?
+              %li
+                = link_to edit_admin_path(current_user.admin), :class => is_active?("patients#edit") do
+                  %span.icon ⚙
+                  Settings
+              %li
+                = link_to admin_path(current_user.admin), :class=> is_active?("patients#show") do
+                  %span.icon u
+                  My Profile                  
           -else
             %li= link_to "Register", register_path, :class => "button ivfblue auth"
             %li= link_to "Sign In", signin_path, :class => "button ivfblue auth"

@@ -1,0 +1,134 @@
+.grid_1.alpha
+  .profile_nav
+    %ul
+      %li.section#profile_li
+        =link_to '#profile', :class => "active" do
+          %span.icon u
+          Profile
+      %li.section#stats_li
+        =link_to '#stats' do
+          %span.icon C
+          Comparator
+        -if current_user.clinic_account?
+          =link_to '#clinic' do
+            %span.icon ⌂
+            Your Clinic
+      %li.active_section
+        %span.icon ←
+.grid_11.omega
+  .profile.round
+    #home_section.hidden
+    #profile_section
+      .profile_top
+        .name
+          %h1= "#{@admin.first_name} #{@admin.last_name}"
+          %span.user_subtitle="Member Since #{@user.created_at.strftime("%B %d, %Y")}"
+        .gravatar.box_shadow
+          = gravatar_for @user, {:size => 200}
+          .personal_info
+            -if current_user?(@user)
+              %ul                  
+                %li
+                  %span.field Email
+                  %span.data=link_to @user.email,"mailto:#{@user.email}"
+        .edit_profile
+          -if current_user?(@user)
+            =link_to edit_admin_path(current_user.admin), :class => "edit button ivfblue" do
+              %span.icon⚙ 
+              Edit
+      .profile_body
+        %ul
+          %li 
+            %span.field Name
+            %span.data="#{@admin.first_name} #{@admin.last_name}"
+          %li 
+            %span.field Title
+            %span.data= @admin.title
+    #stats_section.hidden
+      .profile_top
+        .name
+          %h1 Advanced Statistics for US Fertility Clinics
+          %span.user_subtitle Analysis of Clinics Relative to the National Average    
+      .profile_body_comparator
+        =render 'comparator'
+      :javascript
+        var purchase;
+        $(document).ready(function(){
+          Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'));
+          return subscription.setupForm();
+        });
+        subscription = {
+          setupForm: function(){
+            $('#new_subscription').submit(function(){
+              $("input[type=submit]").attr('disabled', true);
+              subscription.processCard();
+              return false;
+            });
+          },
+
+          processCard: function(){
+            var card;
+            card = {
+              number: $('#card_number').val(),
+              cvc: $('#card_code').val(),
+              expMonth: $('#card_month').val(),
+              expYear: $('#card_year').val()
+            };
+            return Stripe.createToken(card, subscription.stripeResponseHandler);
+          },
+
+          stripeResponseHandler: function(status, response){
+            if(status == 200){
+              alert(response.id);
+            }
+            else{
+              alert(response.error.message);
+            }
+          }
+        };
+    #clinic_section  
+:javascript
+  $(document).ready(function(){
+    
+    var urlitems=window.location.href.split("#");
+    var curpage=urlitems[1];
+    if(curpage==null){
+    
+    }
+    else{
+      if(curpage=="profile"){
+        $('li.active_section').animate({top:'0px'},500);
+      }
+      else if(curpage=="stats"){
+        $('li.active_section').animate({top:'80px'},500);
+      }
+      var menu_item = 'li#' + curpage + '_li a';
+      $(menu_item).addClass('active');
+      $(menu_item).parent().siblings().children().removeClass('active');
+      
+      var show_section = "div#" + curpage + "_section";  
+      $(show_section).siblings().fadeOut(250, function(){
+        setTimeout(function(){
+          $(show_section).fadeIn(250);
+        }, 250);
+      });
+    }
+    
+    $('div.profile_nav ul li.section a').click(function(){
+      $(this).parent().siblings().children().removeClass('active');
+      $(this).addClass('active');
+      var section_id = $(this).parent().attr('id');
+      if(section_id=="profile_li"){
+        $('li.active_section').animate({top:'0px'},500);
+      }
+      else if(section_id=="stats_li"){
+        $('li.active_section').animate({top:'80px'},500);
+      }
+      var show_section = "div#" + section_id.split("_")[0] + "_section";
+      $(show_section).siblings().fadeOut(250, function(){
+        setTimeout(function(){
+          $(show_section).fadeIn(250);
+        }, 250);
+      });
+    });
+  });

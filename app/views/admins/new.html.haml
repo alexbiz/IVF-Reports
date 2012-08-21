@@ -1,0 +1,39 @@
+%h1 Register - Healthcare Professional
+.subtitle 
+  Not a Healthcare Professional? 
+  =link_to "Register for a Patient Account.", register_path
+.grid_4.alpha
+  .third.left
+    %p Register for an IVF Reports Account to receive FREE access to:
+    %ul.content_list
+      %li Clinic Rankings
+      %li Geographic Clinic Search
+      %li Basic Statistics
+      %li Claim Your Clinic
+    %p Upgrade for Premium Features
+    %ul.content_list
+      %li Advanced Statistics
+      %li Historical Performance Tracking
+      %li Contextual and National Comparisons
+.grid_8.omega
+  .twothirds.right
+    = form_for(@professional) do |f|
+      %h2.register_blurb Join the IVF Reports Community
+      =fields_for(@user) do |p|
+        = render 'shared/error_messages', :object => f.object
+        %table.register_form
+          %tr
+            %td.label= f.label :username, 'Username'
+            %td.input= f.text_field :username
+          %tr
+            %td.label= p.label :email
+            %td.input= p.text_field :email
+          %tr
+            %td.label= p.label :password
+            %td.input= p.password_field :password
+          %tr
+            %td.label= p.label :password_confirmation, "Confirmation"
+            %td.input= p.password_field :password_confirmation
+        .register_button= f.submit "Register", :class => 'button ivfblue'
+      %span.terms_agreement
+        %i="*By registering, you acknowledge that you agree to our #{link_to "Terms and Conditions", terms_and_conditions_path} and have reviewed our #{link_to "Privacy Policy", privacy_policy_path}".html_safe

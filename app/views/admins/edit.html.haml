@@ -1,0 +1,135 @@
+.grid_1.alpha
+  .profile_nav
+    %ul
+      %li.active.section#personal_li
+        =link_to '#personal', :class => "active" do      
+          %span.icon u
+          Professional Info
+      %li.section#account_li
+        =link_to '#account' do
+          %span.icon ⚙
+          Account Info 
+      %li.active_section
+        %span.icon ←
+.grid_11.omega
+  .profile.round
+    #personal_section
+      .profile_top
+        .name
+          %h1= "Edit Profile - #{@professional.username}"
+          %span.user_subtitle="Member Since #{@user.created_at.strftime("%B %d, %Y")}"
+        .gravatar.box_shadow
+          = gravatar_for @user, {:size => 200}
+          .personal_info
+            -if current_user?(@user)
+              %ul
+                %li
+                  %span.field="Change Image @ "
+                  %span.data="<a href='http://gravatar.com/emails' target='_blank'>Gravatar.com</a>".html_safe
+        .edit_profile
+          =link_to current_user.professional, :class => "edit button ivfblue" do
+            %span.icon E
+            View Profile
+      .profile_body
+        =form_for @professional, :as => :personal_info, :url => professional_path(@professional), :method => :put, :remote => true do |f|
+          %ul
+            %li
+              %span.field=f.label :first_name
+              %span.data=f.text_field :first_name
+            %li
+              %span.field=f.label :last_name
+              %span.data=f.text_field :last_name
+            %li
+              %span.field=f.label :username
+              %span.data=f.text_field :username
+            %li
+              %span.field=f.label :profession
+              -profession_select = options_for_select([["-"],["Reproductive Endocrinologist", "Reproductive Endocrinologist"], ["Obstetrician/Gynecologist", "Obstetrician/Gynecologist"], ["Genetic Counselor", "Genetic Counselor"], ["Embryologist", "Embryologist"], ["Other Professional", "Other Professional"]], @professional.profession)              
+              %span.data=f.select(:profession, profession_select, {}, :class => 'ivfblue')
+            %li
+              %span.field=f.label :education, "Highest Education Level"
+              -education_select = options_for_select([['-'],['High School Diploma','High School Diploma'],["Associate's Degree","Associate's Degree"],["Bachelor's Degree","Bachelor's Degree"],["Master's Degree","Master's Degree"],["Ph.D.",'Ph.D.'],['M.D.','M.D.'],['D.O.','D.O.'],['Other','Other']], @professional.education)
+              %span.data=f.select(:education, education_select,{}, :class => 'ivfblue')
+            %li
+              %span.field=f.label :phone, 'Phone #'
+              %span.data=f.text_field :phone, :class => "phone_number"
+            %li.about_me
+              %span.field=f.label :about
+              %span.data=f.text_area :about
+            %li.update_button
+              =f.submit "Update.", :class => "button ivfblue"
+            %li
+              .update_results.hidden.round.white
+    #account_section.hidden
+      -if current_user?(@user)
+        .profile_top
+          .name
+            %h1 Update Account Information
+            %span.user_subtitle="Edit your email and password here."
+          .edit_profile
+            =link_to current_user.professional, :class => "edit button ivfblue" do
+              %span.icon E
+              View Profile
+        .profile_body
+          =form_for @user, :as => :account_info, :url => user_path(@user), :method => :put, :remote => true do |f|
+            %ul
+              %li
+                %span.field=f.label :email
+                %span.data=f.email_field :email
+              %li
+                %span.field=f.label :password
+                %span.data=f.password_field :password
+              %li
+                %span.field=f.label :password_confirmation
+                %span.data=f.password_field :password_confirmation
+              %li.update_button
+                =f.submit "Update.", :class => "button ivfblue"
+              %li
+                .update_results.hidden.round.white
+
+:javascript
+  $(document).ready(function(){
+    $('input.phone_number').mask('(999) 999-9999');  
+    
+    var urlitems=window.location.href.split("#");
+    var curpage=urlitems[1];
+    if(curpage==null){
+    
+    }
+    else{
+      if(curpage=="personal"){
+        $('li.active_section').animate({top:'0px'},500);
+      }
+      else if(curpage=="account"){
+        $('li.active_section').animate({top:'80px'},500);
+      }
+      var menu_item = 'li#' + curpage + '_li a';
+      $(menu_item).addClass('active');
+      $(menu_item).parent().siblings().children().removeClass('active');
+      
+      var show_section = "div#" + curpage + "_section";  
+      $(show_section).siblings().fadeOut(250, function(){
+        setTimeout(function(){
+          $(show_section).fadeIn(250);
+        }, 250);
+      });
+    }
+    
+    $('div.profile_nav ul li.section a').click(function(){
+      $(this).parent().siblings().children().removeClass('active');
+      $(this).addClass('active');
+      var section_id = $(this).parent().attr('id');
+      if(section_id=="personal_li"){
+        $('li.active_section').animate({top:'0px'},500);
+      }
+      else if(section_id=="account_li"){
+        $('li.active_section').animate({top:'80px'},500);
+      }
+      var show_section = "div#" + section_id.split("_")[0] + "_section";
+      $(show_section).siblings().fadeOut(250, function(){
+        setTimeout(function(){
+          $(show_section).fadeIn(250);
+        }, 250);
+      });
+    });
+  });
