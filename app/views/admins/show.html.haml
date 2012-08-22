@@ -5,14 +5,14 @@
         =link_to '#profile', :class => "active" do
           %span.icon u
           Profile
-      %li.section#stats_li
-        =link_to '#stats' do
+      %li.section#comparator_li
+        =link_to '#comparator' do
           %span.icon C
           Comparator
-        -if current_user.clinic_account?
-          =link_to '#clinic' do
-            %span.icon ⌂
-            Your Clinic
+      %li.section#explorer_li
+        =link_to '#explorer' do
+          %span.icon z
+          Explorer
       %li.active_section
         %span.icon ←
 .grid_11.omega
@@ -44,49 +44,20 @@
           %li 
             %span.field Title
             %span.data= @admin.title
-    #stats_section.hidden
+    #comparator_section.hidden
       .profile_top
         .name
           %h1 Advanced Statistics for US Fertility Clinics
           %span.user_subtitle Analysis of Clinics Relative to the National Average    
       .profile_body_comparator
         =render 'comparator'
-      :javascript
-        var purchase;
-        $(document).ready(function(){
-          Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'));
-          return subscription.setupForm();
-        });
-        subscription = {
-          setupForm: function(){
-            $('#new_subscription').submit(function(){
-              $("input[type=submit]").attr('disabled', true);
-              subscription.processCard();
-              return false;
-            });
-          },
-
-          processCard: function(){
-            var card;
-            card = {
-              number: $('#card_number').val(),
-              cvc: $('#card_code').val(),
-              expMonth: $('#card_month').val(),
-              expYear: $('#card_year').val()
-            };
-            return Stripe.createToken(card, subscription.stripeResponseHandler);
-          },
-
-          stripeResponseHandler: function(status, response){
-            if(status == 200){
-              alert(response.id);
-            }
-            else{
-              alert(response.error.message);
-            }
-          }
-        };
-    #clinic_section  
+    #explorer_section.hidden
+      .profile_top
+        .name
+          %h1 Explore and Download Clinic Datapoints
+          %span.user_subtitle Datapoint Sorting and Download Module
+      .profile_body_explorer
+        =render 'explorer'
 :javascript
   $(document).ready(function(){
     
@@ -99,8 +70,11 @@
       if(curpage=="profile"){
         $('li.active_section').animate({top:'0px'},500);
       }
-      else if(curpage=="stats"){
+      else if(curpage=="comparator"){
         $('li.active_section').animate({top:'80px'},500);
+      }
+      else if(curpage=="explorer"){
+        $('li.active_section').animate({top:'160px'},500);
       }
       var menu_item = 'li#' + curpage + '_li a';
       $(menu_item).addClass('active');
@@ -121,8 +95,11 @@
       if(section_id=="profile_li"){
         $('li.active_section').animate({top:'0px'},500);
       }
-      else if(section_id=="stats_li"){
+      else if(section_id=="comparator_li"){
         $('li.active_section').animate({top:'80px'},500);
+      }
+      else if(section_id=="explorer_li"){
+        $('li.active_section').animate({top:'160px'},500);
       }
       var show_section = "div#" + section_id.split("_")[0] + "_section";
       $(show_section).siblings().fadeOut(250, function(){

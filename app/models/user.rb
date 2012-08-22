@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
-  has_one :admin
-  has_one :professional
-  has_one :patient
+  has_one :admin, :dependent => :destroy
+  has_one :professional, :dependent => :destroy
+  has_one :patient, :dependent => :destroy
   has_many :subscriptions
   belongs_to :clinic
 
