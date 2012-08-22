@@ -67,22 +67,29 @@
           %h1 Advanced Statistics for US Fertility Clinics
           %span.user_subtitle Analysis of Clinics Relative to the National Average    
       .profile_body_comparator
-        =render 'limited_comparator'
+        -if current_user.subscriptions.exists?
+          =render 'comparator'
+        -else
+          =render 'limited_comparator'
     #upgrade_section.hidden
       .profile_top
         .name
-          %h1 Upgrade to a Premium Provider Account
+          %h1 Upgrade to a Premium Professional Account
           %span.user_subtitle Gain Access to Full Statistics and Download Privilages
       .profile_body
         #account_descs
           %h3 
             Your Current Account Type:
-            %span.account_type Basic
+            %span.account_type 
+            -if current_user.subscriptions.exists?
+              Premium
+            -else
+              Basic
           %ul.account_descriptions.round
             %li.account_desc.header.top-round
               %span.feature Feature
               %span.basic Basic Account
-              %span.pro Pro Account
+              %span.pro Premium Account
             %li.account_desc
               %span.feature Ranking Data
               %span.basic 
@@ -136,29 +143,41 @@
               %span.basic Free
               %span.pro $50/month               
           .upgrade_button
-            %span Upgrade to a Professional Account Now!
-            %span#upgrade_button.button.ivfblue Upgrade
-        #upgrade_form.hidden
-          %h3 Upgrade to a Professional Account.
-          =form_for [@user, @subscription] do |f|          
-            =# f.hidden_field :stripe_card_token       
-            -if false#@subscription.stripe_card_token.present?
-              Credit card has been provided.
+            -if current_user.subscriptions.exists?
+              %span Cancel Your Premium Account.
+              %span#upgrade_button.button.ivfblue Cancel
             -else
-              %ul
-                %li 
-                  %span.field= label_tag :card_number, "Credit Card Number"
-                  %span.data= text_field_tag :card_number, nil, name: nil
-                %li 
-                  %span.field= label_tag :card_code, "Security Code on Card (CVV)"
-                  %span.data= text_field_tag :card_code, nil, name: nil
-                %li
-                  %span.field=label_tag :card_month, "Expiration Date"
-                  %span.data
-                    =select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
-                    =select_year nil, {start_year: Date.today.year, end_year: Date.today.year + 15}, {name: nil, id: "card_year"}
-              .submit_button=f.submit :value => 'Upgrade.', :class => 'button white'
-              #stripe_error
+              %span Upgrade to a Premium Professional Account Now!
+              %span#upgrade_button.button.ivfblue Upgrade
+        #upgrade_form.hidden
+          -if current_user.subscriptions.exists?
+            To Cancel Your Premium Account, Please Contact Althea at 646.470.7422.
+          -else
+            %h3 Upgrade to a Premium Professional Account at $50/month.
+            %p="To upgrade to a professional account, simply provide us with payment via Visa, Mastercard, or American Expression. We use <a href='http://stripe.com'>stripe</a> to securely process your payment and bill you.".html_safe
+            =form_for [@user, @subscription] do |f|          
+              =# f.hidden_field :stripe_card_token       
+              -if @subscription.stripe_card_token
+                Credit card has been provided.
+              -else
+                =f.hidden_field :plan_id, :value => 1
+                =f.hidden_field :stripe_card_token
+                =f.hidden_field :description, :value => current_user.email
+                =f.hidden_field :product, :value => "Premium Account"
+                %ul            
+                  %li 
+                    %span.field= label_tag :card_number, "Credit Card Number"
+                    %span.data= text_field_tag :card_number, nil, name: nil
+                  %li 
+                    %span.field= label_tag :card_code, "Security Code on Card (CVV)"
+                    %span.data= text_field_tag :card_code, nil, name: nil, :size => "5"
+                  %li
+                    %span.field=label_tag :card_month, "Expiration Date"
+                    %span.data
+                      =select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
+                      =select_year nil, {start_year: Date.today.year, end_year: Date.today.year + 15}, {name: nil, id: "card_year"}
+                .submit_button=f.submit :value => 'Upgrade.', :class => 'button white'
+                #stripe_error
       :javascript
         var purchase;
         $(document).ready(function(){
@@ -169,8 +188,13 @@
           setupForm: function(){
             $('#new_subscription').submit(function(){
               $("input[type=submit]").attr('disabled', true);
-              subscription.processCard();
-              return false;
+              if($('#card_number').length){
+                subscription.processCard();
+                return false;
+              }
+              else{
+                return true;
+              }
             });
           },
 
@@ -187,10 +211,12 @@
 
           stripeResponseHandler: function(status, response){
             if(status == 200){
-              alert(response.id);
+              $('#subscription_stripe_card_token').val(response.id);
+              $('#new_subscription')[0].submit();
             }
             else{
-              alert(response.error.message);
+              $('#stripe_error').text(response.error.message);
+              $("input[type=submit]").attr('disabled', false);              
             }
           }
         };

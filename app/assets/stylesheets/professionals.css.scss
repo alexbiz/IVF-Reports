@@ -181,6 +181,9 @@
 			&.hidden{
 				display:none;
 			}
+			p{
+				padding:12px;
+			}
 			ul{
 				width:100%;
 				li{
@@ -197,6 +200,9 @@
 			}
 			.submit_button{
 				display:inline-block;width:100%;text-align:center;margin-top:24px;
+			}
+			#stripe_error{
+				display:inline-block;width:100%;text-align:center;height:40px;line-height:40px;color:#ff0000;
 			}
 		}
 		

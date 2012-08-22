@@ -10,6 +10,8 @@ class PagesController < ApplicationController
         redirect_to current_user.professional
       elsif current_user.clinic_account? && current_user.professional_account?
         redirect_to current_user.clinic
+      elsif current_user.admin_account?
+        redirect_to current_user.admin
       end
     end
   end
