@@ -246,11 +246,12 @@
       }
       else if(curpage=="stats"){
         $('li.active_section').animate({top:'80px'},500);
+        RenderGraph();
       }
       else if(curpage=="upgrade"){
-        $('li.active_section').animate({top:'160px'},500);      
+        $('li.active_section').animate({top:'160px'},500);
       }
-      else if(curpage=="upgrade"){
+      else if(curpage=="clinic"){
         $('li.active_section').animate({top:'240px'},500);      
       }
       var menu_item = 'li#' + curpage + '_li a';
