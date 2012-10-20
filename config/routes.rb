@@ -48,6 +48,7 @@ IVFReports::Application.routes.draw do
   match "/terms-and-conditions", :to => "pages#terms", :as => :terms_and_conditions
   match "/privacy-policy", :to => "pages#privacy", :as => :privacy_policy
   match "/clinicians", :to => "pages#clinicians"
+  match "/advertise", :to => "pages#advertise"
   
   match "/reports/the-ivf-process", :to => "reports#the_ivf_process", :as => :the_ivf_process
   match "/reports/infertility-diagnoses", :to => "reports#infertility_diagnoses", :as => :infertility_diagnoses
