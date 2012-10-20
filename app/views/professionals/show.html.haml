@@ -176,6 +176,10 @@
                     %span.data
                       =select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
                       =select_year nil, {start_year: Date.today.year, end_year: Date.today.year + 15}, {name: nil, id: "card_year"}
+                  %li
+                    %span.field=f.label :discount_code, "Discount Code"
+                    %span.data
+                      =f.text_field :discount_code
                 .submit_button=f.submit :value => 'Upgrade.', :class => 'button white'
                 #stripe_error
       :javascript

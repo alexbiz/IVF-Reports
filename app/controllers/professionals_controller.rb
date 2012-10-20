@@ -19,9 +19,9 @@ class ProfessionalsController < ApplicationController
 
   def create
 	  @user = User.new(params[:user])
+	  @user.professional_account = true
 	  @professional = @user.build_professional(params[:professional])
 	  if @user.save
-	    @user.toggle!(:professional_account)
 	    sign_in @user
 	    flash[:success] = "Welcome to IVF Reports!"
 

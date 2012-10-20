@@ -14,8 +14,8 @@ module ApplicationHelper
 		end
 	end
 	
-	def logo
-		logo_path = image_tag("logo.png", :alt => "Sample App", :class => "round")
+	def favicon(size)
+		logo_path = image_tag("favicon.png", :alt => "IVF Reports", :class => "round", :width => "#{size}")
 	end
 	
 	def send_welcome_email(user)

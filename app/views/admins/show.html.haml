@@ -72,9 +72,11 @@
       }
       else if(curpage=="comparator"){
         $('li.active_section').animate({top:'80px'},500);
+        RenderGraph();
       }
       else if(curpage=="explorer"){
         $('li.active_section').animate({top:'160px'},500);
+        UpdateClinics();
       }
       var menu_item = 'li#' + curpage + '_li a';
       $(menu_item).addClass('active');
@@ -97,9 +99,11 @@
       }
       else if(section_id=="comparator_li"){
         $('li.active_section').animate({top:'80px'},500);
+        RenderGraph();
       }
       else if(section_id=="explorer_li"){
         $('li.active_section').animate({top:'160px'},500);
+        UpdateClinics();
       }
       var show_section = "div#" + section_id.split("_")[0] + "_section";
       $(show_section).siblings().fadeOut(250, function(){

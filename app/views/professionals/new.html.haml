@@ -21,6 +21,7 @@
       %h2.register_blurb Join the IVF Reports Community
       =fields_for(@user) do |p|
         = render 'shared/error_messages', :object => f.object
+        = render 'shared/error_messages', :object => p.object        
         %table.register_form
           %tr
             %td.label= f.label :username, 'Username'

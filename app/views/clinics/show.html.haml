@@ -34,7 +34,7 @@
       .profile_top
         .name
           %h1="IVF Reports - #{@clinic.clinic_name}."
-          %span.user_subtitle="Based on Data from 2010."
+          %span.user_subtitle="Based on Data from #{CURRENT_YEAR}."
         .gravatar.box_shadow
           = gravatar_for User.find_by_email('info@ivfreports.org'), {:size => 200}
           .personal_info
@@ -331,6 +331,19 @@
                   %td.score_result
                     = number_with_precision(@scores_42[0].sart_score, :precision => 2, :separator => '.')
                     %span{:class => "icon score_icon #{print_score_color(@scores_42[0].sart_score)}"} ★
+        -if @clinic.awards(CURRENT_YEAR)[:count] > 0 && false
+          .awards    
+            %h2.award_section_title="Clinic Awards (#{@clinic.awards(CURRENT_YEAR)[:count]})"
+            %ul.award_list
+              -@clinic.awards(CURRENT_YEAR)[:list].each do |a|
+                %li
+                  %h2.award_body="IVF REPORTS"
+                  =favicon(140)
+                  %span.logoicon
+                    %span{:class => "icon #{get_icon_color(a[:rank])}"}=get_award_icon(a[:score])
+                  %h3="#{CURRENT_YEAR} #{get_award_type(a[:score])}"
+                  .ages=get_award_ages(a[:age_group])
+                  .diagnosis= a[:diagnosis]
     #info_section.hidden
       .profile_top
         .name
