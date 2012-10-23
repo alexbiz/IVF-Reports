@@ -366,3 +366,39 @@ ul.clinics_index_list{
 	}
 }
 
+/*Clinic Edit*/
+.clinic_edit{
+	display:inline-block;width:920px;margin-left:10px;margin-right:10px;float:left;
+	h3{
+		
+	}
+	table{
+		width:700px;
+		tr{
+			td{
+				display:inline-block;height:30px;line-height:30px;
+				&.label{
+					width:240px;text-align:left;
+				}
+				&.value{
+					width:460px;
+					input{
+						height:24px;width:300px;
+					}
+				}
+			}
+		}
+	}
+	.info{
+		display:inline-block;width:920px;float:left;
+		textarea{
+			width:700px;
+		}
+	}
+	.submit{
+		text-align:center;display:inline-block;float:left;width:694px;margin-bottom:24px;margin-top:12px;
+		input{
+			margin-left:auto;margin-right:auto;
+		}
+	}
+}

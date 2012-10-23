@@ -143,8 +143,8 @@ class ClinicsController < ApplicationController
     def correct_user
       @clinic = Clinic.find(params[:id])      
       if signed_in?
-        if current_user.admin?
-        elsif current_user.clinician?
+        if current_user.admin_account?
+        elsif current_user.clinic_account?
           if @clinic.user_id.nil? #The clinic has not been claimed
             redirect_to(@clinic)
           else
