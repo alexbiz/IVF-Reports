@@ -358,10 +358,11 @@
             %ul
               %li.location="#{@clinic.city}, #{@clinic.state}"
         .edit_profile
-          -if current_user?(@clinic.users) || current_user.admin_account?
-            =link_to edit_clinic_path(@clinic), :class => "edit button ivfblue" do
-              %span.icon⚙ 
-              Edit
+          -if signed_in?
+            -if current_user?(@clinic.users) || current_user.admin_account?
+              =link_to edit_clinic_path(@clinic), :class => "edit button ivfblue" do
+                %span.icon⚙ 
+                Edit
       .profile_body
         %ul
           %li

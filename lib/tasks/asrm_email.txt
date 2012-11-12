@@ -1,0 +1,78 @@
+<div style='padding-left:20px;padding-right:20px;padding-top:20px;font-family:Arial, sans-serif;'>
+  <table cellspacing='0' cellpadding='0' border='0' width='620px' style='border-left:6px solid #c0d42f;border-top:6px solid #007ec2;border-right:6px solid #c0d42f;border-bottom:6px solid #007ec2;'>
+    <tr>
+      <td style='padding-right:30px;padding-left:30px;padding-top:18px;padding-bottom:0;'>
+        <div style='margin-bottom:12px;'>
+          <img src='http://recombine.com/assets/reprogenetics_logo.png' height='54' title='Reprogenetics' style='vertical-align:middle;margin-right:24px;'>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td style='padding-right:30px;padding-left:30px;padding-top:12px;padding-bottom:12px;'>
+        <p>
+          <span style='font-size:12px;color:#444444;margin-bottom:18px;'>Reprogenetics, the leading PGD provider with the largest world-wide experience, would like to introduce our new partner, Recombine. Recombine will be unveiling a comprehensive genetic carrier test for 175 genetic diseases at the ASRM meeting in San Diego.
+          </span>
+        </p>
+      </td>
+    </tr>
+  </table>
+</div>
+<div style='padding-left:20px;padding-right:20px;padding-top:20px;font-family:Arial, sans-serif;'>
+  <table cellspacing='0' cellpadding='0' border='0' width='620px' style='border-left:6px solid #fcc614;border-top:6px solid #319fd4;border-right:6px solid #e3764d;border-bottom:6px solid #4bab57;'>
+    <tr>
+      <td style='padding-right:30px;padding-left:30px;padding-top:18px;padding-bottom:0;'>
+        <div style='margin-bottom:12px;'>
+          <img src='http://recombine.com/assets/logo.png' height='54' title='Recombine' style='vertical-align:middle;margin-right:24px;'>
+          <span style='font-size:24px;color:#666666;line-height:54px;'>Recombine
+          </span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td style='padding-right:30px;padding-left:30px;padding-top:18px;padding-bottom:6px;'>
+        <span style='font-size:24px;color:#444444;font-weight:bold;'>Nice to Meet You.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td style='padding-right:30px;padding-left:30px;padding-top:12px;padding-bottom:0;'>
+        <span style='display:inline-block;font-size:18px;color:#ffffff;font-weight:bold;background:#4bab57;padding:6px;'>2012 SRBT Basic Science Award
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td style='padding-right:30px;padding-left:30px;padding-top:12px;padding-bottom:0;'>
+        <p>
+          <span style='font-size:12px;color:#444444;margin-bottom:6px;'>Recombine has been awarded the 2012 Society of Reproductive Biologists and Technologists (SRBT) Basic Science Award for the development of this test. Our 15-minute presentation will provide an overview of Recombine's test and discuss validation data to date.  The prize abstract presentation is:</span></p></td></tr><tr><td style='padding-right:30px;padding-left:30px;padding-top:6px;padding-bottom:0;'><p><span style='font-size:12px;color:#444444;margin-bottom:18px;'><b>Tuesday, October 23rd, 2012 - 4:45pm</b></span></p><p><span style='font-size:12px;color:#444444;margin-bottom:18px;'><i>'Development and Improvement of a New Multi-Genetic Test for the Detection of 175 of the Most Highly Penetrant Monogenic Diseases.'</i>
+          </span>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style='padding-right:30px;padding-left:30px;padding-top:12px;padding-bottom:0;'>
+        <span style='display:inline-block;font-size:18px;color:#ffffff;font-weight:bold;background:#319fd4;padding:6px;'>About Recombine
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td style='padding-right:30px;padding-left:30px;padding-top:12px;padding-bottom:0;'>
+        <p>
+          <span style='font-size:12px;color:#444444;margin-bottom:18px;'>Recombine is here to simplify the world of genetic testing for you. We offer the most comprehensive and accurate pan-ethnic genetic carrier test, covering nearly 175 genetic conditions and nearly 1000 disease-causing mutations. We manage every part of the the genetic testing process, from sample collection to genetic counseling. Recombine offers complimentary preimplantation genetic diagnosis for over 100 genetic conditions through our partner laboratory, Reprogenetics. It is Genetic Testing. Simplified.
+          </span>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style='padding-right:30px;padding-left:30px;padding-top:12px;padding-bottom:0;'><span style='font-size:18px;color:#ffffff;font-weight:bold;background:#e3764d;padding:6px;'>How can I offer this test?</span></td></tr><tr><td style='padding-right:30px;padding-left:30px;padding-top:12px;padding-bottom:0;'><p><span style='font-size:12px;color:#444444;margin-bottom:18px;'>If you are interested in offering the Recombine test in your clinic, lab or practice, please visit <a href='http://recombine.com/register' target='_blank'>http://recombine.com/register</a> to register for our service. A Recombine representative will contact you shortly thereafter to help set up your practice and determine the best way to help you serve your patients.</span></p><p><span style='font-size:12px;color:#444444;margin-bottom:18px;'>We look forward to meeting you at the conference. Be sure to come visit us at booth 913.</span></p></td></tr><tr><td style='padding-right:30px;padding-left:30px;padding-top:12px;padding-bottom:18px;'>
+        <p>
+          <span style='font-size:12px;color:#444444;margin-bottom:6px;'>Warm regards,
+          </span>
+        </p>
+        <p>
+          <span style='font-size:12px;color:#444444;margin-bottom:18px;'><i>The Recombine Team</i>
+          </span>
+        </p>
+      </td>
+    </tr>
+  </table>
+</div>
