@@ -12,9 +12,6 @@ namespace :db do
 	    clinics.each do |c|
 	      total_cycles = 0
 	      c.datapoints.where(:year => '2010', :diagnosis => "All Diagnoses", :cycle_type => "fresh", :age_group => "All Ages").each do |d|
-	        puts "Adding cycle data: #{d.cycles}"
-	        total_cycles += d.cycles
-	      c.datapoints.where(:year => 2010, :diagnosis => "All Diagnoses", :cycle_type => "fresh", :age_group => "<35").each do |d|	        
           row << [c.clinic_name, c.address, c.city, c.state, d.cycles, d.implantation_rate, d.avg_num_embs_transferred, d.pregs_per_cycle, d.births_per_cycle, d.births_per_retrieval, d.births_per_transfer, d.set_transfer_rate, d.twin_rate, d.trip_rate]
           puts "-----Writing datapoint: #{c.clinic_name}."
         end
