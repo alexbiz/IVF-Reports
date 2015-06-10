@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(:version => 20121020115613) do
     t.string   "email"
     t.string   "info"
     t.string   "image"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.integer  "old_clinic_id"
     t.string   "permalink"
     t.integer  "user_id"
@@ -69,8 +69,8 @@ ActiveRecord::Schema.define(:version => 20121020115613) do
     t.float    "procedure_icsi_rate"
     t.float    "procedure_unstimulated_rate"
     t.float    "procedure_pgd_rate"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   add_index "datapoints", ["age_group"], :name => "index_datapoints_on_age_group"
@@ -153,8 +153,8 @@ ActiveRecord::Schema.define(:version => 20121020115613) do
     t.float    "quality_score"
     t.float    "safety_score"
     t.float    "sart_score"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   add_index "scores", ["age_group"], :name => "index_scores_on_age_group"
@@ -167,8 +167,8 @@ ActiveRecord::Schema.define(:version => 20121020115613) do
     t.string   "name"
     t.integer  "population"
     t.string   "capital"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "subscriptions", :force => true do |t|
@@ -187,9 +187,8 @@ ActiveRecord::Schema.define(:version => 20121020115613) do
     t.string   "email"
     t.string   "encrypted_password"
     t.string   "salt"
-    t.integer  "height_weight"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
     t.boolean  "professional_account", :default => false
     t.boolean  "clinic_account",       :default => false
     t.boolean  "patient_account",      :default => false
