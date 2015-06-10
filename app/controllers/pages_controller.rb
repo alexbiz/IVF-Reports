@@ -317,10 +317,10 @@ class PagesController < ApplicationController
     results_start = page*results    
     
     if params[:region]=="ALL"
-      @scores = Score.where(:year => year, :age_group => age_group, :diagnosis => diagnosis, :cycle_type => cycle_type).joins(:clinic).where(:clinics => {:state => states}).limit(results).offset(results_start)
+      @scores = Score.where(:year => year, :age_group => age_group, :diagnosis => diagnosis, :cycle_type => cycle_type).joins(:clinic).where(:clinics => {:state => states}).limit(results).order('ivf_reports_score DESC').offset(results_start)
     else
       region = "ALL" #this can be changed if we want to go back to the region based ranking.
-      @scores = Score.where(:year => year, :age_group => age_group, :diagnosis => diagnosis, :cycle_type => cycle_type).joins(:clinic).where(:clinics => {:state => states}).limit(results).offset(results_start)
+      @scores = Score.where(:year => year, :age_group => age_group, :diagnosis => diagnosis, :cycle_type => cycle_type).joins(:clinic).where(:clinics => {:state => states}).limit(results).order('ivf_reports_score DESC').offset(results_start)
     end
     
     @clinic_results = Array.new;

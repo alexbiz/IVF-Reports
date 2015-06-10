@@ -44,7 +44,7 @@ class ClinicsController < ApplicationController
     @request = Request.new
     @review = Review.new
     @clinic = Clinic.find(params[:id])
-    @requests = @clinic.requests.where(:declined => false)
+    @requests = @clinic.requests.where(:declined => false).order('created_at DESC')
     unless @clinic.user_id.nil?
       @clinic_user = User.find(@clinic.user_id)
     end
@@ -77,7 +77,7 @@ class ClinicsController < ApplicationController
       cycle_type = params[:cycle_type]
     end
 
-    @datapoints = @clinic.datapoints.where(:year => year, :age_group => age_group, :diagnosis => diagnosis, :cycle_type => cycle_type)
+    @datapoints = @clinic.datapoints.where(:year => year, :age_group => age_group, :diagnosis => diagnosis, :cycle_type => cycle_type).order('implantation_rate DESC')
     @scores = @clinic.scores.where(:year => year, :age_group => age_group, :diagnosis => diagnosis, :cycle_type => cycle_type)
     @scores_all_ages = @clinic.scores.where(:year => year, :age_group => "All Ages", :diagnosis => diagnosis, :cycle_type => cycle_type)
     @scores_35 = @clinic.scores.where(:year => year, :age_group => "<35", :diagnosis => diagnosis, :cycle_type => cycle_type)
@@ -86,7 +86,7 @@ class ClinicsController < ApplicationController
     @scores_41_42 = @clinic.scores.where(:year => year, :age_group => "41-42", :diagnosis => diagnosis, :cycle_type => cycle_type)
     @scores_42 = @clinic.scores.where(:year => year, :age_group => ">42", :diagnosis => diagnosis, :cycle_type => cycle_type)
     @title = @clinic.clinic_name
-    @reviews = @clinic.reviews
+    @reviews = @clinic.reviews.order('created_at DESC')
   end
   
   def edit

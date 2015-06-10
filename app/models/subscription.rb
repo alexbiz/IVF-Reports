@@ -1,7 +1,6 @@
 class Subscription < ActiveRecord::Base
   belongs_to :user
   attr_accessor :stripe_card_token
-  attr_accessible :card, :description, :product, :user_id, :plan_id, :stripe_card_token, :discount_code
   
   validates :user_id,	:presence => true
   def save_with_payment

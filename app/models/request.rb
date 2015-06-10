@@ -2,8 +2,6 @@ class Request < ActiveRecord::Base
   belongs_to :clinic
   belongs_to :patient
   
-  default_scope :order => 'created_at DESC'
-  
   
   #can add a method that calculates the price
   

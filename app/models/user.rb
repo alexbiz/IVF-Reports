@@ -6,7 +6,6 @@ class User < ActiveRecord::Base
   belongs_to :clinic
 
 	attr_accessor :password
-	attr_accessible :email, :password, :password_confirmation, :professional_account, :patient_account, :clinic_account, :admin_account
 	
 	
 	email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

@@ -1,49 +1,37 @@
 source 'http://rubygems.org'
+ruby '2.1.3'
 
 # Bundle edge Rails instead:
-
+gem 'rails'
 gem 'rake'
 gem 'sass'
 gem 'haml'
 gem 'gravatar_image_tag'
 gem 'will_paginate'
-gem 'aws-s3'
 gem 'paperclip'
 gem 'geocoder'
-gem 'feedzirra'
 gem 'yaml_db'
 gem 'pony'
 gem 'stripe'
-
+gem 'pg'
 gem 'json'
-
-
-group :assets do
-  gem 'sass-rails'
-  gem 'coffee-rails'
-  gem 'uglifier'
-end
-
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'uglifier'
 
-group :production do
-  gem 'rails'
-  gem "therubyracer-heroku"
-  gem "pg"
-end
 
 group :development do
-  gem 'rspec-rails'
   gem 'annotate'
   gem 'faker'
-  gem 'pg'
 end
 
 group :test do
-  gem 'rspec-rails', '2.6.1'
-  gem 'webrat', '0.7.1'
-  gem 'spork', '0.9.0.rc5'
-  gem 'factory_girl_rails', '1.0'
+  gem 'rspec-rails'
+  gem 'webrat'
+  gem 'spork'
+  gem 'factory_girl_rails'
   gem 'sqlite3'
 end
 

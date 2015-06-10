@@ -131,39 +131,23 @@ class PatientsController < ApplicationController
   end
 
   def create
-	  @user = User.new(params[:user])
-	  @patient = @user.build_patient(params[:patient])
-	  if @user.save
-	    @user.toggle!(:patient_account)
-	    sign_in @user
-	    flash[:success] = "Welcome to IVF Reports!"
+	  @user = User.new(create_user_params)
+    if Patient.where(:username => params[:patient][:username]).exists?
+      flash[:error] = "There is already a user with that username."
+      redirect_to :back
+    else
+  	  @patient = @user.build_patient(create_patient_params)
+  	  if @user.save
+  	    @user.toggle!(:patient_account)
+  	    sign_in @user
+  	    flash[:success] = "Welcome to IVF Reports!"
 	    
-
-      email_body = "<img src='#{root_url}#{ActionController::Base.helpers.asset_path('logo.png')}'><br/>"
-	    email_body += "<h1>Welcome to IVF Reports</h1>"
-	    email_body += "<p>IVF Reports is the premier website for finding accurate information about U.S. Fertility Clinics. Our data specialists will help you find the best clinic <i>for you</i>.</p>"
-	    email_body += "<p>Your Account Information:</p>"
-	    email_body += "<ul><li><b>Username: </b>#{@patient.username}</li>"
-	    email_body += "<li><li><b>Email: </b> #{@user.email}</li></ul>"
-	    email_body += "<p><a href='#{root_url}signin'>Log in</a> to view personal recommendations for clinics best suited to treat you. You may contact up to five clinics through our system. Our relationships with Fertility Clinics will allow your case to receive high-level attention from a physician who can help you get pregnant.</p>"
-      email_body += "<p>Thank you for being a part of our community. We look forward to helping you embark on your fertility journey.</p>"
-      email_body += "<p>Warmest regards,</p>"
-      email_body += "<p>The IVF Reports Team</p>"
-
-
-      Pony.mail( 
-      	:to => @user.email,
-      	:bcc => 'info@ivfreports.org',
-      	:subject => 'Welcome to IVF Reports.',
-        :headers => { 'Content-Type' => 'text/html' },      	
-      	:body => email_body
-      )
-	    
-	    redirect_to @patient
-	  else
-	    @title = "Sign Up"
-	    render 'new'
-	  end
+  	    redirect_to @patient
+  	  else
+  	    @title = "Sign Up"
+  	    render 'new'
+  	  end
+    end
   end
 
   def edit
@@ -221,18 +205,25 @@ class PatientsController < ApplicationController
   end
   
   private
+    def create_user_params
+      params.require(:user).permit(:email, :password, :password_confirmation)
+    end
+  
+    def create_patient_params
+      params.require(:patient).permit(:username)
+    end
 	
-	def correct_user
-	  @patient = Patient.find_by_permalink(params[:id])
-	  @user = @patient.user
-	  redirect_to(root_path) unless current_user?(@user)
-	end
+  	def correct_user
+  	  @patient = Patient.find_by_permalink(params[:id])
+  	  @user = @patient.user
+  	  redirect_to(root_path) unless current_user?(@user)
+  	end
 	
-	def admin_user
-	  redirect_to(root_path) unless current_user.admin?
-	end
+  	def admin_user
+  	  redirect_to(root_path) unless current_user.admin?
+  	end
 	
-	def insurance_user
-	  redirect_to(root_path) unless current_user.insurer?
-	end
+  	def insurance_user
+  	  redirect_to(root_path) unless current_user.insurer?
+  	end
 end
